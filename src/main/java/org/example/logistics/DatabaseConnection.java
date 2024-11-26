@@ -1,41 +1,52 @@
 package org.example.logistics;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
-// DAO 설계시
-// DatabaseConnection.getConnection()을 호출하여 Connection 객체를 가져오기만 하면 됩니다.
-// 향후 HikariCP 적용시 수정 필요합니다
-
 public class DatabaseConnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/Logistics";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "1234";
+    private static HikariDataSource dataSource;
 
-    // Singleton Connection 관리 (Thread-Safe)
-    private static Connection con = null;
+    static {
+        try {
+            // HikariCP Configuration
+            HikariConfig config = new HikariConfig();
+            config.setJdbcUrl("jdbc:mysql://localhost:3306/Logistics"); // Database URL
+            config.setUsername("root"); // MYSQL 로그인 username
+            config.setPassword("Dubutoto22!"); // 비밀번호
 
-    private DatabaseConnection() {}
+            // HikariCP Optimization Settings
+            config.setMaximumPoolSize(5); // 최대 커넥션 개수
+            config.setMinimumIdle(2); // 최소 유휴 커넥션 개수
+            config.setIdleTimeout(30000); // 커넥션 유휴 시간 (30초) 파라미터 숫자는 밀리초 기준입니다.
+            config.setMaxLifetime(60000); // 커넥션의 최대 수명 (1분)
+            config.setConnectionTimeout(20000); // 커넥션 획득 대기 시간 (20초)
+            config.setLeakDetectionThreshold(2000); // 커넥션 누수 탐지 시간 (2초)
+            config.addDataSourceProperty("cachePrepStmts", "true"); // PreparedStatement 캐싱
+            config.addDataSourceProperty("prepStmtCacheSize", "250"); // 캐싱할 PreparedStatement 최대 개수
+            config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048"); // 캐싱할 SQL의 최대 길이
 
-    public static Connection getConnection() throws SQLException, ClassNotFoundException {
-        // 연결이 없거나 닫혀 있으면 새로 생성
-        if (con == null || con.isClosed()) {
-
-            // 동기화 블록으로 Thread-Safe 구현
-            synchronized (DatabaseConnection.class) {
-                if (con == null || con.isClosed()) {
-                    // JDBC 1단계. 드라이버 설정
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    System.out.println("Driver Loaded Successfully!");
-
-                    // JDBC 2단계. DB 연결
-                    con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-                    System.out.println("Database Connected Successfully!");
-                }
-            }
+            // HikariCP 초기화
+            dataSource = new HikariDataSource(config);
+            System.out.println("HikariCP 초기화 성공!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("HikariCP 초기화 실패!");
         }
-        return con;
+    }
+
+    // Connection 객체 반환
+    public static Connection getConnection() throws SQLException {
+        return dataSource.getConnection();
+    }
+
+    // DataSource 종료
+    public static void close() {
+        if (dataSource != null && !dataSource.isClosed()) {
+            dataSource.close();
+        }
     }
 }
 
