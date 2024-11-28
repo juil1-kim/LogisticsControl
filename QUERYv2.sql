@@ -1,14 +1,15 @@
 CREATE TABLE Products (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(20) NOT NULL,
-    description VARCHAR(100),
-    category_id INT, -- 카테고리 ID
-    price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    manufacturer_id INT, -- 제조사 ID
-    FOREIGN KEY (category_id) REFERENCES Categories(category_id) ON DELETE SET NULL, -- 카테고리 삭제 시 NULL 처리
-    FOREIGN KEY (manufacturer_id) REFERENCES Manufacturers(manufacturer_id) ON DELETE SET NULL -- 제조사 삭제 시 NULL 처리
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    category_id INT,
+    price DOUBLE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    manufacturer_id INT,
+    FOREIGN KEY (category_id) REFERENCES Categories(category_id) ON DELETE SET NULL,
+    FOREIGN KEY (manufacturer_id) REFERENCES Manufacturers(manufacturer_id)
 );
+
 
 CREATE TABLE Categories (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -33,6 +34,25 @@ CREATE TABLE Warehouses (
     name VARCHAR(20) NOT NULL,
     location VARCHAR(25) NOT NULL, 
     capacity INT NOT NULL CHECK (capacity >= 0) -- 창고 용량은 음수가 될 수 없음
+);
+
+-- 관리자 테이블
+CREATE TABLE Administrators (
+    admin_id INT AUTO_INCREMENT PRIMARY KEY, -- 관리자 ID (고유)
+    username VARCHAR(50) UNIQUE NOT NULL, -- 로그인용 사용자 ID (중복 불가)
+    password VARCHAR(255) NOT NULL, -- 로그인용 비밀번호 (암호화 필요)
+    role ENUM('root', 'general') NOT NULL, -- 관리자 역할 (루트 관리자, 일반 관리자)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 생성일
+);
+
+-- 관리자와 창고의 관계를 나타내는 테이블
+CREATE TABLE Administrator_Warehouses (
+    admin_warehouse_id INT AUTO_INCREMENT PRIMARY KEY, -- 관계 ID
+    admin_id INT NOT NULL, -- 관리자 ID
+    warehouse_id INT NOT NULL, -- 창고 ID
+    assigned_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 할당 시간
+    FOREIGN KEY (admin_id) REFERENCES Administrators(admin_id) ON DELETE CASCADE, -- 관리자가 삭제되면 관련 데이터 삭제
+    FOREIGN KEY (warehouse_id) REFERENCES Warehouses(warehouse_id) ON DELETE CASCADE -- 창고 삭제 시 관련 데이터 삭제
 );
 
 -- Branch 테이블
