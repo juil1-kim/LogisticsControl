@@ -1,14 +1,11 @@
 package org.example.logistics;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.sql.Connection;
 import java.util.List;
+import java.util.Scanner;
 
-public class CategoryProductManufacturerUI extends JFrame {
-    private JTable table;
-    private CategoryProductManufacturerDAO dao;
+public class CategoryProductManufacturerUI {
+    private final CategoryProductManufacturerDAO dao;
 
     public CategoryProductManufacturerUI() {
         // DAO 초기화
@@ -16,60 +13,57 @@ public class CategoryProductManufacturerUI extends JFrame {
             Connection connection = DatabaseConnection.getConnection();
             dao = new CategoryProductManufacturerDAO(connection);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "DB 연결 실패: " + e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+            System.out.println("DB 연결 실패: " + e.getMessage());
+            throw new RuntimeException(e);
         }
+    }
 
-        setTitle("Category-Product-Manufacturer");
-        setSize(800, 600);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+    public void start() {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("========== Category-Product-Manufacturer ==========");
+            System.out.println("1. 데이터 보기");
+            System.out.println("2. 종료");
+            System.out.print("선택: ");
+            String choice = scanner.nextLine();
 
-        // 테이블 초기화
-        table = new JTable();
-        JScrollPane scrollPane = new JScrollPane(table);
-        add(scrollPane, BorderLayout.CENTER);
-
-        // 버튼 패널
-        JPanel buttonPanel = new JPanel();
-        JButton refreshButton = new JButton("Refresh");
-        refreshButton.addActionListener(e -> loadTableData());
-        buttonPanel.add(refreshButton);
-        add(buttonPanel, BorderLayout.SOUTH);
-
-        // 초기 데이터 로드
-        loadTableData();
+            switch (choice) {
+                case "1":
+                    loadTableData();
+                    break;
+                case "2":
+                    System.out.println("프로그램을 종료합니다.");
+                    return;
+                default:
+                    System.out.println("잘못된 입력입니다. 다시 시도하세요.");
+            }
+        }
     }
 
     private void loadTableData() {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try {
             // DAO에서 데이터 가져오기
             List<CategoryProductManufacturerVO> data = dao.getCategoryProductManufacturers();
 
-            // 테이블 모델 생성
-            DefaultTableModel model = new DefaultTableModel(
-                    new String[]{"Category Name", "Product Name", "Manufacturer Name", "Contact"}, 0
-            );
-
+            // 테이블 출력
+            System.out.println("=======================================================");
+            System.out.printf("%-20s %-20s %-20s %-15s%n",
+                    "Category Name", "Product Name", "Manufacturer Name", "Contact");
+            System.out.println("=======================================================");
             for (CategoryProductManufacturerVO vo : data) {
-                model.addRow(new Object[]{
+                System.out.printf("%-20s %-20s %-20s %-15s%n",
                         vo.getCategoryName(),
                         vo.getProductName(),
                         vo.getManufacturerName(),
-                        vo.getManufacturerContact()
-                });
+                        vo.getManufacturerContact());
             }
-
-            table.setModel(model);
+            System.out.println("=======================================================");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "데이터 로드 실패: " + e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("데이터 로드 실패: " + e.getMessage());
         }
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new CategoryProductManufacturerUI().setVisible(true));
+        new CategoryProductManufacturerUI().start();
     }
 }
-
