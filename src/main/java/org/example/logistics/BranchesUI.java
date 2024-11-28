@@ -22,7 +22,6 @@ public class BranchesUI {
             System.out.println("3. View Branch by ID");
             System.out.println("4. Update Branch");
             System.out.println("5. Delete Branch");
-            System.out.println("6. Delete All Branches");
             System.out.println("0. Exit");
             System.out.print("Choose an option: ");
 
@@ -45,9 +44,6 @@ public class BranchesUI {
                         break;
                     case 5:
                         deleteBranch();
-                        break;
-                    case 6:
-                        deleteAllBranches();
                         break;
                     case 0:
                         System.out.println("Exiting...");
@@ -128,18 +124,6 @@ public class BranchesUI {
 
         branchesDAO.deleteBranch(id);
         System.out.println("Branch deleted successfully!");
-    }
-
-    private void deleteAllBranches() throws SQLException {
-        System.out.print("Are you sure you want to delete all branches? (yes/no): ");
-        String confirmation = scanner.nextLine();
-
-        if (confirmation.equalsIgnoreCase("yes")) {
-            branchesDAO.deleteAllBranches();
-            System.out.println("All branches deleted successfully!");
-        } else {
-            System.out.println("Operation canceled.");
-        }
     }
 
     public static void main(String[] args) {

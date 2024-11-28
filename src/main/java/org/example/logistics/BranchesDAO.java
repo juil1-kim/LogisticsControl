@@ -75,13 +75,5 @@ public class BranchesDAO {
             stmt.executeUpdate();
         }
     }
-
-    // DELETE ALL: 모든 지점 삭제 (주의: 위험 작업)
-    public void deleteAllBranches() throws SQLException {
-        String sql = "DELETE FROM Branches";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.executeUpdate();
-        }
-    }
 }
 
