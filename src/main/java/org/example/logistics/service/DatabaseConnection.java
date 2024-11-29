@@ -1,4 +1,4 @@
-package org.example.logistics;
+package org.example.logistics.service;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
