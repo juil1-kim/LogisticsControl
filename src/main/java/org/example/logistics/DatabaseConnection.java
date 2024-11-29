@@ -15,7 +15,7 @@ public class DatabaseConnection {
             HikariConfig config = new HikariConfig();
             config.setJdbcUrl("jdbc:mysql://localhost:3306/Logistics"); // Database URL
             config.setUsername("root"); // MYSQL 로그인 username
-            config.setPassword("Dubutoto22!"); // 비밀번호
+            config.setPassword("1234"); // 비밀번호
 
             // HikariCP Optimization Settings
             config.setMaximumPoolSize(5); // 최대 커넥션 개수
