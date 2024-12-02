@@ -1,7 +1,11 @@
 package org.example.logistics.warehouses;
+
 import org.example.logistics.service.DatabaseConnection;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +34,6 @@ public class WarehousesDAO {
         String query = "SELECT warehouse_id, name, location, capacity FROM Warehouses";
         PreparedStatement stmt = con.prepareStatement(query);
         ResultSet rs = stmt.executeQuery();
-        System.out.println("=====지점 목록=====");
         while (rs.next()) {
             WarehousesVO request = new WarehousesVO();
             request.setWarehouseId(rs.getInt("warehouse_id"));
