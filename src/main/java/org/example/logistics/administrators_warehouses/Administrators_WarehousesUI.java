@@ -59,6 +59,10 @@ public class Administrators_WarehousesUI {
         }
     }
 
+    // 창고 관리자 목록 보기
+    // 창고 관리자 추가
+    // 창고 관리자 수정
+    // 창고 관리자 삭제
     private void addAdministrators_Warehouse(Scanner sc) {
     }
 
