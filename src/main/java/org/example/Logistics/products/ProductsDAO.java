@@ -1,6 +1,7 @@
 package org.example.logistics.products;
 
-import org.example.logistics.DatabaseConnection;
+import org.example.logistics.service.CRUDLogger;
+import org.example.logistics.service.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +17,6 @@ public class ProductsDAO {
 
     // CREATE: 상품 추가
     public void addProduct(ProductsVO product) throws SQLException {
-        // created_at은 DEFAULT CURRENT_TIMESTAMP로 자동 설정
         String sql = "INSERT INTO Products (name, description, category_id, price, manufacturer_id) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, product.getName());
@@ -25,6 +25,13 @@ public class ProductsDAO {
             stmt.setDouble(4, product.getPrice());
             stmt.setInt(5, product.getManufacturerId());
             stmt.executeUpdate();
+
+            // 로그 기록
+            CRUDLogger.log("CREATE", "상품", "상품 추가: " + product.getName());
+        } catch (SQLException e) {
+            // 실패 시 로그
+            CRUDLogger.log("ERROR", "상품", "상품 추가 실패: " + product.getName());
+            throw e;
         }
     }
 
@@ -44,7 +51,14 @@ public class ProductsDAO {
                 product.setCreatedAt(rs.getString("created_at"));
                 product.setManufacturerId(rs.getInt("manufacturer_id"));
                 products.add(product);
+
+                // 로그 기록
+                CRUDLogger.log("READ", "상품", "상품 조회: " + product.getName());
             }
+        } catch (SQLException e) {
+            // 실패 시 로그
+            CRUDLogger.log("ERROR", "상품", "모든 상품 조회 실패");
+            throw e;
         }
         return products;
     }
@@ -64,15 +78,23 @@ public class ProductsDAO {
                 product.setPrice(rs.getDouble("price"));
                 product.setCreatedAt(rs.getString("created_at"));
                 product.setManufacturerId(rs.getInt("manufacturer_id"));
+
+                // 로그 기록
+                CRUDLogger.log("READ", "상품", "상품 ID로 조회: ID " + productId);
                 return product;
+            } else {
+                CRUDLogger.log("WARN", "상품", "조회된 상품 없음: ID " + productId);
+                return null;
             }
+        } catch (SQLException e) {
+            // 실패 시 로그
+            CRUDLogger.log("ERROR", "상품", "상품 ID 조회 실패: ID " + productId);
+            throw e;
         }
-        return null;
     }
 
     // UPDATE: 상품 정보 수정
     public void updateProduct(ProductsVO product) throws SQLException {
-        // created_at 필드는 수정하지 않음
         String sql = "UPDATE Products SET name = ?, description = ?, category_id = ?, price = ?, manufacturer_id = ? WHERE product_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, product.getName());
@@ -81,7 +103,18 @@ public class ProductsDAO {
             stmt.setDouble(4, product.getPrice());
             stmt.setInt(5, product.getManufacturerId());
             stmt.setInt(6, product.getProductId());
-            stmt.executeUpdate();
+            int rowsUpdated = stmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                // 로그 기록
+                CRUDLogger.log("UPDATE", "상품", "상품 수정: ID " + product.getProductId());
+            } else {
+                CRUDLogger.log("WARN", "상품", "수정된 상품 없음: ID " + product.getProductId());
+            }
+        } catch (SQLException e) {
+            // 실패 시 로그
+            CRUDLogger.log("ERROR", "상품", "상품 수정 실패: ID " + product.getProductId());
+            throw e;
         }
     }
 
@@ -90,7 +123,19 @@ public class ProductsDAO {
         String sql = "DELETE FROM Products WHERE product_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, productId);
-            stmt.executeUpdate();
+            int rowsDeleted = stmt.executeUpdate();
+
+            if (rowsDeleted > 0) {
+                // 로그 기록
+                CRUDLogger.log("DELETE", "상품", "상품 삭제: ID " + productId);
+            } else {
+                CRUDLogger.log("WARN", "상품", "삭제된 상품 없음: ID " + productId);
+            }
+        } catch (SQLException e) {
+            // 실패 시 로그
+            CRUDLogger.log("ERROR", "상품", "상품 삭제 실패: ID " + productId);
+            throw e;
         }
     }
 }
+

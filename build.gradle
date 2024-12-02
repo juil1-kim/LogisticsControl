@@ -23,12 +23,16 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok:1.18.24' // 최신 버전 확인
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
-    implementation 'org.mongodb:mongo-java-driver:3.2.2'
+    implementation 'org.mongodb:mongodb-driver-sync:4.11.0' // 02, Dec 수정사항 몽고DB
 
 
 
     implementation 'org.slf4j:slf4j-nop:2.0.9'
     implementation 'org.mindrot:jbcrypt:0.4'
+    implementation 'org.jfree:jfreechart:1.5.3' // 02, Dec 수정사항 그래프용
+    implementation 'org.apache.logging.log4j:log4j-core:2.20.0' // 02, log4j 빌드
+    implementation 'org.apache.logging.log4j:log4j-api:2.20.0'  // 02, log4j 빌드
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.20.0' // 02, log4j 빌드
 }
 
 test {

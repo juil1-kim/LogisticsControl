@@ -16,18 +16,17 @@ public class CategoriesUI {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("\n=== Categories Management ===");
-            System.out.println("1. Add Category");
-            System.out.println("2. View All Categories");
-            System.out.println("3. View Category by ID");
-            System.out.println("4. Update Category");
-            System.out.println("5. Delete Category");
-            System.out.println("6. Delete All Categories");
-            System.out.println("7. Exit");
-            System.out.print("Select an option: ");
+            System.out.println("\n=== 카테고리 관리 ===");
+            System.out.println("1. 카테고리 추가");
+            System.out.println("2. 모든 카테고리 조회");
+            System.out.println("3. ID로 카테고리 조회");
+            System.out.println("4. 카테고리 수정");
+            System.out.println("5. 카테고리 삭제");
+            System.out.println("6. 종료");
+            System.out.print("옵션을 선택하세요: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine(); // 개행 문자 처리
 
             try {
                 switch (choice) {
@@ -47,24 +46,21 @@ public class CategoriesUI {
                         deleteCategory(scanner);
                         break;
                     case 6:
-                        deleteAllCategories(scanner);
-                        break;
-                    case 7:
-                        System.out.println("Exiting...");
+                        System.out.println("종료 중...");
                         return;
                     default:
-                        System.out.println("Invalid choice. Please try again.");
+                        System.out.println("잘못된 선택입니다. 다시 시도하세요.");
                 }
             } catch (Exception e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println("오류 발생: " + e.getMessage());
             }
         }
     }
 
     private void addCategory(Scanner scanner) throws SQLException {
-        System.out.print("Enter category name: ");
+        System.out.print("카테고리 이름을 입력하세요: ");
         String name = scanner.nextLine();
-        System.out.print("Enter category description: ");
+        System.out.print("카테고리 설명을 입력하세요: ");
         String description = scanner.nextLine();
 
         CategoriesVO category = new CategoriesVO();
@@ -72,81 +68,69 @@ public class CategoriesUI {
         category.setDescription(description);
 
         categoriesDAO.addCategory(category);
-        System.out.println("Category added successfully!");
+        System.out.println("카테고리가 성공적으로 추가되었습니다!");
     }
 
     private void viewAllCategories() throws SQLException {
         List<CategoriesVO> categories = categoriesDAO.getAllCategories();
         if (categories.isEmpty()) {
-            System.out.println("No categories found.");
+            System.out.println("등록된 카테고리가 없습니다.");
         } else {
-            System.out.println("\n=== All Categories ===");
+            System.out.println("\n=== 모든 카테고리 ===");
             for (CategoriesVO category : categories) {
                 System.out.println("ID: " + category.getCategoryId() +
-                        ", Name: " + category.getName() +
-                        ", Description: " + category.getDescription());
+                        ", 이름: " + category.getName() +
+                        ", 설명: " + category.getDescription());
             }
         }
     }
 
     private void viewCategoryById(Scanner scanner) throws SQLException {
-        System.out.print("Enter category ID: ");
+        System.out.print("조회할 카테고리 ID를 입력하세요: ");
         int id = scanner.nextInt();
 
         CategoriesVO category = categoriesDAO.getCategoryById(id);
         if (category != null) {
-            System.out.println("\nCategory Details:");
+            System.out.println("\n카테고리 상세 정보:");
             System.out.println("ID: " + category.getCategoryId());
-            System.out.println("Name: " + category.getName());
-            System.out.println("Description: " + category.getDescription());
+            System.out.println("이름: " + category.getName());
+            System.out.println("설명: " + category.getDescription());
         } else {
-            System.out.println("Category not found.");
+            System.out.println("해당 ID의 카테고리를 찾을 수 없습니다.");
         }
     }
 
     private void updateCategory(Scanner scanner) throws SQLException {
-        System.out.print("Enter category ID to update: ");
+        System.out.print("수정할 카테고리 ID를 입력하세요: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine(); // 개행 문자 처리
 
         CategoriesVO category = categoriesDAO.getCategoryById(id);
         if (category != null) {
-            System.out.println("Current name: " + category.getName());
-            System.out.print("Enter new name: ");
+            System.out.println("현재 이름: " + category.getName());
+            System.out.print("새 이름을 입력하세요: ");
             String newName = scanner.nextLine();
 
-            System.out.println("Current description: " + category.getDescription());
-            System.out.print("Enter new description: ");
+            System.out.println("현재 설명: " + category.getDescription());
+            System.out.print("새 설명을 입력하세요: ");
             String newDescription = scanner.nextLine();
 
             category.setName(newName);
             category.setDescription(newDescription);
 
             categoriesDAO.updateCategory(category);
-            System.out.println("Category updated successfully!");
+            System.out.println("카테고리가 성공적으로 수정되었습니다!");
         } else {
-            System.out.println("Category not found.");
+            System.out.println("해당 ID의 카테고리를 찾을 수 없습니다.");
         }
     }
 
     private void deleteCategory(Scanner scanner) throws SQLException {
-        System.out.print("Enter category ID to delete: ");
+        System.out.print("삭제할 카테고리 ID를 입력하세요: ");
         int id = scanner.nextInt();
 
         categoriesDAO.deleteCategory(id);
-        System.out.println("Category deleted successfully!");
-    }
-
-    private void deleteAllCategories(Scanner scanner) throws SQLException {
-        System.out.print("Are you sure you want to delete all categories? (yes/no): ");
-        String confirmation = scanner.nextLine();
-
-        if (confirmation.equalsIgnoreCase("yes")) {
-            categoriesDAO.deleteAllCategories();
-            System.out.println("All categories deleted successfully!");
-        } else {
-            System.out.println("Operation canceled.");
-        }
+        System.out.println("카테고리가 성공적으로 삭제되었습니다!");
     }
 
     public static void main(String[] args) {
@@ -158,3 +142,4 @@ public class CategoriesUI {
         }
     }
 }
+

@@ -1,6 +1,6 @@
 package org.example.logistics.products;
 
-import org.example.logistics.DatabaseConnection;
+import org.example.logistics.service.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -78,11 +78,12 @@ public class CategoriesDAO {
         }
     }
 
-    // DELETE ALL: 모든 카테고리 삭제 (주의: 위험 작업)
+    /* DELETE ALL: 모든 카테고리 삭제 (주의: 위험 작업)
     public void deleteAllCategories() throws SQLException {
         String sql = "DELETE FROM Categories";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.executeUpdate();
         }
     }
+     */
 }

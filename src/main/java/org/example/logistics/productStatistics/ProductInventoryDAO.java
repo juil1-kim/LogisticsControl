@@ -1,7 +1,6 @@
 package org.example.logistics.productStatistics;
 
-import org.example.logistics.DatabaseConnection;
-import org.example.logistics.productStatistics.ProductInventoryVO;
+import org.example.logistics.service.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
