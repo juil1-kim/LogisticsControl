@@ -9,12 +9,8 @@ public class WarehousesUI {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            System.out.println("창고 관리 UI입니다.");
-            System.out.println("1. 창고 생성");
-            System.out.println("2. 창고 목록");
-            System.out.println("3. 창고 수정");
-            System.out.println("4. 창고 삭제");
-            System.out.println("0. 종료");
+            System.out.println("===== 창고 관리입니다. =====");
+            System.out.println("| 1. 창고 생성 | 2. 창고 목록 | 3. 창고 수정 | 4. 창고 삭제 | 0. 종료 |");
             System.out.print("메뉴를 선택하세요: ");
             int menu = sc.nextInt();
             sc.nextLine();
