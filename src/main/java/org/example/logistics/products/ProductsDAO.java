@@ -1,6 +1,6 @@
 package org.example.logistics.products;
 
-import org.example.logistics.DatabaseConnection;
+import org.example.logistics.service.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

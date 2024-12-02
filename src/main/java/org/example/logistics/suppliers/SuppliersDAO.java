@@ -1,6 +1,6 @@
 package org.example.logistics.suppliers;
 
-import org.example.logistics.DatabaseConnection;
+import org.example.logistics.service.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,11 +25,13 @@ public class SuppliersDAO {
             stmt.setString(2, supplier.getContact());
             stmt.setString(3, supplier.getLocation());
             stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     // READ ALL : 모든 공급자 정보 가져오기
-    public List<SuppliersVO> getAllSuppliers(int supplierId) throws SQLException {
+    public List<SuppliersVO> getAllSuppliers() throws SQLException {
         List<SuppliersVO> suppliers = new ArrayList<>();
         String sql = "SELECT * FROM Suppliers";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -42,6 +44,8 @@ public class SuppliersDAO {
                 supplier.setLocation(rs.getString("location"));
                 suppliers.add(supplier);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return suppliers;
     }
@@ -61,6 +65,8 @@ public class SuppliersDAO {
                 supplier.setLocation(rs.getString("location"));
                 return supplier;
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
@@ -74,6 +80,8 @@ public class SuppliersDAO {
             stmt.setString(3, supplier.getLocation());
             stmt.setInt(4, supplier.getSupplierId());
             stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -83,6 +91,8 @@ public class SuppliersDAO {
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, supplierId);
             stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
