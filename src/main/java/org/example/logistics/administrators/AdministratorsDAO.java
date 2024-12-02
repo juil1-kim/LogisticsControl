@@ -1,14 +1,14 @@
 package org.example.logistics.administrators;
 
-import org.example.logistics.service.DatabaseConnection;
-import org.mindrot.jbcrypt.BCrypt;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.example.logistics.service.DatabaseConnection;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class AdministratorsDAO {
     private Connection conn;
@@ -31,7 +31,7 @@ public class AdministratorsDAO {
         List<AdministratorsVO> administrators = new ArrayList<>();
         String sql = " SELECT * FROM Administrators WHERE role = 'general'";
         try (PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+            ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 AdministratorsVO administrator = new AdministratorsVO();
                 administrator.setAdmin_id(rs.getInt("admin_id"));
