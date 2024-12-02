@@ -1,13 +1,15 @@
-package org.example.logistics.administrators;
+package org.example.logistics.service;
+
+import org.example.logistics.administrators.AdministratorsDAO;
 
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class AdministratorsPasswordUpdateUI {
+public class UpdatePasswordToBcrypt {
     private AdministratorsDAO administratorsDAO;
     private Scanner scanner;
 
-    public AdministratorsPasswordUpdateUI() throws SQLException {
+    public UpdatePasswordToBcrypt() throws SQLException {
         this.administratorsDAO = new AdministratorsDAO();
         this.scanner = new Scanner(System.in);
     }
@@ -46,7 +48,7 @@ public class AdministratorsPasswordUpdateUI {
 
     public static void main(String[] args) {
         try {
-            AdministratorsPasswordUpdateUI ui = new AdministratorsPasswordUpdateUI();
+            UpdatePasswordToBcrypt ui = new UpdatePasswordToBcrypt();
             ui.start();
         } catch (SQLException e) {
             System.out.println("데이터베이스 연결 오류: " + e.getMessage());
