@@ -132,7 +132,7 @@ public class SuppliersUI {
             SuppliersUI ui = new SuppliersUI();
             ui.start();
         } catch (Exception e) {
-            System.out.println("Error : " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
