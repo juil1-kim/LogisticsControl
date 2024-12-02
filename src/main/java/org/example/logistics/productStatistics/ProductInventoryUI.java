@@ -1,7 +1,7 @@
 package org.example.logistics.productStatistics;
 
-import org.example.logistics.DatabaseConnection;
-import org.example.logistics.productStatistics.ProductInventoryDAO;
+import org.example.logistics.service.DatabaseConnection;
+
 import java.util.List;
 import java.util.Scanner;
 
