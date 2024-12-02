@@ -1,63 +1,137 @@
 package org.example.logistics.branches;
 
+
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
 public class BranchesUI {
-    public static void main(String[] args) throws Exception {
-        BranchesDAO dao = new BranchesDAO();
-        Scanner sc = new Scanner(System.in);
+    private BranchesDAO branchesDAO;
+    private Scanner scanner;
 
+    public BranchesUI() throws SQLException, ClassNotFoundException {
+        this.branchesDAO = new BranchesDAO();
+        this.scanner = new Scanner(System.in);
+    }
+
+    public void start() {
         while (true) {
-            System.out.println("지점 관리 UI입니다.");
-            System.out.println("1. 지점 생성");
-            System.out.println("2. 지점 목록");
-            System.out.println("3. 지점 수정");
-            System.out.println("4. 지점 삭제");
-            System.out.println("0. 종료");
-            System.out.print("메뉴를 선택하세요: ");
-            int menu = sc.nextInt();
-            sc.nextLine();
+            System.out.println("\n=== Branch Management ===");
+            System.out.println("1. Add Branch");
+            System.out.println("2. View All Branches");
+            System.out.println("3. View Branch by ID");
+            System.out.println("4. Update Branch");
+            System.out.println("5. Delete Branch");
+            System.out.println("0. Exit");
+            System.out.print("Choose an option: ");
 
-            switch (menu) {
-                case 1:
-                    System.out.print("지점 이름: ");
-                    String name = sc.nextLine();
-                    System.out.print("지점 위치: ");
-                    String loc = sc.nextLine();
-                    dao.addBranches(name, loc);
-                    System.out.println("지점이 생성되었습니다.");
-                    break;
-                case 2:
-                    List<BranchesVO> list = dao.getAllBranches();
-                    if (!list.isEmpty()) {
-                        System.out.println("지점 목록:");
-                        for (BranchesVO b : list) {
-                            System.out.println(b.getBranchID() + " " + b.getBranchName() + " " + b.getBranchLocate());
-                        }
-                    } else {
-                        System.out.println("지점이 없습니다.");
-                    }
-                    break;
-                case 3:
-                    System.out.print("수정할 지점 ID: ");
-                    int updateId = sc.nextInt();
-                    sc.nextLine();
-                    System.out.print("바꿀 이름: ");
-                    String updateName = sc.nextLine();
-                    dao.update(updateName, updateId);
-                    break;
-                case 4:
-                    System.out.print("삭제할 지점 ID: ");
-                    int deleteId = sc.nextInt();
-                    dao.delete(deleteId);
-                    break;
-                case 0:
-                    System.out.println("프로그램을 종료합니다.");
-                    return;
-                default:
-                    System.out.println("잘못된 입력입니다. 다시 시도하세요.");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            try {
+                switch (choice) {
+                    case 1:
+                        addBranch();
+                        break;
+                    case 2:
+                        viewAllBranches();
+                        break;
+                    case 3:
+                        viewBranchById();
+                        break;
+                    case 4:
+                        updateBranch();
+                        break;
+                    case 5:
+                        deleteBranch();
+                        break;
+                    case 0:
+                        System.out.println("Exiting...");
+                        return;
+                    default:
+                        System.out.println("Invalid option. Try again.");
+                }
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
             }
+        }
+    }
+
+    private void addBranch() throws SQLException {
+        System.out.print("Enter branch name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter branch location: ");
+        String location = scanner.nextLine();
+
+        BranchesVO branch = new BranchesVO();
+        branch.setName(name);
+        branch.setLocation(location);
+        branchesDAO.addBranch(branch);
+
+        System.out.println("Branch added successfully!");
+    }
+
+    private void viewAllBranches() throws SQLException {
+        List<BranchesVO> branches = branchesDAO.getAllBranches();
+        if (branches.isEmpty()) {
+            System.out.println("No branches found.");
+        } else {
+            System.out.println("\n=== Branches ===");
+            for (BranchesVO branch : branches) {
+                System.out.println("ID: " + branch.getBranchId() +
+                        ", Name: " + branch.getName() +
+                        ", Location: " + branch.getLocation());
+            }
+        }
+    }
+
+    private void viewBranchById() throws SQLException {
+        System.out.print("Enter branch ID: ");
+        int id = scanner.nextInt();
+
+        BranchesVO branch = branchesDAO.getBranchById(id);
+        if (branch == null) {
+            System.out.println("Branch not found.");
+        } else {
+            System.out.println("ID: " + branch.getBranchId());
+            System.out.println("Name: " + branch.getName());
+            System.out.println("Location: " + branch.getLocation());
+        }
+    }
+
+    private void updateBranch() throws SQLException {
+        System.out.print("Enter branch ID to update: ");
+        int id = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        System.out.print("Enter new name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter new location: ");
+        String location = scanner.nextLine();
+
+        BranchesVO branch = new BranchesVO();
+        branch.setBranchId(id);
+        branch.setName(name);
+        branch.setLocation(location);
+        branchesDAO.updateBranch(branch);
+
+        System.out.println("Branch updated successfully!");
+    }
+
+    private void deleteBranch() throws SQLException {
+        System.out.print("Enter branch ID to delete: ");
+        int id = scanner.nextInt();
+
+        branchesDAO.deleteBranch(id);
+        System.out.println("Branch deleted successfully!");
+    }
+
+    public static void main(String[] args) {
+        try {
+            BranchesUI ui = new BranchesUI();
+            ui.start();
+        } catch (Exception e) {
+            System.out.println("Failed to start application: " + e.getMessage());
         }
     }
 }

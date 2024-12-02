@@ -32,14 +32,14 @@ CREATE TABLE Manufacturers (
 CREATE TABLE Warehouses (
     warehouse_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(20) NOT NULL,
-    location VARCHAR(25) NOT NULL, 
+    location VARCHAR(25) NOT NULL,
     capacity INT NOT NULL CHECK (capacity >= 0) -- 창고 용량은 음수가 될 수 없음
 );
 
 -- 관리자 테이블
 CREATE TABLE Administrators (
     admin_id INT AUTO_INCREMENT PRIMARY KEY, -- 관리자 ID (고유)
-    username VARCHAR(50) UNIQUE NOT NULL, -- 로그인용 사용자 ID (중복 불가)
+    user_id VARCHAR(50) UNIQUE NOT NULL, -- 로그인용 사용자 ID (중복 불가)
     password VARCHAR(255) NOT NULL, -- 로그인용 비밀번호 (암호화 필요)
     role ENUM('root', 'general') NOT NULL, -- 관리자 역할 (루트 관리자, 일반 관리자)
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 생성일
@@ -59,7 +59,7 @@ CREATE TABLE Administrator_Warehouses (
 CREATE TABLE Branches (
     branch_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    location VARCHAR(255) NOT NULL -- 
+    location VARCHAR(255) NOT NULL --
 );
 
 -- 창고 재고 관리 테이블
@@ -118,59 +118,27 @@ CREATE TABLE Outgoing (
     quantity INT NOT NULL CHECK (quantity > 0), -- 출고 수량은 0보다 커야 함
     outgoing_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (warehouse_id) REFERENCES Warehouses(warehouse_id) ON DELETE CASCADE,
-    FOREIGN KEY (product_id) REFERENCES Products(product_id) ON DELETE SET NULL
+    FOREIGN KEY (product_id) REFERENCES Products(product_id) ON DELETE SET NULL,
     FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE SET NULL
 );
+
+-- 새로 추가한 공급자 - 상품 관계테이블입니다. 사실상 중간 연결테이블.
+CREATE TABLE Supplier_Products (
+    supplier_product_id INT AUTO_INCREMENT PRIMARY KEY, -- PK
+    supplier_id INT NOT NULL, -- 공급자 ID FK
+    product_id INT NOT NULL, -- 제품 ID FK
+    UNIQUE(supplier_id, product_id), -- 중복 방지: 한 공급자-제품 조합은 한 번만 저장
+    FOREIGN KEY (supplier_id) REFERENCES Suppliers(supplier_id) ON DELETE CASCADE, -- 공급자 삭제 시 관련 데이터 삭제
+    FOREIGN KEY (product_id) REFERENCES Products(product_id) ON DELETE CASCADE -- 제품 삭제 시 관련 데이터 삭제
+);
+
 
 -- 인덱스 추가 (성능 최적화)
 CREATE INDEX idx_orders_status ON Orders(status); -- 주문 상태에 대한 빠른 검색 지원
 
-INSERT INTO Categories (name, description) VALUES
-('Electronics', 'Electronic devices'),
-('Furniture', 'Household furniture'),
-('Clothing', 'Apparel and accessories');
-
-INSERT INTO Manufacturers (name, location, contact) VALUES
-('Samsung', 'Seoul', '010-1234-5678'),
-('IKEA', 'Gwangju', '02-987-6543'),
-('Nike', 'Busan', '051-432-1234');
-
-INSERT INTO Products (name, description, category_id, price, manufacturer_id) VALUES
-('Smartphone', 'High-end phone', 1, 999.99, 1),
-('Sofa', 'Comfortable sofa', 2, 499.99, 2),
-('Running Shoes', 'Lightweight shoes', 3, 119.99, 3);
-
-INSERT INTO Warehouses (name, location, capacity) VALUES
-('Central Warehouse', 'Seoul', 1000),
-('East Warehouse', 'Busan', 500);
-
-INSERT INTO Branches (name, location) VALUES
-('Seoul Branch', 'Seoul'),
-('Busan Branch', 'Busan');
-
-INSERT INTO Warehouse_Inventory (warehouse_id, product_id, quantity) VALUES
-(1, 1, 100),
-(1, 2, 50),
-(2, 3, 200);
-
 ALTER TABLE Suppliers DROP CHECK suppliers_chk_1;
 -- 제약 조건 제거, 자바 코드에서 제약을 거는것이 더 괜찮을것 같습니다.
 
-INSERT INTO Suppliers (name, contact, location) VALUES
-('LG Electronics', '02-3456-7890', 'Incheon'),
-('Samsung Materials', '010-5555-6666', 'Seoul');
-
-INSERT INTO Incoming (warehouse_id, product_id, supplier_id, quantity) VALUES
-(1, 1, 1, 20),
-(2, 3, 2, 50);
-
-INSERT INTO Orders (warehouse_id, branch_id, status) VALUES
-(1, 1, 'pending'),
-(2, 2, 'completed');
-
-INSERT INTO Outgoing (warehouse_id, product_id, order_id, quantity) VALUES
-(1, 1, 1, 10),
-(2, 3, 2, 20);
 
 SELECT * FROM Products;
 
@@ -178,11 +146,11 @@ SELECT   -- 특정 창고 재고 조회 쿼리
     w.name AS warehouse_name,
     p.name AS product_name,
     wi.quantity
-FROM 
+FROM
     Warehouse_Inventory wi
-JOIN 
+JOIN
     Warehouses w ON wi.warehouse_id = w.warehouse_id
-JOIN 
+JOIN
     Products p ON wi.product_id = p.product_id;
 
 SELECT  -- 주문 및 관련 정보 조회
@@ -191,11 +159,11 @@ SELECT  -- 주문 및 관련 정보 조회
     b.name AS branch_name,
     o.status,
     o.order_date
-FROM 
+FROM
     Orders o
-JOIN 
+JOIN
     Warehouses w ON o.warehouse_id = w.warehouse_id
-LEFT JOIN 
+LEFT JOIN
     Branches b ON o.branch_id = b.branch_id;
 
 -- 제품 가격 수정
@@ -230,31 +198,32 @@ SELECT * FROM Orders;
 SELECT * FROM Warehouse_Inventory;
 
 -- 창고별 제품명, 제품번호, 재고량
-SELECT 
-    w.warehouse_id AS warehouse_number, 
-    w.name AS warehouse_name, 
-    p.product_id AS product_number, 
-    p.name AS product_name, 
+SELECT
+    w.warehouse_id AS warehouse_number,
+    w.name AS warehouse_name,
+    p.product_id AS product_number,
+    p.name AS product_name,
     wi.quantity AS product_quantity
-FROM 
+FROM
     Warehouse_Inventory wi
-JOIN 
+JOIN
     Warehouses w ON wi.warehouse_id = w.warehouse_id
-JOIN 
+JOIN
     Products p ON wi.product_id = p.product_id;
 
 -- 특정 창고의 제품 정보만 조회
-SELECT 
-    w.warehouse_id AS warehouse_number, 
-    w.name AS warehouse_name, 
-    p.product_id AS product_number, 
-    p.name AS product_name, 
+SELECT
+    w.warehouse_id AS warehouse_number,
+    w.name AS warehouse_name,
+    p.product_id AS product_number,
+    p.name AS product_name,
     wi.quantity AS product_quantity
-FROM 
+FROM
     Warehouse_Inventory wi
-JOIN 
+JOIN
     Warehouses w ON wi.warehouse_id = w.warehouse_id
-JOIN 
+JOIN
     Products p ON wi.product_id = p.product_id
-WHERE 
+WHERE
     w.warehouse_id = 1; -- 창고 번호 1만 조회
+

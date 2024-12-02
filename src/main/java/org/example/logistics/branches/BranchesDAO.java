@@ -1,68 +1,92 @@
 package org.example.logistics.branches;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import org.example.logistics.service.DatabaseConnection;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BranchesDAO {
-    Connection con;
+    private Connection conn;
 
-    public BranchesDAO() throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        String url = "jdbc:mysql://localhost:3306/Logistics";
-        String id = "root";
-        String pw = "1234";
-        con = DriverManager.getConnection(url, id, pw);
+    // Constructor: DatabaseConnection에서 Connection 가져오기
+    public BranchesDAO() throws SQLException, ClassNotFoundException {
+        this.conn = DatabaseConnection.getConnection();
     }
 
-    //Create: 지점 생성
-    public void addBranches(String branches_name, String branches_loc) throws Exception {
-        String query = "insert into branches(name, location)  values(?,?)";
-        PreparedStatement ps = con.prepareStatement(query);
-        ps.setString(1, branches_name);
-        ps.setString(2, branches_loc);
-
-        ps.executeUpdate();
-        System.out.println("=====삽입 성공=====");
-    }
-
-    //Read: 지점 목록
-    public List<BranchesVO> getAllBranches() throws Exception {
-        List<BranchesVO> branchesList = new ArrayList<>();
-        String query = "SELECT branch_id, name, location FROM branches";
-        PreparedStatement stmt = con.prepareStatement(query);
-        ResultSet rs = stmt.executeQuery();
-        System.out.println("=====지점 목록=====");
-        while (rs.next()) {
-            BranchesVO request = new BranchesVO();
-            request.setBranchID(rs.getInt("branch_id"));
-            request.setBranchName(rs.getString("name"));
-            request.setBranchLocate(rs.getString("location"));
-            branchesList.add(request);
+    // CREATE: 지점 추가
+    public void addBranch(BranchesVO branch) throws SQLException {
+        String sql = "INSERT INTO Branches (name, location) VALUES (?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, branch.getName());
+            stmt.setString(2, branch.getLocation());
+            stmt.executeUpdate();
         }
-
-        return branchesList;
     }
 
-    //Update: 지점 수정
-    public void update(String name, int id) throws Exception {
-        String sql = "update branches set name = ? where branch_id = ?";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, name);
-        ps.setInt(2, id);
-
-        ps.executeUpdate();
+    // READ ALL: 모든 지점 가져오기
+    public List<BranchesVO> getAllBranches() throws SQLException {
+        List<BranchesVO> branches = new ArrayList<>();
+        String sql = "SELECT * FROM Branches";
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                BranchesVO branch = new BranchesVO();
+                branch.setBranchId(rs.getInt("branch_id"));
+                branch.setName(rs.getString("name"));
+                branch.setLocation(rs.getString("location"));
+                branches.add(branch);
+            }
+        }
+        return branches;
     }
 
-    //Delete: 지점 삭제
-    public void delete(int id) throws Exception {
-        String sql = "delete from branches where branch_id = ?";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, id);
+    // READ BY ID: 특정 ID의 지점 가져오기
+    public BranchesVO getBranchById(int branchId) throws SQLException {
+        String sql = "SELECT * FROM Branches WHERE branch_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, branchId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                BranchesVO branch = new BranchesVO();
+                branch.setBranchId(rs.getInt("branch_id"));
+                branch.setName(rs.getString("name"));
+                branch.setLocation(rs.getString("location"));
+                return branch;
+            }
+        }
+        return null;
+    }
 
-        ps.executeUpdate();
+    // UPDATE: 지점 정보 수정
+    public void updateBranch(BranchesVO branch) throws SQLException {
+        String sql = "UPDATE Branches SET name = ?, location = ? WHERE branch_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, branch.getName());
+            stmt.setString(2, branch.getLocation());
+            stmt.setInt(3, branch.getBranchId());
+            stmt.executeUpdate();
+        }
+    }
+
+    // DELETE: 특정 ID의 지점 삭제
+    public void deleteBranch(int branchId) throws SQLException {
+        String sql = "DELETE FROM Branches WHERE branch_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, branchId);
+            stmt.executeUpdate();
+        }
+    }
+
+    public void sortingBranchSales(){
+
+    }
+
+    public void sortingBranchNames(){
+
+    }
+
+    public void sortingBranchProduct(){
+
     }
 }

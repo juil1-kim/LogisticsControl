@@ -1,14 +1,11 @@
 package org.example.logistics.branches;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class BranchesVO {
-    private int branchID;
-    private String branchName;
-    private String branchLocate;
+    private int branchId;
+    private String name;
+    private String location;
 }
+
