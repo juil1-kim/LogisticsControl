@@ -1,7 +1,5 @@
 package org.example.logistics.orders;
 
-import org.example.logistics.branches.BranchesDAO;
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,7 +11,6 @@ public class OrdersUI {
         int quantity = 0;
         int orderId = 0;
         Scanner sc = new Scanner(System.in);
-        BranchesDAO branchDao = new BranchesDAO();
         OrdersDAO ordersDao = new OrdersDAO();
         while (true) {
             System.out.println("===== 주문 관리입니다. =====");
