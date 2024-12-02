@@ -1,7 +1,6 @@
 package org.example.logistics.productStatistics;
 
 import org.example.logistics.service.DatabaseConnection;
-import org.example.logistics.productStatistics.ProductInventoryVO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,5 +44,3 @@ public class ProductInventoryDAO{
         return inventoryList;
     }
 }
-
-
