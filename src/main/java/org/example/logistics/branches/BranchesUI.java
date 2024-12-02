@@ -12,6 +12,7 @@ public class BranchesUI {
     public BranchesUI() throws SQLException, ClassNotFoundException {
         this.branchesDAO = new BranchesDAO();
         this.scanner = new Scanner(System.in);
+
     }
 
     public void start() {
@@ -126,7 +127,7 @@ public class BranchesUI {
         System.out.println("Branch deleted successfully!");
     }
 
-    public static void main(String[] args) {
+    public static void function(String[] args) {
         try {
             BranchesUI ui = new BranchesUI();
             ui.start();
