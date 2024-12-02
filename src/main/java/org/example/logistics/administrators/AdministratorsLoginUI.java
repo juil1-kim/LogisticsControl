@@ -1,5 +1,7 @@
 package org.example.logistics.administrators;
 
+import org.example.logistics.branches.BranchesUI;
+
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -51,7 +53,7 @@ public class AdministratorsLoginUI {
             System.out.println("4. 가맹점 정보 관리");
             System.out.println("5. 수입 및 지출 관리");
             System.out.println("6. 출고 등록");
-            System.out.println("7. 일반 모드 권한 관리");
+            System.out.println("7. 일반 관리자 권한 관리");
             System.out.println("0. 로그인 창 이동");
             System.out.println("-1. 프로그램 종료");
             System.out.print("메뉴를 선택하세요 >> ");
@@ -71,6 +73,7 @@ public class AdministratorsLoginUI {
                     break;
                 case 4:
                     // 가맹점 정보 관리 기능 호출
+                    BranchesUI.function(null);
                     break;
                 case 5:
                     // 수입 및 지출 관리 기능 호출
@@ -79,7 +82,8 @@ public class AdministratorsLoginUI {
                     // 출고 등록 기능 호출
                     break;
                 case 7:
-                    // 일반 모드 권한 관리 기능 호출
+                    // 일반 관리자 권한 관리
+                    AdministratorsUI.function(null);
                     break;
                 case 0:
                     System.out.println("로그인 창 이동");
