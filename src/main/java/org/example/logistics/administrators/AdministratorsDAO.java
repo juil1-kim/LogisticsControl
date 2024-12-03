@@ -17,7 +17,7 @@ public class AdministratorsDAO {
         this.conn = DatabaseConnection.getConnection();
     }
 
-    // 비밀번호 암호화 추가 필요
+
     public void addAdministrator(AdministratorsVO administrator) throws SQLException {
         String sql = "INSERT INTO Administrators (user_id, password, role) VALUES (?, ?, 'general')";
         try(PreparedStatement stmt = conn.prepareStatement(sql)) {
