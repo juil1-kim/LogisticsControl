@@ -1,15 +1,15 @@
-package org.example.logistics.administrators_warehouses;
+package org.example.logistics.administratorsWarehouses;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Scanner;
 
-public class Administrators_WarehousesUI {
-    private Administrators_WarehousesDAO administrators_warehousesDAO;
+public class AdministratorsWarehousesUI {
+    private AdministratorsWarehousesDAO administrators_warehousesDAO;
 
-    public Administrators_WarehousesUI() throws SQLException {
-        this.administrators_warehousesDAO = new Administrators_WarehousesDAO();
+    public AdministratorsWarehousesUI() throws SQLException {
+        this.administrators_warehousesDAO = new AdministratorsWarehousesDAO();
     }
     
     public void start() {
@@ -59,12 +59,12 @@ public class Administrators_WarehousesUI {
 
     // 창고 관리자 목록 전체 보기
     private void getAllAdministrators_Warehouses(Scanner sc) throws SQLException {
-        List<Administrators_WarehousesVO> administrators_warehouses = administrators_warehousesDAO.getAllAdministrators_Warehouses();
+        List<AdministratorsWarehousesVO> administrators_warehouses = administrators_warehousesDAO.getAllAdministrators_Warehouses();
         if (administrators_warehouses.isEmpty()) {
             System.out.println("데이터가 없습니다.");
         } else {
             System.out.printf("\n=== 관리자 - 창고 정보 시스템 ===");
-            for (Administrators_WarehousesVO administrators_warehouse : administrators_warehouses) {
+            for (AdministratorsWarehousesVO administrators_warehouse : administrators_warehouses) {
                 System.out.println("Admin_Warehouse_ID: " + administrators_warehouse.getAdmin_warehouse_id() +
                         ", Admin_ID: " + administrators_warehouse.getAdmin_id() +
                         ", Warehouse_ID: " + administrators_warehouse.getWarehouse_id() +
@@ -79,7 +79,7 @@ public class Administrators_WarehousesUI {
         System.out.println("창고 관리자 ID: ");
         int admin_warehouse_id = sc.nextInt();
 
-        Administrators_WarehousesVO administrators_warehouses = Administrators_WarehousesDAO.getAdministrators_Warehouse(admin_warehouse_id);
+        AdministratorsWarehousesVO administrators_warehouses = AdministratorsWarehousesDAO.getAdministrators_Warehouse(admin_warehouse_id);
         if (administrators_warehouses == null) {
             System.out.println("해당 창고 관리자 ID를 찾을 수 없습니다.");
         } else {
@@ -105,7 +105,7 @@ public class Administrators_WarehousesUI {
         String newAssignedAtInput = sc.nextLine();
         Timestamp newAssignedAt = Timestamp.valueOf(newAssignedAtInput);
 
-        Administrators_WarehousesVO administrators_warehouse = new Administrators_WarehousesVO();
+        AdministratorsWarehousesVO administrators_warehouse = new AdministratorsWarehousesVO();
         administrators_warehouse.setAdmin_warehouse_id(Integer.parseInt(sc.nextLine()));
         administrators_warehouse.setAdmin_id(adminID);
         administrators_warehouse.setAdmin_warehouse_id(warehouseID);
@@ -121,7 +121,7 @@ public class Administrators_WarehousesUI {
         int adminWarehouseID = sc.nextInt();
         sc.nextLine();
 
-        Administrators_WarehousesVO administrators_warehouse = administrators_warehousesDAO.getAdministrators_Warehouse(adminWarehouseID);
+        AdministratorsWarehousesVO administrators_warehouse = administrators_warehousesDAO.getAdministrators_Warehouse(adminWarehouseID);
         if (administrators_warehouse.getAssigned_at() != null) {
             System.out.println("현재 창고 관리자 ID: " + administrators_warehouse.getAdmin_warehouse_id());
             System.out.println("수정할 창고 관리자 ID: ");
@@ -168,7 +168,7 @@ public class Administrators_WarehousesUI {
 
     public static void main(String[] args) {
         try {
-            Administrators_WarehousesUI ui = new Administrators_WarehousesUI();
+            AdministratorsWarehousesUI ui = new AdministratorsWarehousesUI();
             ui.start();
         } catch (Exception e) {
             e.printStackTrace();
