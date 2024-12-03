@@ -43,12 +43,12 @@ public class WarehousesUI {
                     sc.nextLine();
                     System.out.print("바꿀 이름: ");
                     String updateName = sc.nextLine();
-                    dao.update(updateName, updateId);
+                    dao.updateWarehouses(updateName, updateId);
                     break;
                 case 4:
                     System.out.print("삭제할 창고 ID: ");
                     int deleteId = sc.nextInt();
-                    dao.delete(deleteId);
+                    dao.deleteWarehouses(deleteId);
                     break;
                 case 0:
                     System.out.println("프로그램을 종료합니다.");

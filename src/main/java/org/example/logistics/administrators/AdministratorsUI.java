@@ -128,7 +128,7 @@ public class AdministratorsUI {
         System.out.println("'" + user_id + "' 계정이 정상 삭제 되었습니다.");
     }
 
-    public static void function(String[] args) {
+    public static void function() {
         try{
             AdministratorsUI ui = new AdministratorsUI();
             ui.start();

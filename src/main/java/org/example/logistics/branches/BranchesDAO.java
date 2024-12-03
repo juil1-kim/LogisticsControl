@@ -78,15 +78,92 @@ public class BranchesDAO {
         }
     }
 
-    public void sortingBranchSales(){
-
+    // 지점별 총 판매량 순 정렬
+    public List<BranchesOutgoingOrdersVO> sortingBranchSales() throws SQLException {
+        List<BranchesOutgoingOrdersVO> branches = new ArrayList<>();
+        String sql = "SELECT " +
+                "b.name AS branch_name, " +
+                "SUM(o.quantity) AS total_sales " +
+                "FROM " +
+                "Outgoing o " +
+                "JOIN " +
+                "Orders ord ON o.order_id = ord.order_id " +
+                "JOIN " +
+                "Branches b ON ord.branch_id = b.branch_id " +
+                "GROUP BY " +
+                "b.branch_id, b.name " +
+                "ORDER BY " +
+                "total_sales DESC;";
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                BranchesOutgoingOrdersVO branch = new BranchesOutgoingOrdersVO();
+                branch.setName(rs.getString("branch_name"));
+                branch.setQuantity(rs.getInt("total_sales"));
+                branches.add(branch);
+            }
+        }
+        return branches;
     }
 
-    public void sortingBranchNames(){
-
+    // 지점별 이름 가나다 순 정렬
+    public List<BranchesVO> sortingBranchNames() throws SQLException {
+        List<BranchesVO> branches = new ArrayList<>();
+        String sql = "SELECT " +
+                "branch_id, " +
+                "name AS branch_name, " +
+                "location " +
+                "FROM " +
+                "Branches " +
+                "ORDER BY " +
+                "name ASC;";
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                BranchesVO branch = new BranchesVO();
+                branch.setBranchId(rs.getInt("branch_id"));
+                branch.setName(rs.getString("branch_name"));
+                branch.setLocation(rs.getString("location"));
+                branches.add(branch);
+            }
+        }
+        return branches;
     }
 
-    public void sortingBranchProduct(){
+    // 특정 상품별 지점 판매량 정렬
+    public List<BranchesOutgoingOrdersProductsVO> sortingBranchProduct(int productId) throws SQLException {
+        List<BranchesOutgoingOrdersProductsVO> branches = new ArrayList<>();
+        String sql = "SELECT " +
+                "b.name AS branch_name, " +
+                "p.name AS product_name, " +
+                "SUM(o.quantity) AS total_sales " +
+                "FROM " +
+                "Outgoing o " +
+                "JOIN " +
+                "Orders ord ON o.order_id = ord.order_id " +
+                "JOIN " +
+                "Branches b ON ord.branch_id = b.branch_id " +
+                "JOIN " +
+                "Products p ON o.product_id = p.product_id " +
+                "WHERE " +
+                "p.product_id = ? " +
+                "GROUP BY " +
+                "b.branch_id, b.name, p.product_id, p.name " +
+                "ORDER BY " +
+                "total_sales DESC;";
 
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, productId); // 사용자로부터 입력받은 productId를 설정
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    BranchesOutgoingOrdersProductsVO branch = new BranchesOutgoingOrdersProductsVO();
+                    branch.setBranch_name(rs.getString("branch_name"));
+                    branch.setProduct_name(rs.getString("product_name"));
+                    branch.setQuantity(rs.getInt("total_sales"));
+                    branches.add(branch);
+                }
+            }
+        }
+        return branches;
     }
 }
