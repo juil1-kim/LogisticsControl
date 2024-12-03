@@ -1,14 +1,16 @@
-package org.example.logistics.warehouse_inventory;
+package org.example.logistics.warehouseInventory;
+
+import org.example.logistics.orders.OrdersVO;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Warehouse_InventoryUI {
+public class WarehouseInventoryUI {
     public static void main(String[] args) throws Exception {
         int id = 0;
         int productId = 0;
         int quantity = 0;
-        Warehouse_InventoryDAO dao = new Warehouse_InventoryDAO();
+        WarehouseInventoryDAO dao = new WarehouseInventoryDAO();
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.println("===== 창고 재고 관리입니다. =====");
@@ -20,10 +22,10 @@ public class Warehouse_InventoryUI {
                     System.out.print("창고 id: ");
                     id = sc.nextInt();
 
-                    ArrayList<Warehouse_InventoryVO> list = dao.getAllInventoryDAO(id);
+                    ArrayList<WarehouseInventoryVO> list = dao.getAllInventoryDAO(id);
                     System.out.println("=====재고 목록=====");
                     System.out.println("| ID | 상품 이름   | 가격  | 수량 | 업데이트날짜 |");
-                    for (Warehouse_InventoryVO bag : list) {
+                    for (WarehouseInventoryVO bag : list) {
                         System.out.println("| " + bag.getProductId() + "  | " + bag.getProductName() + " | " + bag.getProductPrice() + " | " + bag.getQuantity() + " |" + bag.getLast_update());
                     }
                     break;
