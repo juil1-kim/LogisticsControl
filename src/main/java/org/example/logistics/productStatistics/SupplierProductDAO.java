@@ -1,7 +1,7 @@
 package org.example.logistics.productStatistics;
 
+import org.example.logistics.service.CRUDLogger;
 import org.example.logistics.service.DatabaseConnection;
-
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,8 +37,14 @@ public class SupplierProductDAO {
 
                 supplierList.add(vo);
             }
+
+            // 성공 로그 기록
+            CRUDLogger.log("READ", "공급자-제품", "공급자별 제품 조회 성공");
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            // 실패 로그 기록 및 예외 처리
+            CRUDLogger.log("ERROR", "공급자-제품", "공급자별 제품 조회 실패 - " + e.getMessage());
+            throw new RuntimeException("공급자별 제품 조회 실패", e);
         }
         return supplierList;
     }

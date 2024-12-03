@@ -10,7 +10,7 @@ public class OrdersVO {
     private int warehouseId; // Foreign Key
     private int branchId; // Foreign Key
     private Timestamp orderDate; // DATETIME
-    private String status; // ENUM('pending', 'completed', 'cancelled')
+    private String status; // ENUM('대기', '완료', '취소')
     private int productId;
     private int quantity;
 }
