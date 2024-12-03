@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Administrators_WarehousesDAO {
-    private Connection conn;
+    private static Connection conn;
 
     // Constructor: DatabaseConnection에서 Connection 가져오기
     public Administrators_WarehousesDAO() throws SQLException {
@@ -31,7 +31,7 @@ public class Administrators_WarehousesDAO {
     }
 
     // READ ALL : 모든 관리자 - 창고 정보 가져오기
-    public List<Administrators_WarehousesVO> getAllAdministrators_Warehouses(int admin_warehouse_id) throws SQLException {
+    public List<Administrators_WarehousesVO> getAllAdministrators_Warehouses() throws SQLException {
         List<Administrators_WarehousesVO> administrators_Warehouses = new ArrayList<>();
         String sql = "SELECT * FROM Administrators_warehouses";
         try(PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -51,7 +51,7 @@ public class Administrators_WarehousesDAO {
     }
 
     // READ BY ID : 특정 관리자 - 창고 정보 가져오기
-    public Administrators_WarehousesVO getAdministrators_Warehouse(int admin_warehouse_id) throws SQLException {
+    public static Administrators_WarehousesVO getAdministrators_Warehouse(int admin_warehouse_id) throws SQLException {
         String sql = "SELECT * FROM Administrators_warehouses WHERE admin_warehouse_id = ?";
         try(PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, admin_warehouse_id);
