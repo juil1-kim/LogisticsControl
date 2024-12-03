@@ -17,10 +17,11 @@ public class SuppliersUI {
         while(true) {
             System.out.println("\n=== 공급자 관리 시스템 ===");
             System.out.println("1. 공급자 전체 보기");
-            System.out.println("2. 공급자 추가");
-            System.out.println("3. 공급자 수정");
-            System.out.println("4. 공급자 삭제");
-            System.out.println("5. 종료");
+            System.out.println("2. 공급자 ID로 조회해서 보기");
+            System.out.println("3. 공급자 추가");
+            System.out.println("4. 공급자 수정");
+            System.out.println("5. 공급자 삭제");
+            System.out.println("6. 종료");
             System.out.println("선택: ");
 
             int select = sc.nextInt();
@@ -32,15 +33,18 @@ public class SuppliersUI {
                         getAllSuppliers(sc);
                         break;
                     case 2:
-                        addSupplier(sc);
+                        getSuppliersById(sc);
                         break;
                     case 3:
-                        updateSupplier(sc);
+                        addSupplier(sc);
                         break;
                     case 4:
-                        deleteSupplier(sc);
+                        updateSupplier(sc);
                         break;
                     case 5:
+                        deleteSupplier(sc);
+                        break;
+                    case 6:
                         System.out.println("Exiting...");
                         return;
                     default:
@@ -52,7 +56,7 @@ public class SuppliersUI {
         }
     }
 
-    // 공급자 목록 보기
+    // 공급자 목록 전체 보기
     private void getAllSuppliers(Scanner sc) throws SQLException {
         List<SuppliersVO> suppliers = suppliersDAO.getAllSuppliers();
         if (suppliers.isEmpty()) {
@@ -65,6 +69,21 @@ public class SuppliersUI {
                         ", Contact: " + supplier.getContact() +
                         ", Location: " + supplier.getLocation());
             }
+        }
+    }
+
+    // 특정 공급자 목록 보기
+    private void getSuppliersById(Scanner sc) throws SQLException {
+        System.out.println("공급자 ID: ");
+        int supplierId = sc.nextInt();
+
+        SuppliersVO suppliers = SuppliersDAO.getSuppliersById(supplierId);
+        if (suppliers == null) {
+            System.out.println("해당 공급자 ID를 찾을 수 없습니다.");
+        } else {
+            System.out.println("이름: " + suppliers.getName());
+            System.out.println("전화번호: " + suppliers.getContact());
+            System.out.println("위치: " + suppliers.getLocation());
         }
     }
 

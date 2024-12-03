@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SuppliersDAO {
-    private Connection conn;
+    private static Connection conn;
 
     // Constructor: DatabaseConnection에서 Connection 가져오기
     public SuppliersDAO() throws SQLException {
@@ -51,7 +51,7 @@ public class SuppliersDAO {
     }
 
     // READ BY ID : 특정 공급자 정보 가져오기
-    public SuppliersVO getSuppliersById(int supplierId) throws SQLException {
+    public static SuppliersVO getSuppliersById(int supplierId) throws SQLException {
         //SuppliersVO supplier = new SuppliersVO(); --> 중복자 선언으로 인한 에러가 났었음.
         String sql = "SELECT * FROM Suppliers WHERE supplierId = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
