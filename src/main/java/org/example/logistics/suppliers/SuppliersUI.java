@@ -12,6 +12,7 @@ public class SuppliersUI {
     }
 
     public void start() {
+        //Scanner는 자바에서 콘솔 입력을 받기 위해 주로 사용되는 객체임.
         Scanner sc = new Scanner(System.in);
 
         while(true) {
@@ -54,6 +55,16 @@ public class SuppliersUI {
                 System.out.println("Error : " + e.getMessage());
             }
         }
+        // Error 발생한 코드 :
+        //sc.close();
+        // 문제 : sc.close()는 Scanner 객체를 닫을 뿐만 아니라 내부적으로 사용하는 System.in 스트림도 닫아버림.
+        //       반복문이나 다른 메서드에서 입력을 받으려고 할 때 System.in이 이미 닫혀있기 때문에 입력이 불가능해짐.
+        // 해결 : 1. sc.close는 system.in을 닫기 때문에 반복적으로 입력을 받을 필요가 있는 경우 호출하지 않아야 함.
+        // ==> System.in은 JVM이 종료될 때 자동으로 닫히기 때문에 명시적으로 sc.close()를 호출하지 않아도 괜찮음.
+        // ==> 따라서 sc.close()를 호출하지 않고 while 반복문을 유지해야함.
+        //       2. 프로그램 종료 시점에만 close()를 호출하거나 생략하는 방식으로 문제를 해결할 수 있음.
+        // ==> 입력 처리가 완전히 끝난 후(프로그램 종료 직전) sc.close()를 호출함.
+        // ==> 하지만 반복문 안에서 System.in을 계속 사용할 경우, sc.close()는 생략하는 것이 안전함.
     }
 
     // 공급자 목록 전체 보기
@@ -126,9 +137,9 @@ public class SuppliersUI {
             System.out.println("수정할 공급자 위치: ");
             String newLocation = sc.nextLine();
 
-            supplier.setContact(newName);
+            supplier.setName(newName);
             supplier.setContact(newContact);
-            supplier.setContact(newLocation);
+            supplier.setLocation(newLocation);
 
             suppliersDAO.updateSupplier(supplier);
             System.out.println("공급자 정보가 성공적으로 수정되었습니다.");
