@@ -2,6 +2,9 @@ package org.example.logistics.administrators;
 
 import org.example.logistics.branches.BranchesUI;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -18,12 +21,11 @@ public class AdministratorsLoginUI {
         while (true) {
             System.out.println("\n=== Login ===");
             System.out.print("Enter ID: ");
-
             String user_id = sc.next();
             sc.nextLine();
 
-            System.out.print("Enter password: ");
-            String password = sc.nextLine();
+            // 스레드를 사용하여 비밀번호 입력 숨기기
+            String password = readPassword("Enter password: ");
 
             AdministratorsVO authority = loginDAO.login(user_id, password);
 
@@ -39,10 +41,46 @@ public class AdministratorsLoginUI {
                 }
             } else {
                 System.out.println("아이디나 비밀번호가 올바르지 않습니다.");
-                // 비밀번호 찾기 기능 구현
             }
         }
     }
+
+    private String readPassword(String prompt) {
+        System.out.print(prompt);
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder password = new StringBuilder();
+
+        Thread maskingThread = new Thread(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    break;
+                }
+            }
+        });
+
+        maskingThread.start();
+
+        try {
+            while (true) {
+                int ch = in.read();
+                if (ch == '\n' || ch == '\r') {
+                    break;
+                }
+                password.append((char) ch);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            maskingThread.interrupt();
+        }
+
+        return password.toString();
+    }
+
+
 
     private void rootMode() {
         while (true) {
@@ -73,7 +111,7 @@ public class AdministratorsLoginUI {
                     break;
                 case 4:
                     // 가맹점 정보 관리 기능 호출
-                    BranchesUI.function(null);
+                    BranchesUI.function();
                     break;
                 case 5:
                     // 수입 및 지출 관리 기능 호출
@@ -83,7 +121,7 @@ public class AdministratorsLoginUI {
                     break;
                 case 7:
                     // 일반 관리자 권한 관리
-                    AdministratorsUI.function(null);
+                    AdministratorsUI.function();
                     break;
                 case 0:
                     System.out.println("로그인 창 이동");

@@ -1,12 +1,13 @@
 package org.example.logistics.productStatistics;
 
 import org.example.logistics.service.DatabaseConnection;
-
+import org.jfree.chart.*;
 import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+
 
 import javax.swing.*;
 import java.text.DecimalFormat;
@@ -157,3 +158,5 @@ public class ProductInventoryUI {
         }
     }
 }
+
+
