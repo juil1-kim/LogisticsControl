@@ -1,9 +1,9 @@
-package org.example.logistics.warehouse_inventory;
+package org.example.logistics.warehouseInventory;
 
 import lombok.Data;
 
 @Data
-public class Warehouse_InventoryVO {
+public class WarehouseInventoryVO {
     private int productId;
     private String productName;
     private Double productPrice;
