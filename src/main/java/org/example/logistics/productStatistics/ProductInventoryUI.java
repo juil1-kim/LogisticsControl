@@ -1,106 +1,150 @@
 package org.example.logistics.productStatistics;
 
-import org.example.logistics.service.DatabaseConnection;
-import org.jfree.chart.*;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
 import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
-
 import javax.swing.*;
+import java.awt.*;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class ProductInventoryUI {
 
     private final ProductInventoryDAO dao;
-    private final List<JFrame> openFrames;
 
     public ProductInventoryUI() {
         this.dao = new ProductInventoryDAO();
-        this.openFrames = new ArrayList<>();
     }
 
-    private void displayInventory() {
-        List<ProductInventoryVO> inventoryList = dao.getProductInventory();
+    private void displayAllInventoryConsole() {
+        List<ProductInventoryVO> allData = dao.getAllProductInventory(); // 전체 데이터를 조회
 
-        int idWidth = 10;
-        int nameWidth = 25;
-        int quantityWidth = 10;
-        int warehouseWidth = 20;
+        if (allData.isEmpty()) {
+            System.out.println("조회된 데이터가 없습니다.");
+            return;
+        }
 
-        String header = String.format("%-" + idWidth + "s | %-" + nameWidth + "s | %-" + quantityWidth + "s | %-" + warehouseWidth + "s",
-                "ID", "제품명", "수량", "창고명");
-        String separator = "-".repeat(idWidth) + "-+-" +
-                "-".repeat(nameWidth) + "-+-" +
-                "-".repeat(quantityWidth) + "-+-" +
-                "-".repeat(warehouseWidth);
-
-        System.out.println("=".repeat(header.length()));
-        System.out.println("전체 제품 재고 목록");
-        System.out.println("=".repeat(header.length()));
-        System.out.println(header);
-        System.out.println(separator);
-
-        for (ProductInventoryVO inventory : inventoryList) {
-            String row = String.format("%-" + idWidth + "d | %-" + nameWidth + "s | %-" + quantityWidth + "d | %-" + warehouseWidth + "s",
+        // 콘솔 출력
+        System.out.printf("%-10s | %-25s | %-10s | %-50s%n", "ID", "제품명", "수량", "창고명");
+        System.out.println("-".repeat(100));
+        for (ProductInventoryVO inventory : allData) {
+            System.out.printf("%-10d | %-25s | %-10d | %-50s%n",
                     inventory.getProductId(),
                     inventory.getProductName(),
                     inventory.getQuantity(),
                     inventory.getWarehouseName());
-            System.out.println(row);
         }
 
-        // Footer
-        System.out.println("=".repeat(header.length()));
+        System.out.println("-".repeat(100));
+        System.out.println("총 " + allData.size() + "개의 데이터가 조회되었습니다.");
     }
 
-    private void displayInventoryGraph() {
-        List<ProductInventoryVO> inventoryList = dao.getProductInventory();
 
+
+    private void displayInventoryWithPagination() {
+        Scanner scanner = new Scanner(System.in);
+        int pageSize = 10;  // 한 페이지에 표시할 데이터 수
+        int currentPage = 0;
+        boolean hasNextPage = true;
+
+        while (hasNextPage) {
+            List<ProductInventoryVO> inventoryList = dao.getProductInventory(currentPage * pageSize, pageSize);
+
+            if (inventoryList.isEmpty()) {
+                System.out.println("더 이상 데이터가 없습니다.");
+                break;
+            }
+
+            // 콘솔 출력
+            System.out.printf("%-10s | %-25s | %-10s | %-50s%n", "ID", "제품명", "수량", "창고명");
+            System.out.println("-".repeat(100));
+            for (ProductInventoryVO inventory : inventoryList) {
+                System.out.printf("%-10d | %-25s | %-10d | %-50s%n",
+                        inventory.getProductId(),
+                        inventory.getProductName(),
+                        inventory.getQuantity(),
+                        inventory.getWarehouseName());
+            }
+
+            // 페이지 탐색 옵션
+            System.out.println("\n1. 다음 페이지");
+            System.out.println("2. 이전 페이지");
+            System.out.println("3. 종료");
+            System.out.print("옵션을 선택하세요: ");
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1 -> currentPage++;
+                case 2 -> {
+                    if (currentPage > 0) currentPage--;
+                    else System.out.println("첫 페이지입니다.");
+                }
+                case 3 -> {
+                    hasNextPage = false;
+                    System.out.println("페이지 탐색을 종료합니다.");
+                }
+                default -> System.out.println("잘못된 선택입니다. 다시 시도하세요.");
+            }
+        }
+    }
+
+    private void displayTableAndBarChart() {
+        List<ProductInventoryVO> inventoryList = dao.getProductInventory(0, 10); // 상위 50개 데이터만 조회
+
+        // JTable 데이터 준비
+        String[] columnNames = {"ID", "제품명", "수량", "창고명"};
+        Object[][] data = new Object[inventoryList.size()][4];
+        for (int i = 0; i < inventoryList.size(); i++) {
+            ProductInventoryVO inventory = inventoryList.get(i);
+            data[i][0] = inventory.getProductId();
+            data[i][1] = inventory.getProductName();
+            data[i][2] = inventory.getQuantity();
+            data[i][3] = inventory.getWarehouseName();
+        }
+        JTable table = new JTable(data, columnNames);
+        JScrollPane tableScrollPane = new JScrollPane(table);
+
+        // 막대 그래프 데이터 준비
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (ProductInventoryVO inventory : inventoryList) {
             dataset.addValue(inventory.getQuantity(), "수량", inventory.getProductName());
         }
-
         JFreeChart barChart = ChartFactory.createBarChart(
-                "제품 재고 그래프", // Title
-                "제품명",          // X-axis Label
-                "수량",           // Y-axis Label
-                dataset           // Dataset
+                "제품 재고 그래프", "제품명", "수량", dataset
         );
+        ChartPanel chartPanel = new ChartPanel(barChart);
 
+        // JFrame에 JTable과 그래프 추가
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("제품 재고 그래프");
+            JFrame frame = new JFrame("제품 목록 + 재고 그래프");
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            frame.getContentPane().add(new ChartPanel(barChart));
+            frame.setLayout(new BorderLayout());
+
+            frame.add(tableScrollPane, BorderLayout.CENTER);  // 테이블 중앙
+            frame.add(chartPanel, BorderLayout.SOUTH);        // 그래프 아래
+
             frame.pack();
             frame.setVisible(true);
-            openFrames.add(frame); // 열린 창 관리
         });
     }
 
-    private void displayInventoryPieChart() {
-        List<ProductInventoryVO> inventoryList = dao.getProductInventory();
+    private void displayPieChart() {
+        List<ProductInventoryVO> inventoryList = dao.getProductInventory(0, 50); // 상위 50개 데이터만 가져옴
 
         DefaultPieDataset dataset = new DefaultPieDataset();
-        int totalQuantity = inventoryList.stream().mapToInt(ProductInventoryVO::getQuantity).sum();
-
         for (ProductInventoryVO inventory : inventoryList) {
-            double percentage = (inventory.getQuantity() / (double) totalQuantity) * 100;
-            dataset.setValue(inventory.getProductName(), percentage);
+            dataset.setValue(inventory.getProductName(), inventory.getQuantity());
         }
 
         JFreeChart pieChart = ChartFactory.createPieChart(
-                "제품 재고 분포", // Title
-                dataset,          // Dataset
-                true,             // Legend
-                true,             // Tooltips
-                false             // URLs
+                "제품 재고 분포", dataset, true, true, false
         );
 
         PiePlot plot = (PiePlot) pieChart.getPlot();
@@ -115,48 +159,37 @@ public class ProductInventoryUI {
             frame.getContentPane().add(new ChartPanel(pieChart));
             frame.pack();
             frame.setVisible(true);
-            openFrames.add(frame); // 열린 창 관리
         });
     }
 
     public void start() {
-        Scanner scanner = new Scanner(System.in, "UTF-8"); // UTF-8로 한글 지원
+        Scanner scanner = new Scanner(System.in, "UTF-8");
         while (true) {
-            System.out.println("\n1. 제품 목록 보기 (표)");
-            System.out.println("2. 제품 재고 보기 (막대 그래프)");
-            System.out.println("3. 제품 재고 보기 (원형 그래프)");
+            System.out.println("\n1. 제품 목록 보기 (페이지 탐색)");
+            System.out.println("2. 제품 + 막대 그래프(재고)");
+            System.out.println("3. 원형 그래프(재고)");
             System.out.println("4. 종료");
+            System.out.println("5. 전체 데이터 출력(터미널)");
+
             System.out.print("옵션을 선택하세요: ");
             int choice = scanner.nextInt();
             switch (choice) {
-                case 1 -> displayInventory();
-                case 2 -> displayInventoryGraph();
-                case 3 -> displayInventoryPieChart();
+                case 1 -> displayInventoryWithPagination();
+                case 2 -> displayTableAndBarChart();
+                case 3 -> displayPieChart();
                 case 4 -> {
                     System.out.println("종료합니다...");
-                    closeAllFrames(); // 열린 모든 Swing 창 닫기
                     return;
                 }
+                case 5 -> displayAllInventoryConsole();
                 default -> System.out.println("잘못된 선택입니다. 다시 시도하세요.");
             }
         }
     }
 
-    private void closeAllFrames() {
-        for (JFrame frame : openFrames) {
-            frame.dispose(); // 모든 창 닫기
-        }
-        openFrames.clear(); // 리스트 비우기
-    }
-
     public static void main(String[] args) {
-        try {
-            ProductInventoryUI ui = new ProductInventoryUI();
-            ui.start();
-        } finally {
-            DatabaseConnection.close(); // 데이터베이스 연결 종료
-        }
+        ProductInventoryUI ui = new ProductInventoryUI();
+        ui.start();
     }
 }
-
 

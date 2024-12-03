@@ -1,5 +1,6 @@
-package org.example.logistics.warehouse_inventory;
+package org.example.logistics.warehouseInventory;
 
+import org.example.logistics.service.CRUDLogger;
 import org.example.logistics.service.DatabaseConnection;
 
 import java.sql.Connection;
@@ -8,15 +9,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Warehouse_InventoryDAO {
+public class WarehouseInventoryDAO {
     private Connection con;
 
-    public Warehouse_InventoryDAO() throws SQLException, ClassNotFoundException {
+    public WarehouseInventoryDAO() throws SQLException, ClassNotFoundException {
         this.con = DatabaseConnection.getConnection();
     }
 
-    public ArrayList<Warehouse_InventoryVO> getAllInventoryDAO(int id) throws Exception {
-        ArrayList<Warehouse_InventoryVO> InventoryList = new ArrayList<>();
+    public ArrayList<WarehouseInventoryVO> getAllInventoryDAO(int id) throws Exception {
+        ArrayList<WarehouseInventoryVO> InventoryList = new ArrayList<>();
         String query = "SELECT p.product_id, p.name, p.price, wi.quantity, wi.last_updated " +
                 "FROM Warehouse_Inventory wi JOIN Products p ON wi.product_id = p.product_id WHERE wi.warehouse_id = ?";
         PreparedStatement ps = con.prepareStatement(query);
@@ -25,12 +26,13 @@ public class Warehouse_InventoryDAO {
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            Warehouse_InventoryVO wivo = new Warehouse_InventoryVO();
+            WarehouseInventoryVO wivo = new WarehouseInventoryVO();
             wivo.setProductId(rs.getInt("product_id"));
             wivo.setProductName(rs.getString("name"));
             wivo.setProductPrice(rs.getDouble("price"));
             wivo.setQuantity(rs.getInt("quantity"));
             wivo.setLast_update(rs.getString("last_updated"));
+            CRUDLogger.log("READ", "창고", "창고별 재고: " + rs.getString("name"));
             InventoryList.add(wivo);
         }
         return InventoryList;
@@ -45,6 +47,7 @@ public class Warehouse_InventoryDAO {
         ps.setInt(1, id);
         ps.setInt(2, productId);
         ps.setInt(3, quantity);
+        CRUDLogger.log("UPDATE", "창고", "창고ID: " + id + "상품ID: " + productId + "재고 추가: " + quantity);
         ps.executeUpdate();
     }
 }

@@ -9,10 +9,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+// SuppliersDAO 클래스는 데이터베이스와 상호작용하여 공급자 데이터를 관리하는 역할을 함.
+// DAO(Data Access Object) 패턴을 사용하여 데이터베이스 작업을 캡슐화함.
 public class SuppliersDAO {
-    private Connection conn;
+    private static Connection conn;
 
     // Constructor: DatabaseConnection에서 Connection 가져오기
+    // 생성자 : DatabaseConnection에서 Connection 객체를 가져옴.
+    // 이 연결 객체를 통해 데이터베이스 작업(쿼리 실행)을 수행함.
     public SuppliersDAO() throws SQLException {
         this.conn = DatabaseConnection.getConnection();
     }
@@ -51,8 +55,9 @@ public class SuppliersDAO {
     }
 
     // READ BY ID : 특정 공급자 정보 가져오기
-    public SuppliersVO getSuppliersById(int supplierId) throws SQLException {
-        //SuppliersVO supplier = new SuppliersVO(); --> 중복자 선언으로 인한 에러가 났었음.
+    public static SuppliersVO getSuppliersById(int supplierId) throws SQLException {
+        // Error 발생한 코드 :
+        //SuppliersVO supplier = new SuppliersVO(); --> 중복자 선언으로 인한 Error가 났었음.
         String sql = "SELECT * FROM Suppliers WHERE supplierId = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, supplierId);

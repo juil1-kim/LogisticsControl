@@ -1,5 +1,6 @@
 package org.example.logistics.orders;
 
+import org.example.logistics.service.CRUDLogger;
 import org.example.logistics.service.DatabaseConnection;
 
 import java.sql.*;
@@ -10,7 +11,7 @@ public class OrdersDAO {
     private Connection con;
 
     public OrdersDAO() throws SQLException, ClassNotFoundException {
-        this.con = DatabaseConnection.getConnection();
+        con = DatabaseConnection.getConnection();
     }
 
     public List<OrdersVO> getAllOrder() throws Exception {
@@ -32,12 +33,13 @@ public class OrdersDAO {
             request.setStatus(rs.getString("status"));
             request.setProductId(rs.getInt("product_id"));
             request.setQuantity(rs.getInt("quantity"));
+            CRUDLogger.log("READ", "주문", "주문 ID: " + rs.getInt("order_id"));
             OrdersList.add(request);
         }
         return OrdersList;
     }
 
-    public void createOrder(int warehouseId, int branchId, int productId, int quantity) throws Exception {
+    public void addOrder(int warehouseId, int branchId, int productId, int quantity) throws Exception {
 
         String insertOrder = "INSERT INTO Orders (warehouse_id, branch_id, status) VALUES (?, ?, ?)";
         PreparedStatement orderStmt = con.prepareStatement(insertOrder, Statement.RETURN_GENERATED_KEYS);
@@ -68,5 +70,94 @@ public class OrdersDAO {
         outgoingStmt.executeUpdate();
 
         System.out.println("주문과 출고 등록이 정상으로 입력됐습니다.");
+    }
+
+    public void processOrder(int requestId) {
+        Connection connection = null;
+        PreparedStatement getRequestStmt = null;
+        PreparedStatement updateRequesterStmt = null;
+        PreparedStatement updateResponderStmt = null;
+        PreparedStatement updateRequestStatusStmt = null;
+
+        try {
+            connection = DatabaseConnection.getConnection();
+            connection.setAutoCommit(false);
+
+            String getRequestQuery = "SELECT Orders.order_id, Orders.warehouse_id, Orders.branch_id, Orders.order_date, " +
+                    "Orders.status, Outgoing.product_id, Outgoing.quantity FROM Orders " +
+                    "LEFT JOIN Outgoing ON Orders.order_id = Outgoing.order_id where Orders.order_id = ?";
+            getRequestStmt = connection.prepareStatement(getRequestQuery);
+            getRequestStmt.setInt(1, requestId);
+            ResultSet requestResult = getRequestStmt.executeQuery();
+
+            if (!requestResult.next()) {
+                System.out.println("요청 ID를 찾을 수 없습니다.");
+                return;
+            }
+
+            int orderId = requestResult.getInt("order_id");
+            int warehouseId = requestResult.getInt("warehouse_id");
+            int branchId = requestResult.getInt("branch_id");
+            int productId = requestResult.getInt("product_id");
+            int quantity = requestResult.getInt("quantity");
+            String status = requestResult.getString("status");
+
+            if (!status.equals("대기")) {
+                System.out.println("이미 처리된 요청입니다.");
+                return;
+            }
+
+            String getResponderProductQuery = "SELECT quantity FROM Warehouse_Inventory WHERE warehouse_id = ? AND product_id = ?";
+            PreparedStatement getResponderProductStmt = connection.prepareStatement(getResponderProductQuery);
+            getResponderProductStmt.setInt(1, warehouseId);
+            getResponderProductStmt.setInt(2, productId);
+            ResultSet responderProductResult = getResponderProductStmt.executeQuery();
+
+            if (!responderProductResult.next() || responderProductResult.getInt("quantity") < quantity) {
+                String rejectRequestQuery = "UPDATE Orders SET status = '취소' WHERE order_id = ?";
+                updateRequestStatusStmt = connection.prepareStatement(rejectRequestQuery);
+                updateRequestStatusStmt.setInt(1, orderId);
+                updateRequestStatusStmt.executeUpdate();
+
+                connection.commit();
+                System.out.println("재고 부족으로 요청이 거절되었습니다.");
+                return;
+            }
+
+            String updateResponderQuery = "UPDATE Warehouse_Inventory SET quantity = quantity - ? WHERE warehouse_id = ? AND product_id = ?";
+            updateResponderStmt = connection.prepareStatement(updateResponderQuery);
+            updateResponderStmt.setInt(1, quantity);
+            updateResponderStmt.setInt(2, warehouseId);
+            updateResponderStmt.setInt(3, productId);
+            updateResponderStmt.executeUpdate();
+
+            String acceptRequestQuery = "UPDATE Orders SET status = '완료' WHERE order_id = ?";
+            updateRequestStatusStmt = connection.prepareStatement(acceptRequestQuery);
+            updateRequestStatusStmt.setInt(1, orderId);
+            updateRequestStatusStmt.executeUpdate();
+
+            connection.commit();
+            System.out.println("요청이 수락되었습니다.");
+        } catch (SQLException e) {
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                    System.out.println("트랜잭션 롤백이 수행되었습니다.");
+                } catch (SQLException rollbackEx) {
+                    System.err.println("롤백 실패: " + rollbackEx.getMessage());
+                }
+            }
+            e.printStackTrace();
+        } finally {
+            try {
+                if (getRequestStmt != null) getRequestStmt.close();
+                if (updateRequesterStmt != null) updateRequesterStmt.close();
+                if (updateResponderStmt != null) updateResponderStmt.close();
+                if (updateRequestStatusStmt != null) updateRequestStatusStmt.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

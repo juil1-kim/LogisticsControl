@@ -61,7 +61,7 @@ CREATE TABLE Products (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     manufacturer_id INT,
     FOREIGN KEY (category_id) REFERENCES Categories(category_id) ON DELETE SET NULL,
-    FOREIGN KEY (manufacturer_id) REFERENCES Manufacturers(manufacturer_id)
+    FOREIGN KEY (manufacturer_id) REFERENCES Manufacturers(manufacturer_id) ON DELETE SET NULL
 );
 
 -- 8. Administrator_Warehouses 테이블
