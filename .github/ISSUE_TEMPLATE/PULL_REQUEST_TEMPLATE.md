@@ -1,3 +1,12 @@
+---
+name: "✨ Pull Request"
+about: "Create a pull request to propose changes"
+title: "[PR] 간략한 제목 작성"
+labels: enhancement
+assignees: ''
+
+---
+
 ## 📢 변경 사항
 - 이 PR에서 수행한 주요 변경 사항을 간략히 설명합니다.
 
