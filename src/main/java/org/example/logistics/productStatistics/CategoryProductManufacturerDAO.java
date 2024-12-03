@@ -1,5 +1,6 @@
 package org.example.logistics.productStatistics;
 
+import org.example.logistics.service.CRUDLogger;
 import org.example.logistics.service.DatabaseConnection;
 
 import java.sql.Connection;
@@ -12,11 +13,13 @@ import java.util.List;
 public class CategoryProductManufacturerDAO {
     private Connection conn;
 
-    public CategoryProductManufacturerDAO(Connection connection) throws SQLException {
+    // Constructor: DatabaseConnection에서 Connection 가져오기
+    public CategoryProductManufacturerDAO(Connection connection) throws SQLException, ClassNotFoundException {
         this.conn = DatabaseConnection.getConnection();
     }
 
-    public List<CategoryProductManufacturerVO> getCategoryProductManufacturers() throws SQLException {
+    // 카테고리, 상품, 제조사 정보를 가져오는 메서드
+    public List<CategoryProductManufacturerVO> getCategoryProductManufacturers() {
         String query = """
             SELECT c.name AS categoryName, p.name AS productName,
                    m.name AS manufacturerName, m.contact AS manufacturerContact
@@ -27,8 +30,10 @@ public class CategoryProductManufacturerDAO {
         """;
 
         List<CategoryProductManufacturerVO> result = new ArrayList<>();
+
         try (PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
+
             while (rs.next()) {
                 result.add(new CategoryProductManufacturerVO(
                         rs.getString("categoryName"),
@@ -37,8 +42,16 @@ public class CategoryProductManufacturerDAO {
                         rs.getString("manufacturerContact")
                 ));
             }
+
+            // 성공 로그 기록
+            CRUDLogger.log("READ", "카테고리-상품-제조사", "카테고리, 상품, 제조사 조회 성공");
+
+        } catch (SQLException e) {
+            // 실패 로그 기록 및 예외 처리
+            CRUDLogger.log("ERROR", "카테고리-상품-제조사", "카테고리, 상품, 제조사 조회 실패 - " + e.getMessage());
+            throw new RuntimeException("카테고리, 상품, 제조사 조회 실패", e);
         }
+
         return result;
     }
 }
-
