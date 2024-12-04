@@ -1,7 +1,6 @@
 package org.example.logistics.productStatistics;
 
 import org.example.logistics.service.CRUDLogger;
-import org.example.logistics.service.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,17 +9,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryProductManufacturerDAO {
-    private Connection conn;
+public class CategoryProductManufacturerDAO implements CateProManuDAOInterface {
+    private final Connection conn;
 
-    // Constructor: DatabaseConnection에서 Connection 가져오기
-    public CategoryProductManufacturerDAO(Connection connection) throws SQLException, ClassNotFoundException {
-        this.conn = DatabaseConnection.getConnection();
+    // 생성자: Connection 객체를 외부에서 주입받음
+    public CategoryProductManufacturerDAO(Connection connection) {
+        this.conn = connection;
     }
 
     // 카테고리, 상품, 제조사 정보를 가져오는 메서드
+    @Override
     public List<CategoryProductManufacturerVO> getCategoryProductManufacturers() {
-        String query = """
+        final String QUERY = """
             SELECT c.name AS categoryName, p.name AS productName,
                    m.name AS manufacturerName, m.contact AS manufacturerContact
             FROM Products p
@@ -31,7 +31,7 @@ public class CategoryProductManufacturerDAO {
 
         List<CategoryProductManufacturerVO> result = new ArrayList<>();
 
-        try (PreparedStatement stmt = conn.prepareStatement(query);
+        try (PreparedStatement stmt = conn.prepareStatement(QUERY);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {

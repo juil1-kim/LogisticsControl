@@ -1,10 +1,11 @@
 package org.example.logistics.administrators;
 
 import org.example.logistics.branches.BranchesUI;
+import org.example.logistics.logViewer.LogViewerUI;
+import org.example.logistics.products.ProductManagementUI;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
+import javax.swing.*;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -24,8 +25,8 @@ public class AdministratorsLoginUI {
             String user_id = sc.next();
             sc.nextLine();
 
-            // 스레드를 사용하여 비밀번호 입력 숨기기
-            String password = readPassword("Enter password: ");
+            // JPasswordField를 사용하여 비밀번호 마스킹
+            String password = getPasswordFromDialog("Enter password: ");
 
             AdministratorsVO authority = loginDAO.login(user_id, password);
 
@@ -41,58 +42,32 @@ public class AdministratorsLoginUI {
                 }
             } else {
                 System.out.println("아이디나 비밀번호가 올바르지 않습니다.");
+                // 비밀번호 찾기 기능 구현
             }
         }
     }
 
-    private String readPassword(String prompt) {
-        System.out.print(prompt);
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder password = new StringBuilder();
-
-        Thread maskingThread = new Thread(() -> {
-            while (!Thread.currentThread().isInterrupted()) {
-                try {
-                    Thread.sleep(1);
-                } catch (InterruptedException e) {
-                    break;
-                }
-            }
-        });
-
-        maskingThread.start();
-
-        try {
-            while (true) {
-                int ch = in.read();
-                if (ch == '\n' || ch == '\r') {
-                    break;
-                }
-                password.append((char) ch);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            maskingThread.interrupt();
+    private String getPasswordFromDialog(String message) {
+        JPasswordField jpf = new JPasswordField();
+        int result = JOptionPane.showConfirmDialog(null, jpf, message, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (result == JOptionPane.OK_OPTION) {
+            return new String(jpf.getPassword());
+        } else {
+            return null;
         }
-
-        return password.toString();
     }
-
-
 
     private void rootMode() {
         while (true) {
             System.out.println("\n=== Root Mode ===");
-            System.out.println("1. 상품 정보 관리");
-            System.out.println("2. 상품 관련 세부 정보");
-            System.out.println("3. 창고별 주문 내역 확인");
-            System.out.println("4. 가맹점 정보 관리");
-            System.out.println("5. 수입 및 지출 관리");
-            System.out.println("6. 출고 등록");
-            System.out.println("7. 일반 관리자 권한 관리");
-            System.out.println("0. 로그인 창 이동");
+            System.out.println("1. 상품 관리");
+            System.out.println("2. 주문 관리");
+            System.out.println("3. 창고 관리");
+            System.out.println("4. 지점 관리");
+            System.out.println("5. 공급자 관리");
+            System.out.println("6. 일반 관리자 관리");
+            System.out.println("9. 로그 기록 확인");
+            System.out.println("0. 로그아웃");
             System.out.println("-1. 프로그램 종료");
             System.out.print("메뉴를 선택하세요 >> ");
 
@@ -101,37 +76,41 @@ public class AdministratorsLoginUI {
 
             switch (choice) {
                 case 1:
-                    // 상품 정보 관리 기능 호출
+                    // 상품 관리
+                    manageAllProductInfo();
                     break;
                 case 2:
-                    // 상품 관련 세부 정보 기능 호출
+                    // 주문 관리
+                    OrdersUI.warehouseFunction();
                     break;
                 case 3:
-                    // 창고별 주문 내역 확인 기능 호출
+                    // 창고 관리
+                    WarehousesUI.function();
                     break;
                 case 4:
-                    // 가맹점 정보 관리 기능 호출
-                    BranchesUI.function();
+                    // 지점 관리
+                    BranchesUI.manegeBranches();
                     break;
                 case 5:
-                    // 수입 및 지출 관리 기능 호출
+                    // 공급자 관리
+                    SuppliersUI.function();
                     break;
                 case 6:
-                    // 출고 등록 기능 호출
+                    // 일반 관리자 관리
+                    AdministratorsUI.manegeGeneralAdmin();
                     break;
-                case 7:
-                    // 일반 관리자 권한 관리
-                    AdministratorsUI.function();
+                case 9:
+                    launchLogViewer(); // 로그 뷰어 실행
                     break;
                 case 0:
-                    System.out.println("로그인 창 이동");
+                    System.out.println("로그아웃");
                     return;
                 case -1:
                     System.out.println("프로그램 종료");
                     sc.close();
                     System.exit(0);
                 default:
-                    System.out.println("메뉴를 다시 선택하시오");
+                    System.out.println("메뉴를 다시 선택하세요");
             }
         }
     }
@@ -139,11 +118,9 @@ public class AdministratorsLoginUI {
     private void generalMode() {
         while (true) {
             System.out.println("\n=== General Mode ===");
-            System.out.println("1. 주문 조회");
-            System.out.println("2. 상품 정보 관리");
-            System.out.println("3. 주문 관리");
-            System.out.println("4. 출고 등록");
-            System.out.println("0. 로그인 창 이동");
+            System.out.println("1. 상품 관리");
+            System.out.println("2. 주문 요청");
+            System.out.println("0. 로그아웃");
             System.out.println("-1. 프로그램 종료");
             System.out.print("메뉴를 선택하세요 >> ");
 
@@ -152,19 +129,15 @@ public class AdministratorsLoginUI {
 
             switch (choice) {
                 case 1:
-                    // 주문 조회 기능 호출
+                    // 주문 관리
+                    manageAllProductInfo();
                     break;
                 case 2:
-                    // 상품 정보 관리 기능 호출
-                    break;
-                case 3:
-                    // 주문 관리 기능 호출
-                    break;
-                case 4:
-                    // 출고 등록 기능 호출
+                    // 주문 요청
+                    OrdersUI.branchFunction();
                     break;
                 case 0:
-                    System.out.println("로그인 창 이동");
+                    System.out.println("로그아웃");
                     return;
                 case -1:
                     System.out.println("프로그램을 종료합니다.");
@@ -176,12 +149,23 @@ public class AdministratorsLoginUI {
         }
     }
 
+    // 근영 추가
+    private void manageAllProductInfo() {
+        ProductManagementUI productManagementUI = new ProductManagementUI();
+        productManagementUI.start();
+    }
+
+    private void launchLogViewer() {
+        SwingUtilities.invokeLater(() -> new LogViewerUI().createAndShowGUI());
+    }
+// 여기 까지
+
     public static void main(String[] args) {
         try{
             AdministratorsLoginUI ui = new AdministratorsLoginUI();
             ui.start();
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            System.out.println("프로그램을 실행하지 못했습니다.\nError: " + e.getMessage());
         }
     }
 }

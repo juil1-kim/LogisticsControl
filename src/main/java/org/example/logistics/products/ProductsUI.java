@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ProductsUI {
-    private ProductsDAO productsDAO;
-    private Scanner scanner;
+    private final ProductsDAOInterface productsDAO; // 인터페이스 참조
+    private final Scanner scanner;
 
-    public ProductsUI() throws SQLException, ClassNotFoundException {
-        this.productsDAO = new ProductsDAO();
+    // 생성자: 인터페이스 구현체 주입
+    public ProductsUI(ProductsDAOInterface productsDAO) {
+        this.productsDAO = productsDAO;
         this.scanner = new Scanner(System.in);
     }
 
@@ -21,7 +22,7 @@ public class ProductsUI {
             System.out.println("3. ID로 제품 조회");
             System.out.println("4. 제품 정보 수정");
             System.out.println("5. 제품 삭제");
-            System.out.println("0. 종료");
+            System.out.println("0. 이전 메뉴로 돌아가기");
             System.out.print("옵션을 선택하세요: ");
 
             int choice = scanner.nextInt();
@@ -155,10 +156,13 @@ public class ProductsUI {
 
     public static void main(String[] args) {
         try {
-            ProductsUI ui = new ProductsUI();
+            // 인터페이스 구현체 생성 후 주입
+            ProductsDAOInterface productsDAO = new ProductsDAO();
+            ProductsUI ui = new ProductsUI(productsDAO);
             ui.start();
         } catch (Exception e) {
             System.out.println("프로그램 시작에 실패했습니다: " + e.getMessage());
         }
     }
 }
+

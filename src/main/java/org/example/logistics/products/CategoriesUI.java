@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CategoriesUI {
-    private final CategoriesDAO categoriesDAO;
+    private final CategoriesDAOInterface categoriesDAO; // 인터페이스 참조
 
-    // Constructor: DAO 객체 생성
-    public CategoriesUI() throws SQLException, ClassNotFoundException {
-        this.categoriesDAO = new CategoriesDAO();
+    // Constructor: 인터페이스 타입으로 DAO 객체 받기
+    public CategoriesUI(CategoriesDAOInterface categoriesDAO) {
+        this.categoriesDAO = categoriesDAO;
     }
 
     public void start() {
@@ -22,7 +22,7 @@ public class CategoriesUI {
             System.out.println("3. ID로 카테고리 조회");
             System.out.println("4. 카테고리 수정");
             System.out.println("5. 카테고리 삭제");
-            System.out.println("6. 종료");
+            System.out.println("0. 이전 메뉴로 돌아가기");
             System.out.print("옵션을 선택하세요: ");
 
             int choice = scanner.nextInt();
@@ -45,8 +45,7 @@ public class CategoriesUI {
                     case 5:
                         deleteCategory(scanner);
                         break;
-                    case 6:
-                        System.out.println("종료 중...");
+                    case 0:
                         return;
                     default:
                         System.out.println("잘못된 선택입니다. 다시 시도하세요.");
@@ -135,11 +134,11 @@ public class CategoriesUI {
 
     public static void main(String[] args) {
         try {
-            CategoriesUI ui = new CategoriesUI();
+            CategoriesDAOInterface categoriesDAO = new CategoriesDAO(); // 구체적인 구현체 주입
+            CategoriesUI ui = new CategoriesUI(categoriesDAO);
             ui.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
-

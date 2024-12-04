@@ -7,17 +7,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CategoryProductManufacturerUI {
-    private final CategoryProductManufacturerDAO dao;
+    private final CateProManuDAOInterface dao;
 
-    public CategoryProductManufacturerUI() {
-        // DAO 초기화
-        try {
-            Connection connection = DatabaseConnection.getConnection();
-            dao = new CategoryProductManufacturerDAO(connection);
-        } catch (Exception e) {
-            System.out.println("DB 연결 실패: " + e.getMessage());
-            throw new RuntimeException(e);
-        }
+    // 생성자: DAO 인터페이스를 주입받음
+    public CategoryProductManufacturerUI(CateProManuDAOInterface dao) {
+        this.dao = dao;
     }
 
     public void start() {
@@ -25,7 +19,7 @@ public class CategoryProductManufacturerUI {
         while (true) {
             System.out.println("========== Category-Product-Manufacturer ==========");
             System.out.println("1. 데이터 보기");
-            System.out.println("2. 종료");
+            System.out.println("0. 이전 메뉴로 돌아가기");
             System.out.print("선택: ");
             String choice = scanner.nextLine();
 
@@ -33,8 +27,7 @@ public class CategoryProductManufacturerUI {
                 case "1":
                     loadTableData();
                     break;
-                case "2":
-                    System.out.println("프로그램을 종료합니다.");
+                case "0":
                     return;
                 default:
                     System.out.println("잘못된 입력입니다. 다시 시도하세요.");
@@ -66,6 +59,15 @@ public class CategoryProductManufacturerUI {
     }
 
     public static void main(String[] args) {
-        new CategoryProductManufacturerUI().start();
+        try {
+            // Connection 객체 생성
+            Connection connection = DatabaseConnection.getConnection();
+            // 인터페이스 구현체 생성 및 주입
+            CateProManuDAOInterface dao = new CategoryProductManufacturerDAO(connection);
+            // UI 시작
+            new CategoryProductManufacturerUI(dao).start();
+        } catch (Exception e) {
+            System.out.println("프로그램 시작에 실패했습니다: " + e.getMessage());
+        }
     }
 }
