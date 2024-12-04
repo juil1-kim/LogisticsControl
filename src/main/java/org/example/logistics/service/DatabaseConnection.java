@@ -9,6 +9,7 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     private static HikariDataSource dataSource;
 
+
     static {
         try {
             // HikariCP Configuration
