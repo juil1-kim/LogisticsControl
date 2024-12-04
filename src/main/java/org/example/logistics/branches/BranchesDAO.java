@@ -1,5 +1,7 @@
 package org.example.logistics.branches;
 
+import org.example.logistics.productStatistics.ProductInventoryVO;
+import org.example.logistics.service.CRUDLogger;
 import org.example.logistics.service.DatabaseConnection;
 
 import java.sql.*;
@@ -22,6 +24,7 @@ public class BranchesDAO {
             stmt.setString(2, branch.getLocation());
             stmt.executeUpdate();
         }
+        CRUDLogger.log("CREATE", "지점", "지점 추가: " + branch.getName());
     }
 
     // READ ALL: 모든 지점 가져오기
@@ -36,6 +39,7 @@ public class BranchesDAO {
                 branch.setName(rs.getString("name"));
                 branch.setLocation(rs.getString("location"));
                 branches.add(branch);
+                CRUDLogger.log("READ", "지점", "지점 조회: " + branch.getName());
             }
         }
         return branches;
@@ -52,6 +56,7 @@ public class BranchesDAO {
                 branch.setBranchId(rs.getInt("branch_id"));
                 branch.setName(rs.getString("name"));
                 branch.setLocation(rs.getString("location"));
+                CRUDLogger.log("READ", "지점", "지점 조회: " + branch.getName());
                 return branch;
             }
         }
@@ -67,18 +72,20 @@ public class BranchesDAO {
             stmt.setInt(3, branch.getBranchId());
             stmt.executeUpdate();
         }
+        CRUDLogger.log("UPDATE", "지점", "지점 수정: " + branch.getName());
     }
 
     // DELETE: 특정 ID의 지점 삭제
-    public void deleteBranch(int branchId) throws SQLException {
+    public void deleteBranch(int branch_id) throws SQLException {
         String sql = "DELETE FROM Branches WHERE branch_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, branchId);
+            stmt.setInt(1, branch_id);
             stmt.executeUpdate();
         }
+        CRUDLogger.log("DELETE", "지점", "지점 삭제: " + branch_id);
     }
 
-    // 지점별 총 판매량 순 정렬
+    // READ BY TOTAL_SALES : 지점별 총 판매량 순 정렬
     public List<BranchesOutgoingOrdersVO> sortingBranchSales() throws SQLException {
         List<BranchesOutgoingOrdersVO> branches = new ArrayList<>();
         String sql = "SELECT " +
@@ -101,12 +108,13 @@ public class BranchesDAO {
                 branch.setName(rs.getString("branch_name"));
                 branch.setQuantity(rs.getInt("total_sales"));
                 branches.add(branch);
+                CRUDLogger.log("READ BY TOTAL_SALES", "지점", "지점 총 판매량: " + rs.getInt("total_sales"));
             }
         }
         return branches;
     }
 
-    // 지점별 이름 가나다 순 정렬
+    // SORTING BY NAME : 지점별 이름 가나다 순 정렬
     public List<BranchesVO> sortingBranchNames() throws SQLException {
         List<BranchesVO> branches = new ArrayList<>();
         String sql = "SELECT " +
@@ -125,12 +133,13 @@ public class BranchesDAO {
                 branch.setName(rs.getString("branch_name"));
                 branch.setLocation(rs.getString("location"));
                 branches.add(branch);
+                CRUDLogger.log("SORTING BY NAME", "지점", "지점 ID: " + rs.getInt("branch_id"));
             }
         }
         return branches;
     }
 
-    // 특정 상품별 지점 판매량 정렬
+    // READ BY PRODUCT_NAME SORTING TOTAL_SALES : 특정 상품별 지점 판매량 정렬
     public List<BranchesOutgoingOrdersProductsVO> sortingBranchProduct(int productId) throws SQLException {
         List<BranchesOutgoingOrdersProductsVO> branches = new ArrayList<>();
         String sql = "SELECT " +
@@ -161,9 +170,14 @@ public class BranchesDAO {
                     branch.setProduct_name(rs.getString("product_name"));
                     branch.setQuantity(rs.getInt("total_sales"));
                     branches.add(branch);
+                    CRUDLogger.log("READ BY PRODUCT_NAME SORTING TOTAL_SALES", "지점", "검색한 상품: " + rs.getString("product_name") + ", 총 판매량: " + rs.getInt("total_sales"));
                 }
             }
         }
         return branches;
     }
+
+
+
+
 }

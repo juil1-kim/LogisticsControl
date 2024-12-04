@@ -1,10 +1,10 @@
 package org.example.logistics.administrators;
 
 import org.example.logistics.branches.BranchesUI;
+//import org.example.logistics.products.ProductManagementUI;
+//import org.example.logistics.productStatistics.ProductAllStatisticsUI;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import javax.swing.*;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -24,8 +24,8 @@ public class AdministratorsLoginUI {
             String user_id = sc.next();
             sc.nextLine();
 
-            // 스레드를 사용하여 비밀번호 입력 숨기기
-            String password = readPassword("Enter password: ");
+            // JPasswordField를 사용하여 비밀번호 마스킹
+            String password = getPasswordFromDialog("Enter password: ");
 
             AdministratorsVO authority = loginDAO.login(user_id, password);
 
@@ -41,46 +41,20 @@ public class AdministratorsLoginUI {
                 }
             } else {
                 System.out.println("아이디나 비밀번호가 올바르지 않습니다.");
+                // 비밀번호 찾기 기능 구현
             }
         }
     }
 
-    private String readPassword(String prompt) {
-        System.out.print(prompt);
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder password = new StringBuilder();
-
-        Thread maskingThread = new Thread(() -> {
-            while (!Thread.currentThread().isInterrupted()) {
-                try {
-                    Thread.sleep(1);
-                } catch (InterruptedException e) {
-                    break;
-                }
-            }
-        });
-
-        maskingThread.start();
-
-        try {
-            while (true) {
-                int ch = in.read();
-                if (ch == '\n' || ch == '\r') {
-                    break;
-                }
-                password.append((char) ch);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            maskingThread.interrupt();
+    private String getPasswordFromDialog(String message) {
+        JPasswordField jpf = new JPasswordField();
+        int result = JOptionPane.showConfirmDialog(null, jpf, message, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (result == JOptionPane.OK_OPTION) {
+            return new String(jpf.getPassword());
+        } else {
+            return null;
         }
-
-        return password.toString();
     }
-
-
 
     private void rootMode() {
         while (true) {
