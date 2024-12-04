@@ -129,7 +129,7 @@ public class AdministratorsUI{
         System.out.println("'" + user_id + "' 계정이 정상 삭제 되었습니다.");
     }
 
-    public static void function() {
+    public static void manegeGeneralAdmin() {
         try{
             AdministratorsDAOInterface administratorsDAO = new AdministratorsDAO();
             AdministratorsUI ui = new AdministratorsUI(administratorsDAO);

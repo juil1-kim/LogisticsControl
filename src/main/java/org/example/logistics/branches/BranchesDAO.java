@@ -98,7 +98,7 @@ public class BranchesDAO implements BranchesDAOInterface {
         CRUDLogger.log("DELETE", "지점", "지점 삭제: " + branch_id);
     }
 
-    // READ BY TOTAL_SALES : 지점별 총 판매량 순 정렬
+    // READ BY TOTAL_SALES : 지점별 총 주문량 순 정렬
     @Override
     public List<BranchesOutgoingOrdersVO> sortingBranchSales() throws SQLException {
         List<BranchesOutgoingOrdersVO> branches = new ArrayList<>();
@@ -122,10 +122,10 @@ public class BranchesDAO implements BranchesDAOInterface {
                 branch.setName(rs.getString("branch_name"));
                 branch.setQuantity(rs.getInt("total_sales"));
                 branches.add(branch);
-                CRUDLogger.log("READ", "지점", "지점 총 판매량: " + rs.getInt("total_sales"));
+                CRUDLogger.log("READ", "지점", "지점 총 주문량: " + rs.getInt("total_sales"));
             }
         } catch (SQLException e) {
-            logAndThrow("지점별 판매량 점검 실패", e);
+            logAndThrow("지점별 주문량 점검 실패", e);
         }
         return branches;
     }
@@ -158,7 +158,7 @@ public class BranchesDAO implements BranchesDAOInterface {
         return branches;
     }
 
-    // READ BY PRODUCT_NAME SORTING TOTAL_SALES : 특정 상품별 지점 판매량 정렬
+    // READ BY PRODUCT_NAME SORTING TOTAL_SALES : 특정 상품별 지점 주문량 정렬
     @Override
     public List<BranchesOutgoingOrdersProductsVO> sortingBranchProduct(int productId) throws SQLException {
         List<BranchesOutgoingOrdersProductsVO> branches = new ArrayList<>();
@@ -190,7 +190,7 @@ public class BranchesDAO implements BranchesDAOInterface {
                     branch.setProduct_name(rs.getString("product_name"));
                     branch.setQuantity(rs.getInt("total_sales"));
                     branches.add(branch);
-                    CRUDLogger.log("READ", "지점", "검색한 상품: " + rs.getString("product_name") + ", 총 판매량: " + rs.getInt("total_sales"));
+                    CRUDLogger.log("READ", "지점", "검색한 상품: " + rs.getString("product_name") + ", 총 주문량: " + rs.getInt("total_sales"));
                 }
             } catch (SQLException e) {
                 logAndThrow("조회 실패", e);

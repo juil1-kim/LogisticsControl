@@ -290,3 +290,33 @@
 [2024-12-04 14:58:04] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 세탁기, 총 판매량: 25
 [2024-12-04 14:59:00] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 이케아 소파, 총 판매량: 35
 [2024-12-04 14:59:00] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 이케아 소파, 총 판매량: 32
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 11
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 12
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 13
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 14
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 10
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 4
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 9
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 5
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 2
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 15
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 1
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 6
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 3
+[2024-12-04 16:00:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 101
+[2024-12-04 16:00:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 83
+[2024-12-04 16:00:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 75
+[2024-12-04 16:00:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 57
+[2024-12-04 16:00:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 40
+[2024-12-04 16:00:11] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 검색한 상품: 스마트폰, 총 판매량: 20
+[2024-12-04 16:00:11] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 검색한 상품: 스마트폰, 총 판매량: 15
+[2024-12-04 16:00:46] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 101
+[2024-12-04 16:00:46] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 83
+[2024-12-04 16:00:46] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 75
+[2024-12-04 16:00:46] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 57
+[2024-12-04 16:00:46] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 40
+[2024-12-04 16:00:52] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 101
+[2024-12-04 16:00:52] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 83
+[2024-12-04 16:00:52] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 75
+[2024-12-04 16:00:52] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 57
+[2024-12-04 16:00:52] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 40
