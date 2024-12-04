@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BranchesDAO {
+public class BranchesDAO implements BranchesDAOInterface {
     private Connection conn;
 
     // Constructor: DatabaseConnection에서 Connection 가져오기
@@ -17,6 +17,7 @@ public class BranchesDAO {
     }
 
     // CREATE: 지점 추가
+    @Override
     public void addBranch(BranchesVO branch) throws SQLException {
         String sql = "INSERT INTO Branches (name, location) VALUES (?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -28,6 +29,7 @@ public class BranchesDAO {
     }
 
     // READ ALL: 모든 지점 가져오기
+    @Override
     public List<BranchesVO> getAllBranches() throws SQLException {
         List<BranchesVO> branches = new ArrayList<>();
         String sql = "SELECT * FROM Branches";
@@ -46,6 +48,7 @@ public class BranchesDAO {
     }
 
     // READ BY ID: 특정 ID의 지점 가져오기
+    @Override
     public BranchesVO getBranchById(int branchId) throws SQLException {
         String sql = "SELECT * FROM Branches WHERE branch_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -64,6 +67,7 @@ public class BranchesDAO {
     }
 
     // UPDATE: 지점 정보 수정
+    @Override
     public void updateBranch(BranchesVO branch) throws SQLException {
         String sql = "UPDATE Branches SET name = ?, location = ? WHERE branch_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -76,6 +80,7 @@ public class BranchesDAO {
     }
 
     // DELETE: 특정 ID의 지점 삭제
+    @Override
     public void deleteBranch(int branch_id) throws SQLException {
         String sql = "DELETE FROM Branches WHERE branch_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -86,6 +91,7 @@ public class BranchesDAO {
     }
 
     // READ BY TOTAL_SALES : 지점별 총 판매량 순 정렬
+    @Override
     public List<BranchesOutgoingOrdersVO> sortingBranchSales() throws SQLException {
         List<BranchesOutgoingOrdersVO> branches = new ArrayList<>();
         String sql = "SELECT " +
@@ -115,6 +121,7 @@ public class BranchesDAO {
     }
 
     // SORTING BY NAME : 지점별 이름 가나다 순 정렬
+    @Override
     public List<BranchesVO> sortingBranchNames() throws SQLException {
         List<BranchesVO> branches = new ArrayList<>();
         String sql = "SELECT " +
@@ -140,6 +147,7 @@ public class BranchesDAO {
     }
 
     // READ BY PRODUCT_NAME SORTING TOTAL_SALES : 특정 상품별 지점 판매량 정렬
+    @Override
     public List<BranchesOutgoingOrdersProductsVO> sortingBranchProduct(int productId) throws SQLException {
         List<BranchesOutgoingOrdersProductsVO> branches = new ArrayList<>();
         String sql = "SELECT " +

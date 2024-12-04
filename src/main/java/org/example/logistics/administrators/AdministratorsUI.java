@@ -4,12 +4,12 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-public class AdministratorsUI {
-    private AdministratorsDAO administratorsDAO;
+public class AdministratorsUI{
+    private final AdministratorsDAOInterface administratorsDAO; //인터페이스 참조
     private Scanner sc;
 
-    public AdministratorsUI() throws SQLException {
-        this.administratorsDAO = new AdministratorsDAO();
+    public AdministratorsUI(AdministratorsDAOInterface administratorsDAO) throws SQLException {
+        this.administratorsDAO = administratorsDAO;
         this.sc = new Scanner(System.in);
     }
 
@@ -21,7 +21,7 @@ public class AdministratorsUI {
             System.out.println("3. 일반 관리자 검색");
             System.out.println("4. 일반 관리자 ID 변경");
             System.out.println("5. 일반 관리자 계정 삭제");
-            System.out.println("0. Exit");
+            System.out.println("0. 이전 메뉴");
             System.out.print("메뉴를 선택하시오: ");
 
             int choice = sc.nextInt();
@@ -78,13 +78,15 @@ public class AdministratorsUI {
             System.out.println("유저가 없습니다.");
         }else{
             System.out.println("\n====== 전체 일반 관리자 목록 ======");
-            System.out.println("---------------------------------");
-            System.out.println("| 일반 관리자 고유 ID | 일반 관리자 ID |");
+            System.out.printf("%-20s %-20s%n",
+                    "고유 ID", "관리자 ID");
+            System.out.println("===============================");
 
             for (AdministratorsVO administrator : administrators) {
-                System.out.println("----------------------------------");
-                System.out.println("|\t\t " + administrator.getAdmin_id() + " \t\t | \t" + administrator.getUser_id() + "  \t|");
-            }
+                System.out.printf("%-20s %-20s%n",
+                        administrator.getAdmin_id(),
+                        administrator.getUser_id());
+               }
         }
     }
 
@@ -96,14 +98,14 @@ public class AdministratorsUI {
         if (administrator == null) {
             System.out.println("해당 유저를 찾을 수 없습니다.");
         }else{
-            System.out.println("일반 관리자 고유 ID: " + administrator.getAdmin_id());
-            System.out.println("일반 관리자 ID: " + administrator.getUser_id());
+            System.out.println("관리자 고유 ID: " + administrator.getAdmin_id());
+            System.out.println("관리자 ID: " + administrator.getUser_id());
             System.out.println("비밀번호: " + administrator.getPassword());
         }
     }
 
     private void updateAdministrator() throws SQLException {
-        System.out.print("변경할 일반 관리자 고유 ID: ");
+        System.out.print("변경할 일반 관리자의 고유 ID: ");
         int admin_id = sc.nextInt();
         sc.nextLine();
 
@@ -130,7 +132,8 @@ public class AdministratorsUI {
 
     public static void function() {
         try{
-            AdministratorsUI ui = new AdministratorsUI();
+            AdministratorsDAOInterface administratorsDAO = new AdministratorsDAO();
+            AdministratorsUI ui = new AdministratorsUI(administratorsDAO);
             ui.start();
         }catch (Exception e){
             System.out.println("에러 메세지: " + e.getMessage());

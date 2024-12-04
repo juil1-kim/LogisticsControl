@@ -1,6 +1,7 @@
 package org.example.logistics.branches;
 
 
+import org.example.logistics.administrators.AdministratorsDAOInterface;
 import org.example.logistics.productStatistics.ProductInventoryVO;
 import org.example.logistics.service.CRUDLogger;
 import org.jfree.chart.ChartFactory;
@@ -20,24 +21,25 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BranchesUI {
-    private static BranchesDAO branchesDAO;
+    private final BranchesDAOInterface branchesDAO;
+//    private static BranchesDAO branchesDAO;
     private static Scanner scanner;
 
-    public BranchesUI() throws SQLException, ClassNotFoundException {
-        this.branchesDAO = new BranchesDAO();
+    public BranchesUI(BranchesDAOInterface branchesDAO) throws SQLException, ClassNotFoundException {
+        this.branchesDAO = branchesDAO;
         this.scanner = new Scanner(System.in);
 
     }
 
     public void start() {
         while (true) {
-            System.out.println("\n=== 지점 정보 관리 ===");
+            System.out.println("\n==== 지점 정보 관리 ====");
             System.out.println("1. 지점 추가");
             System.out.println("2. 전체 지점 목록");
             System.out.println("3. 지점 수정");
             System.out.println("4. 지점 삭제");
             System.out.println("5. 지점 상세 정보 조회");
-            System.out.println("0. 이전 화면으로 이동");
+            System.out.println("0. 이전 메뉴");
             System.out.print("메뉴를 선택하세요 >> ");
 
             int choice = scanner.nextInt();
@@ -72,14 +74,15 @@ public class BranchesUI {
         }
     }
 
-    public void branchesStatistic() {
+    public void branchesSelect() {
         while (true) {
-            System.out.println("\n==== 지점 통계 ====");
-            System.out.println("1. 지점별 총 판매량(막대 그래프)");
-            System.out.println("2. 지점별 총 판매량(원형 그래프)");
-            System.out.println("3. 상품별 지점 판매량(막대 그래프)");
-            System.out.println("4. 상품별 지점 판매량(원형 그래프)");
-            System.out.println("0. 이전 창으로 돌아가기");
+            System.out.println("\n======= 지점 정보 상세 조회 =======");
+            System.out.println("1. 특정 지점 정보 검색");
+            System.out.println("2. 이름순 지점 리스트");
+            System.out.println("3. 총 판매량순 리스트");
+            System.out.println("4. 상품별 지점 판매량순 리스트");
+            System.out.println("5. 통계 보기");
+            System.out.println("0. 이전 메뉴");
             System.out.print("메뉴를 선택하세요 >> ");
 
             int choice = scanner.nextInt();
@@ -88,20 +91,19 @@ public class BranchesUI {
             try {
                 switch (choice) {
                     case 1:
-                        branchSalesBarChart();
+                        viewBranchById();
                         break;
                     case 2:
-                        branchSalesPieChart();
+                        sortingBranchNames(branchesDAO);
                         break;
                     case 3:
-                        System.out.print("상품 ID: ");
-                        int productId = scanner.nextInt();
-                        displayTableAndBarChart(productId);
+                        sortingBranchSales(branchesDAO);
                         break;
                     case 4:
-                        System.out.print("상품 ID: ");
-                        int productId2 = scanner.nextInt();
-                        displayPieChart(productId2);
+                        sortingBranchProduct(branchesDAO);
+                        break;
+                    case 5:
+                        branchesStatistic();
                         break;
                     case 0:
                         return;
@@ -114,15 +116,14 @@ public class BranchesUI {
         }
     }
 
-    public void branchesSelect() {
+    public void branchesStatistic() {
         while (true) {
-            System.out.println("\n==== 지점 검색 ====");
-            System.out.println("1. 특정 지점 정보 검색");
-            System.out.println("2. 이름순 지점 리스트");
-            System.out.println("3. 총 판매량순 리스트");
-            System.out.println("4. 상품별 지점 판매량순 리스트");
-            System.out.println("5. 통계 보기");
-            System.out.println("0. 이전 창으로 돌아가기");
+            System.out.println("\n========== 지점 통계 ==========");
+            System.out.println("1. 지점별 총 판매량(막대 그래프)");
+            System.out.println("2. 지점별 총 판매량(원형 그래프)");
+            System.out.println("3. 상품별 지점 판매량(막대 그래프)");
+            System.out.println("4. 상품별 지점 판매량(원형 그래프)");
+            System.out.println("0. 이전 메뉴");
             System.out.print("메뉴를 선택하세요 >> ");
 
             int choice = scanner.nextInt();
@@ -131,19 +132,20 @@ public class BranchesUI {
             try {
                 switch (choice) {
                     case 1:
-                        viewBranchById();
+                        branchSalesBarChart(branchesDAO);
                         break;
                     case 2:
-                        sortingBranchNames();
+                        branchSalesPieChart(branchesDAO);
                         break;
                     case 3:
-                        sortingBranchSales();
+                        System.out.print("상품 ID: ");
+                        int productId = scanner.nextInt();
+                        branchProductSalesBarChart(productId);
                         break;
                     case 4:
-                        sortingBranchProduct();
-                        break;
-                    case 5:
-                        branchesStatistic();
+                        System.out.print("상품 ID: ");
+                        int productId2 = scanner.nextInt();
+                        branchProductSalesPieChart(productId2);
                         break;
                     case 0:
                         return;
@@ -161,7 +163,7 @@ public class BranchesUI {
     private void addBranch() throws SQLException {
         System.out.print("지점 이름: ");
         String name = scanner.nextLine();
-        System.out.print("지점 주소: ");
+        System.out.print("지점 위치: ");
         String location = scanner.nextLine();
 
         BranchesVO branch = new BranchesVO();
@@ -174,15 +176,21 @@ public class BranchesUI {
 
     private void viewAllBranches() throws SQLException {
         List<BranchesVO> branches = branchesDAO.getAllBranches();
+
         if (branches.isEmpty()) {
             System.out.println("지점이 없습니다.");
         } else {
-            System.out.println("\n=== 전체 지점 목록 ===");
+            System.out.println("\n========================= 전체 지점 목록 =========================");
+            System.out.printf("%-20s %-20s %-30s%n",
+                    "지점 ID", "지점 이름", "지점 위치");
+            System.out.println("===============================================================");
             for (BranchesVO branch : branches) {
-                System.out.println("지점 ID: " + branch.getBranchId() +
-                        ", 지점 이름: " + branch.getName() +
-                        ", 지점 주소: " + branch.getLocation());
+                System.out.printf("%-20s %-20s %-30s%n",
+                        branch.getBranchId(),
+                        branch.getName(),
+                        branch.getLocation());
             }
+            System.out.println("===============================================================");
         }
     }
 
@@ -226,37 +234,47 @@ public class BranchesUI {
         System.out.println("지점이 삭제되었습니다.");
     }
 
-    public static void sortingBranchSales() throws SQLException{
+    public static void sortingBranchSales(BranchesDAOInterface branchesDAO) throws SQLException{
 
         List<BranchesOutgoingOrdersVO> branches = branchesDAO.sortingBranchSales();
 
         if (branches.isEmpty()) {
             System.out.println("지점을 찾지 못했습니다.");
         } else {
-            System.out.println("\n=== 지점별 총 판매량 순 정렬 ===");
+            System.out.println("===== 지점별 총 판매량 순 정렬 =====");
+            System.out.printf("%-20s %-20s%n",
+                    "지점 이름", "총 판매량");
+            System.out.println("===============================");
             for (BranchesOutgoingOrdersVO branch : branches) {
-                System.out.println("지점 이름: " + branch.getName() +
-                        ", 총 판매량: " + branch.getQuantity());
+                System.out.printf("%-20s %-20s%n",
+                        branch.getName(),
+                        branch.getQuantity());
             }
+            System.out.println("===============================");
         }
     }
 
-    public static void sortingBranchNames() throws SQLException {
+    public static void sortingBranchNames(BranchesDAOInterface branchesDAO) throws SQLException {
         List<BranchesVO> branches = branchesDAO.sortingBranchNames();
 
         if (branches.isEmpty()) {
             System.out.println("지점을 찾지 못했습니다.");
         }else {
-            System.out.println("\n=== 지점 이름 순 정렬 ===");
+            System.out.println("==================== 지점 이름 순 정렬 ====================");
+            System.out.printf("%-20s %-20s %-30s%n",
+                    "지점 ID", "지점 이름", "지점 위치");
+            System.out.println("=======================================================");
             for (BranchesVO branch : branches) {
-                System.out.println("ID: " + branch.getBranchId() +
-                        ", 지점 이름: " + branch.getName() +
-                        ", 주소: " + branch.getLocation());
+                System.out.printf("%-20s %-20s %-30s%n",
+                        branch.getBranchId(),
+                        branch.getName(),
+                        branch.getLocation());
             }
+            System.out.println("=======================================================");
         }
     }
 
-    public static void sortingBranchProduct() throws SQLException {
+    public static void sortingBranchProduct(BranchesDAOInterface branchesDAO) throws SQLException {
         System.out.print("검색하고자 하는 상품 ID: ");
         int productId = scanner.nextInt(); // 사용자로부터 상품 ID 입력받기
         List<BranchesOutgoingOrdersProductsVO> branches = branchesDAO.sortingBranchProduct(productId);
@@ -264,17 +282,21 @@ public class BranchesUI {
         if (branches.isEmpty()) {
             System.out.println("지점을 찾지 못했습니다.");
         } else {
-            System.out.println("\n=== 상품별 가맹점 판매량 ===");
+            System.out.println("===== 상품별 가맹점 판매량 =====");
+            System.out.printf("%-20s %-20s %-30s%n",
+                    "지점 이름", "상품 이름", "총 판매량");
+            System.out.println("===========================");
             for (BranchesOutgoingOrdersProductsVO branch : branches) {
-                System.out.println("지점 이름: " + branch.getBranch_name() +
-                        ", 상품 이름: " + branch.getProduct_name() +
-                        ", 총 판매량: " + branch.getQuantity());
+                System.out.printf("%-20s %-20s %-30s%n",
+                        branch.getBranch_name(),
+                        branch.getProduct_name(),
+                        branch.getQuantity());
             }
         }
     }
 
 
-    private void branchSalesBarChart() throws SQLException {
+    private static void branchSalesBarChart(BranchesDAOInterface branchesDAO) throws SQLException {
         List<BranchesOutgoingOrdersVO> branchesList = branchesDAO.sortingBranchSales(); // 데이터 조회
 
         // JTable 데이터 준비
@@ -291,6 +313,7 @@ public class BranchesUI {
         // 막대 그래프 데이터 준비
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (BranchesOutgoingOrdersVO branch : branchesList) {
+
             dataset.addValue(branch.getQuantity(), "총 판매량", branch.getName());
         }
         JFreeChart barChart = ChartFactory.createBarChart(
@@ -312,7 +335,7 @@ public class BranchesUI {
         });
     }
 
-    private void branchSalesPieChart() throws SQLException {
+    private static void branchSalesPieChart(BranchesDAOInterface branchesDAO) throws SQLException {
         List<BranchesOutgoingOrdersVO> branchesList = branchesDAO.sortingBranchSales(); // 데이터 조회
 
         DefaultPieDataset dataset = new DefaultPieDataset();
@@ -339,7 +362,7 @@ public class BranchesUI {
         });
     }
 
-    private void displayTableAndBarChart(int productId) throws SQLException {
+    private void branchProductSalesBarChart(int productId) throws SQLException {
         List<BranchesOutgoingOrdersProductsVO> branchesList = branchesDAO.sortingBranchProduct(productId);
 
 
@@ -379,7 +402,7 @@ public class BranchesUI {
         });
     }
 
-    private void displayPieChart(int productId2) throws SQLException {
+    private void branchProductSalesPieChart(int productId2) throws SQLException {
         List<BranchesOutgoingOrdersProductsVO> branchesList = branchesDAO.sortingBranchProduct(productId2);
 
         DefaultPieDataset dataset = new DefaultPieDataset();
@@ -409,7 +432,8 @@ public class BranchesUI {
 
     public static void function() {
         try {
-            BranchesUI ui = new BranchesUI();
+            BranchesDAOInterface branchesDAO = new BranchesDAO();
+            BranchesUI ui = new BranchesUI(branchesDAO);
             ui.start();
         } catch (Exception e) {
             System.out.println("에러가 발생했습니다.\nError: " + e.getMessage());
