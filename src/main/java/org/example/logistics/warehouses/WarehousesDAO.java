@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WarehousesDAO {
+public class WarehousesDAO implements WarehousesDAOInterface {
     private Connection con;
 
     public WarehousesDAO() throws SQLException, ClassNotFoundException {
@@ -18,8 +18,9 @@ public class WarehousesDAO {
     }
 
     //Create: 지점 생성
+    @Override
     public void addWarehouses(String warehouse_name, String warehouse_loc, int warehouse_cap) throws Exception {
-        String query = "insert into branches(name, location, capacity)  values(?, ?, ?)";
+        String query = "insert into Warehouses(name, location, capacity)  values(?, ?, ?)";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, warehouse_name);
         ps.setString(2, warehouse_loc);
@@ -27,10 +28,10 @@ public class WarehousesDAO {
 
         ps.executeUpdate();
         CRUDLogger.log("CREATE", "창고", "창고 추가: " + warehouse_name);
-        System.out.println("=====창고 추가=====");
     }
 
     //Read: 지점 목록
+    @Override
     public List<WarehousesVO> getAllWarehouses() throws Exception {
         List<WarehousesVO> WarehouseesList = new ArrayList<>();
         String query = "SELECT warehouse_id, name, location, capacity FROM Warehouses";
@@ -50,6 +51,7 @@ public class WarehousesDAO {
     }
 
     //Update: 지점 수정
+    @Override
     public void updateWarehouses(String name, int id) throws Exception {
         String sql = "update Warehouses set name = ? where Warehouse_id = ?";
         PreparedStatement ps = con.prepareStatement(sql);
@@ -60,6 +62,7 @@ public class WarehousesDAO {
     }
 
     //Delete: 지점 삭제
+    @Override
     public void deleteWarehouses(int id) throws Exception {
         String sql = "delete from Warehouses where Warehouse_id = ?";
         PreparedStatement ps = con.prepareStatement(sql);
@@ -68,4 +71,5 @@ public class WarehousesDAO {
         System.out.println("해당 창고가 삭제되었습니다.");
         CRUDLogger.log("DELETE", "창고", "삭제된 창고 ID: " + id);
     }
+
 }

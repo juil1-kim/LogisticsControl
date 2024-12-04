@@ -8,5 +8,5 @@ public class WarehouseInventoryVO {
     private String productName;
     private Double productPrice;
     private int quantity;
-    private String last_update;
+    private String lastUpdate;
 }
