@@ -82,7 +82,6 @@ public class AdministratorsLoginUI {
                 case 2:
                     // 주문 관리
                     OrdersUI.warehouseFunction();
-//                    manageProductStatistics();
                     break;
                 case 3:
                     // 창고 관리
@@ -135,7 +134,7 @@ public class AdministratorsLoginUI {
                     break;
                 case 2:
                     // 주문 요청
-                    OrdersUI.warehouseFunction();
+                    OrdersUI.branchFunction();
                     break;
                 case 0:
                     System.out.println("로그아웃");
