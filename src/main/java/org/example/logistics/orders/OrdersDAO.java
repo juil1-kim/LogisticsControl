@@ -106,20 +106,18 @@ public class OrdersDAO implements OrdersDAOInterface {
 
     @Override
     public void processOrder(int requestId) {
-        Connection connection = null;
         PreparedStatement getRequestStmt = null;
         PreparedStatement updateRequesterStmt = null;
         PreparedStatement updateResponderStmt = null;
         PreparedStatement updateRequestStatusStmt = null;
 
         try {
-            connection = DatabaseConnection.getConnection();
-            connection.setAutoCommit(false);
+            con.setAutoCommit(false);
 
             String getRequestQuery = "SELECT Orders.order_id, Orders.warehouse_id, Orders.branch_id, Orders.order_date, " +
                     "Orders.status, Outgoing.product_id, Outgoing.quantity FROM Orders " +
                     "LEFT JOIN Outgoing ON Orders.order_id = Outgoing.order_id where Orders.order_id = ?";
-            getRequestStmt = connection.prepareStatement(getRequestQuery);
+            getRequestStmt = con.prepareStatement(getRequestQuery);
             getRequestStmt.setInt(1, requestId);
             ResultSet requestResult = getRequestStmt.executeQuery();
 
@@ -143,42 +141,42 @@ public class OrdersDAO implements OrdersDAOInterface {
             }
 
             String getResponderProductQuery = "SELECT quantity FROM Warehouse_Inventory WHERE warehouse_id = ? AND product_id = ?";
-            PreparedStatement getResponderProductStmt = connection.prepareStatement(getResponderProductQuery);
+            PreparedStatement getResponderProductStmt = con.prepareStatement(getResponderProductQuery);
             getResponderProductStmt.setInt(1, warehouseId);
             getResponderProductStmt.setInt(2, productId);
             ResultSet responderProductResult = getResponderProductStmt.executeQuery();
 
             if (!responderProductResult.next() || responderProductResult.getInt("quantity") < quantity) {
                 String rejectRequestQuery = "UPDATE Orders SET status = '취소' WHERE order_id = ?";
-                updateRequestStatusStmt = connection.prepareStatement(rejectRequestQuery);
+                updateRequestStatusStmt = con.prepareStatement(rejectRequestQuery);
                 updateRequestStatusStmt.setInt(1, orderId);
                 updateRequestStatusStmt.executeUpdate();
 
-                connection.commit();
+                con.commit();
                 CRUDLogger.log("ERROR", "재고 부족", "재고 부족으로 요청이 거절되었습니다.");
                 System.out.println("재고 부족으로 요청이 거절되었습니다.");
                 return;
             }
 
             String updateResponderQuery = "UPDATE Warehouse_Inventory SET quantity = quantity - ? WHERE warehouse_id = ? AND product_id = ?";
-            updateResponderStmt = connection.prepareStatement(updateResponderQuery);
+            updateResponderStmt = con.prepareStatement(updateResponderQuery);
             updateResponderStmt.setInt(1, quantity);
             updateResponderStmt.setInt(2, warehouseId);
             updateResponderStmt.setInt(3, productId);
             updateResponderStmt.executeUpdate();
 
             String acceptRequestQuery = "UPDATE Orders SET status = '완료' WHERE order_id = ?";
-            updateRequestStatusStmt = connection.prepareStatement(acceptRequestQuery);
+            updateRequestStatusStmt = con.prepareStatement(acceptRequestQuery);
             updateRequestStatusStmt.setInt(1, orderId);
             updateRequestStatusStmt.executeUpdate();
 
-            connection.commit();
+            con.commit();
             CRUDLogger.log("UPDATE", "요청 처리", "요청이 수락되었습니다.");
             System.out.println("요청이 수락되었습니다.");
         } catch (SQLException e) {
-            if (connection != null) {
+            if (con != null) {
                 try {
-                    connection.rollback();
+                    con.rollback();
                     CRUDLogger.log("ROLLBACK", "롤백 수행", "트랜잭션 롤백이 수행되었습니다.");
                     System.out.println("트랜잭션 롤백이 수행되었습니다.");
                 } catch (SQLException rollbackEx) {
@@ -187,16 +185,6 @@ public class OrdersDAO implements OrdersDAOInterface {
                 }
             }
             e.printStackTrace();
-        } finally {
-            try {
-                if (getRequestStmt != null) getRequestStmt.close();
-                if (updateRequesterStmt != null) updateRequesterStmt.close();
-                if (updateResponderStmt != null) updateResponderStmt.close();
-                if (updateRequestStatusStmt != null) updateRequestStatusStmt.close();
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

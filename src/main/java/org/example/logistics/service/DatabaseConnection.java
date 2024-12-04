@@ -21,8 +21,8 @@ public class DatabaseConnection {
             // HikariCP Optimization Settings
             config.setMaximumPoolSize(100); // 최대 커넥션 개수
             config.setMinimumIdle(2); // 최소 유휴 커넥션 개수
-            config.setIdleTimeout(30000); // 커넥션 유휴 시간 (30초) 파라미터 숫자는 밀리초 기준입니다.
-            config.setMaxLifetime(60000); // 커넥션의 최대 수명 (1분)
+            config.setIdleTimeout(300000); // 커넥션 유휴 시간 (30초) 파라미터 숫자는 밀리초 기준입니다.
+            config.setMaxLifetime(600000); // 커넥션의 최대 수명 (1분)
             config.setConnectionTimeout(20000); // 커넥션 획득 대기 시간 (20초)
             config.setLeakDetectionThreshold(2000); // 커넥션 누수 탐지 시간 (2초)
             config.addDataSourceProperty("cachePrepStmts", "true"); // PreparedStatement 캐싱

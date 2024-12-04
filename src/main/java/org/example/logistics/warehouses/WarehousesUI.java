@@ -56,10 +56,10 @@ public class WarehousesUI {
                     dao.deleteWarehouses(deleteId);
                     break;
                 case 5:
-                    ui.start();
+                    WarehouseInventoryUI.function();
                     break;
                 case 6:
-                    WarehouseInventoryUI.function();
+                    ui.start();
                     break;
                 case 7:
                     AdministratorsWarehousesUI.function();
