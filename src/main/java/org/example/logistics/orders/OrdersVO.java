@@ -13,4 +13,5 @@ public class OrdersVO {
     private String status; // ENUM('대기', '완료', '취소')
     private int productId;
     private int quantity;
+    private int sumPrice;
 }

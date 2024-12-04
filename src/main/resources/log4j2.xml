@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
     <Appenders>
-        <!-- Console Appender: 로그를 콘솔에 출력 -->
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%p] %c - %m%n" />
-        </Console>
-
         <!-- File Appender: 로그를 파일에 기록 -->
         <File name="File" fileName="logs/app.log" append="true">
             <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%p] %c - %m%n" />
@@ -13,16 +8,14 @@
     </Appenders>
 
     <Loggers>
+        <!-- CRUDLogger에 대한 커스텀 로깅 설정 -->
+        <Logger name="org.example.logistics.service.CRUDLogger" level="debug" additivity="false">
+            <AppenderRef ref="File" />
+        </Logger>
+
         <!-- Root Logger: 모든 로그에 기본적으로 적용 -->
         <Root level="info">
-            <AppenderRef ref="Console" />
             <AppenderRef ref="File" />
         </Root>
-
-        <!-- CRUDLogger에 대한 커스텀 로깅 설정 -->
-        <!-- 나중에 끌것-->
-        <Logger name="org.example.logistics.service.CRUDLogger" level="debug" additivity="false">
-            <AppenderRef ref="Console" />
-        </Logger>
     </Loggers>
 </Configuration>
