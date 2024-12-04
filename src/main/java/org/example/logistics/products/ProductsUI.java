@@ -21,7 +21,7 @@ public class ProductsUI {
             System.out.println("3. ID로 제품 조회");
             System.out.println("4. 제품 정보 수정");
             System.out.println("5. 제품 삭제");
-            System.out.println("0. 종료");
+            System.out.println("0. 이전 메뉴로 돌아가기");
             System.out.print("옵션을 선택하세요: ");
 
             int choice = scanner.nextInt();

@@ -25,7 +25,7 @@ public class CategoryProductManufacturerUI {
         while (true) {
             System.out.println("========== Category-Product-Manufacturer ==========");
             System.out.println("1. 데이터 보기");
-            System.out.println("2. 종료");
+            System.out.println("0. 이전 메뉴로 돌아가기");
             System.out.print("선택: ");
             String choice = scanner.nextLine();
 
@@ -33,8 +33,7 @@ public class CategoryProductManufacturerUI {
                 case "1":
                     loadTableData();
                     break;
-                case "2":
-                    System.out.println("프로그램을 종료합니다.");
+                case "0":
                     return;
                 default:
                     System.out.println("잘못된 입력입니다. 다시 시도하세요.");

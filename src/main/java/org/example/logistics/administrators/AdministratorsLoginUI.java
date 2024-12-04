@@ -1,6 +1,8 @@
 package org.example.logistics.administrators;
 
 import org.example.logistics.branches.BranchesUI;
+import org.example.logistics.products.ProductManagementUI;
+import org.example.logistics.productStatistics.ProductAllStatisticsUI;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -101,9 +103,11 @@ public class AdministratorsLoginUI {
 
             switch (choice) {
                 case 1:
+                    manageAllProductInfo();
                     // 상품 정보 관리 기능 호출
                     break;
                 case 2:
+                    manageProductStatistics();
                     // 상품 관련 세부 정보 기능 호출
                     break;
                 case 3:
@@ -184,4 +188,15 @@ public class AdministratorsLoginUI {
             System.out.println(e.getMessage());
         }
     }
+    // 근영 추가
+    private void manageAllProductInfo() {
+        ProductManagementUI productManagementUI = new ProductManagementUI();
+        productManagementUI.start();
+    }
+
+    private void manageProductStatistics() {
+        ProductAllStatisticsUI statisticsUI = new ProductAllStatisticsUI();
+        statisticsUI.start();
+    }
+    // 여기 까지
 }

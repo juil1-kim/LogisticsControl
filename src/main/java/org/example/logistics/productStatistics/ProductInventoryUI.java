@@ -165,20 +165,20 @@ public class ProductInventoryUI {
     public void start() {
         Scanner scanner = new Scanner(System.in, "UTF-8");
         while (true) {
-            System.out.println("\n1. 제품 목록 보기 (페이지 탐색)");
-            System.out.println("2. 제품 + 막대 그래프(재고)");
-            System.out.println("3. 원형 그래프(재고)");
-            System.out.println("4. 종료");
-            System.out.println("5. 전체 데이터 출력(터미널)");
+            System.out.println("1. 제품 목록 보기");
+            System.out.println("2. 제품 목록 보기 (페이지 탐색)");
+            System.out.println("3. 상위 10개 제품 재고 & 그래프 보기");
+            System.out.println("4. 백분율 그래프 보기");
+            System.out.println("0. 이전 메뉴로 돌아가기");
 
             System.out.print("옵션을 선택하세요: ");
             int choice = scanner.nextInt();
             switch (choice) {
-                case 1 -> displayInventoryWithPagination();
-                case 2 -> displayTableAndBarChart();
-                case 3 -> displayPieChart();
-                case 4 -> {
-                    System.out.println("종료합니다...");
+                case 1 -> displayAllInventoryConsole();
+                case 2 -> displayInventoryWithPagination();
+                case 3 -> displayTableAndBarChart();
+                case 4 -> displayPieChart();
+                case 0 -> {
                     return;
                 }
                 case 5 -> displayAllInventoryConsole();

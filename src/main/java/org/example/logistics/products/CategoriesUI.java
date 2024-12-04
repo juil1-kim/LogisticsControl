@@ -22,7 +22,7 @@ public class CategoriesUI {
             System.out.println("3. ID로 카테고리 조회");
             System.out.println("4. 카테고리 수정");
             System.out.println("5. 카테고리 삭제");
-            System.out.println("6. 종료");
+            System.out.println("0. 이전 메뉴로 돌아가기");
             System.out.print("옵션을 선택하세요: ");
 
             int choice = scanner.nextInt();
@@ -45,8 +45,7 @@ public class CategoriesUI {
                     case 5:
                         deleteCategory(scanner);
                         break;
-                    case 6:
-                        System.out.println("종료 중...");
+                    case 0:
                         return;
                     default:
                         System.out.println("잘못된 선택입니다. 다시 시도하세요.");
