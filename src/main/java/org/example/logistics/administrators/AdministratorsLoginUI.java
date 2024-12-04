@@ -1,9 +1,12 @@
 package org.example.logistics.administrators;
 
 import org.example.logistics.branches.BranchesUI;
+//여기부터
+import org.example.logistics.logViewer.LogViewerUI;
 import org.example.logistics.products.ProductManagementUI;
-import org.example.logistics.productStatistics.ProductAllStatisticsUI;
 
+//여기까지
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -107,8 +110,6 @@ public class AdministratorsLoginUI {
                     // 상품 정보 관리 기능 호출
                     break;
                 case 2:
-                    manageProductStatistics();
-                    // 상품 관련 세부 정보 기능 호출
                     break;
                 case 3:
                     // 창고별 주문 내역 확인 기능 호출
@@ -126,6 +127,9 @@ public class AdministratorsLoginUI {
                 case 7:
                     // 일반 관리자 권한 관리
                     AdministratorsUI.function();
+                    break;
+                case 9:
+                    launchLogViewer(); // 로그 뷰어 실행
                     break;
                 case 0:
                     System.out.println("로그인 창 이동");
@@ -157,9 +161,10 @@ public class AdministratorsLoginUI {
             switch (choice) {
                 case 1:
                     // 주문 조회 기능 호출
+                    manageAllProductInfo();
                     break;
                 case 2:
-                    // 상품 정보 관리 기능 호출
+
                     break;
                 case 3:
                     // 주문 관리 기능 호출
@@ -194,9 +199,8 @@ public class AdministratorsLoginUI {
         productManagementUI.start();
     }
 
-    private void manageProductStatistics() {
-        ProductAllStatisticsUI statisticsUI = new ProductAllStatisticsUI();
-        statisticsUI.start();
+    private void launchLogViewer() {
+        SwingUtilities.invokeLater(() -> new LogViewerUI().createAndShowGUI());
     }
     // 여기 까지
 }

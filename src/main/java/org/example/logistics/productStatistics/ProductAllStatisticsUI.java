@@ -15,8 +15,8 @@ public class ProductAllStatisticsUI {
         try {
             while (true) {
                 System.out.println("\n=== 상품 관련 세부 정보 ===");
-                System.out.println("1. 제품 재고 관리");
-                System.out.println("2. 카테고리-제품-제조사 통계");
+                System.out.println("1. 제품 재고 목록 및 통계");
+                System.out.println("2. 카테고리별 제품과 제조사 보기");
                 System.out.println("3. 제품별 공급자 정보 조회");
                 System.out.println("0. 이전 메뉴로 돌아가기");
                 System.out.print("옵션을 선택하세요: ");

@@ -1,5 +1,7 @@
 package org.example.logistics.products;
 
+import org.example.logistics.productStatistics.ProductAllStatisticsUI;
+
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -16,6 +18,7 @@ public class ProductManagementUI {
             System.out.println("1. 제품 관리");
             System.out.println("2. 카테고리 관리");
             System.out.println("3. 제조사 관리");
+            System.out.println("4. 제품 관련 통계");
             System.out.println("0. 이전 메뉴로 돌아가기");
             System.out.print("옵션을 선택하세요: ");
 
@@ -32,6 +35,10 @@ public class ProductManagementUI {
                         break;
                     case 3:
                         manageManufacturerUI();
+                        break;
+                    case 4:
+                        // 상품 관련 통계
+                        manageProductStatistics();
                         break;
                     case 0:
                         return;
@@ -67,5 +74,10 @@ public class ProductManagementUI {
         ManufacturersDAOInterface manufacturerDAO = new ManufacturersDAO();
         ManufacturersUI manufacturersUI = new ManufacturersUI(manufacturerDAO);
         manufacturersUI.start();
+    }
+
+    private void manageProductStatistics() {
+        ProductAllStatisticsUI statisticsUI = new ProductAllStatisticsUI();
+        statisticsUI.start();
     }
 }
