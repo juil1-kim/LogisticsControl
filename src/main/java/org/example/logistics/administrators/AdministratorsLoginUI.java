@@ -1,6 +1,8 @@
 package org.example.logistics.administrators;
 
+import org.example.logistics.administratorsWarehouses.AdministratorsWarehousesUI;
 import org.example.logistics.branches.BranchesUI;
+import org.example.logistics.suppliers.SuppliersUI;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -92,6 +94,8 @@ public class AdministratorsLoginUI {
             System.out.println("5. 수입 및 지출 관리");
             System.out.println("6. 출고 등록");
             System.out.println("7. 일반 관리자 권한 관리");
+            System.out.println("8. 공급자 관리");
+            System.out.println("9. 전체 관리자-창고 관계 확인");
             System.out.println("0. 로그인 창 이동");
             System.out.println("-1. 프로그램 종료");
             System.out.print("메뉴를 선택하세요 >> ");
@@ -118,10 +122,19 @@ public class AdministratorsLoginUI {
                     break;
                 case 6:
                     // 출고 등록 기능 호출
+//                    AdministratorsWarehousesUI.function();
                     break;
                 case 7:
                     // 일반 관리자 권한 관리
                     AdministratorsUI.function();
+                    break;
+                case 8:
+                    // 공급자 조회
+                    SuppliersUI.function();
+                    break;
+                case 9:
+                    // 전체 관리자-창고 관계 확인
+                    AdministratorsWarehousesUI.function();
                     break;
                 case 0:
                     System.out.println("로그인 창 이동");
