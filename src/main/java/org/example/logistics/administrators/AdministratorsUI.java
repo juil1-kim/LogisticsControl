@@ -57,9 +57,9 @@ public class AdministratorsUI{
     }
 
     private void addAdministrators() throws SQLException {
-        System.out.print("아이디: ");
+        System.out.print("추가할 관리자 ID: ");
         String user_id = sc.nextLine();
-        System.out.print("비밀번호: ");
+        System.out.print("추가할 관리자 PW: ");
         String password = sc.nextLine();
 
         AdministratorsVO administrator = new AdministratorsVO();
@@ -69,13 +69,13 @@ public class AdministratorsUI{
         administratorsDAO.addAdministrator(administrator);
         administratorsDAO.updatePasswordsToBCrypt();
 
-        System.out.println("성공적으로 일반 유저 추가가 완료되었습니다.");
+        System.out.println("성공적으로 일반 관리자 추가가 완료되었습니다.");
     }
 
     private void viewAllAdministrators() throws SQLException {
         List<AdministratorsVO> administrators = administratorsDAO.viewAllAdministrators();
         if (administrators.isEmpty()) {
-            System.out.println("유저가 없습니다.");
+            System.out.println("해당하는 일반 관리자가 없습니다.");
         }else{
             System.out.println("\n====== 전체 일반 관리자 목록 ======");
             System.out.printf("%-20s %-20s%n",
@@ -100,7 +100,6 @@ public class AdministratorsUI{
         }else{
             System.out.println("관리자 고유 ID: " + administrator.getAdmin_id());
             System.out.println("관리자 ID: " + administrator.getUser_id());
-            System.out.println("비밀번호: " + administrator.getPassword());
         }
     }
 

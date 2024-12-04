@@ -24,8 +24,10 @@ public class BranchesDAO implements BranchesDAOInterface {
             stmt.setString(1, branch.getName());
             stmt.setString(2, branch.getLocation());
             stmt.executeUpdate();
+            CRUDLogger.log("CREATE", "지점", "지점 추가: " + branch.getName());
+        } catch (SQLException e) {
+            logAndThrow("지점 추가: ", e);
         }
-        CRUDLogger.log("CREATE", "지점", "지점 추가: " + branch.getName());
     }
 
     // READ ALL: 모든 지점 가져오기
@@ -43,6 +45,8 @@ public class BranchesDAO implements BranchesDAOInterface {
                 branches.add(branch);
                 CRUDLogger.log("READ", "지점", "지점 조회: " + branch.getName());
             }
+        } catch (SQLException e) {
+            logAndThrow("모든 지점 조회 실패: ",e);
         }
         return branches;
     }
@@ -62,6 +66,8 @@ public class BranchesDAO implements BranchesDAOInterface {
                 CRUDLogger.log("READ", "지점", "지점 조회: " + branch.getName());
                 return branch;
             }
+        } catch (SQLException e) {
+            logAndThrow("조회 실패", e);
         }
         return null;
     }
@@ -75,8 +81,10 @@ public class BranchesDAO implements BranchesDAOInterface {
             stmt.setString(2, branch.getLocation());
             stmt.setInt(3, branch.getBranchId());
             stmt.executeUpdate();
+            CRUDLogger.log("UPDATE", "지점", "지점 수정: " + branch.getName());
+        } catch (SQLException e) {
+            logAndThrow("지점 정보 수정 실패: ", e);
         }
-        CRUDLogger.log("UPDATE", "지점", "지점 수정: " + branch.getName());
     }
 
     // DELETE: 특정 ID의 지점 삭제
@@ -114,8 +122,10 @@ public class BranchesDAO implements BranchesDAOInterface {
                 branch.setName(rs.getString("branch_name"));
                 branch.setQuantity(rs.getInt("total_sales"));
                 branches.add(branch);
-                CRUDLogger.log("READ BY TOTAL_SALES", "지점", "지점 총 판매량: " + rs.getInt("total_sales"));
+                CRUDLogger.log("READ", "지점", "지점 총 판매량: " + rs.getInt("total_sales"));
             }
+        } catch (SQLException e) {
+            logAndThrow("지점별 판매량 점검 실패", e);
         }
         return branches;
     }
@@ -140,8 +150,10 @@ public class BranchesDAO implements BranchesDAOInterface {
                 branch.setName(rs.getString("branch_name"));
                 branch.setLocation(rs.getString("location"));
                 branches.add(branch);
-                CRUDLogger.log("SORTING BY NAME", "지점", "지점 ID: " + rs.getInt("branch_id"));
+                CRUDLogger.log("READ", "지점", "지점 ID: " + rs.getInt("branch_id"));
             }
+        } catch (SQLException e) {
+            logAndThrow("조회 실패", e);
         }
         return branches;
     }
@@ -178,14 +190,17 @@ public class BranchesDAO implements BranchesDAOInterface {
                     branch.setProduct_name(rs.getString("product_name"));
                     branch.setQuantity(rs.getInt("total_sales"));
                     branches.add(branch);
-                    CRUDLogger.log("READ BY PRODUCT_NAME SORTING TOTAL_SALES", "지점", "검색한 상품: " + rs.getString("product_name") + ", 총 판매량: " + rs.getInt("total_sales"));
+                    CRUDLogger.log("READ", "지점", "검색한 상품: " + rs.getString("product_name") + ", 총 판매량: " + rs.getInt("total_sales"));
                 }
+            } catch (SQLException e) {
+                logAndThrow("조회 실패", e);
             }
         }
         return branches;
     }
 
-
-
-
+    private void logAndThrow(String message, SQLException e) {
+        CRUDLogger.log("ERROR", "지점", message + " - " + e.getMessage());
+        throw new RuntimeException(message, e);
+    }
 }

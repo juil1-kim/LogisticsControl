@@ -38,7 +38,7 @@ public class BranchesUI {
             System.out.println("2. 전체 지점 목록");
             System.out.println("3. 지점 수정");
             System.out.println("4. 지점 삭제");
-            System.out.println("5. 지점 상세 정보 조회");
+            System.out.println("5. 지점 정보 상세 조회");
             System.out.println("0. 이전 메뉴");
             System.out.print("메뉴를 선택하세요 >> ");
 
@@ -209,13 +209,13 @@ public class BranchesUI {
     }
 
     private void updateBranch() throws SQLException {
-        System.out.print("업데이트할 지점 ID: ");
+        System.out.print("수정할 지점 ID: ");
         int id = scanner.nextInt();
         scanner.nextLine(); // Consume newline
 
         System.out.print("새로운 지점 이름: ");
         String name = scanner.nextLine();
-        System.out.print("새로운 지점 주소: ");
+        System.out.print("새로운 지점 위치: ");
         String location = scanner.nextLine();
 
         BranchesVO branch = new BranchesVO();
@@ -384,13 +384,13 @@ public class BranchesUI {
             dataset.addValue(branch.getQuantity(), "총 판매량", branch.getBranch_name());
         }
         JFreeChart barChart = ChartFactory.createBarChart(
-                "지점별 특정 제품 총 판매량 (막대 그래프)", "지점명", "총 판매량", dataset
+                "지점별 '" + data[0][1] + "' 총 판매량 (막대 그래프)", "지점명", "총 판매량", dataset
         );
         ChartPanel chartPanel = new ChartPanel(barChart);
 
         // JFrame에 JTable과 그래프 추가
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("지점별 특정 제품 총 판매량");
+            JFrame frame = new JFrame("지점별 '" + data[0][1] + "' 총 판매량");
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.setLayout(new BorderLayout());
 
@@ -404,6 +404,13 @@ public class BranchesUI {
 
     private void branchProductSalesPieChart(int productId2) throws SQLException {
         List<BranchesOutgoingOrdersProductsVO> branchesList = branchesDAO.sortingBranchProduct(productId2);
+        Object[][] data = new Object[branchesList.size()][3];
+        for (int i = 0; i < branchesList.size(); i++) {
+            BranchesOutgoingOrdersProductsVO branch = branchesList.get(i);
+            data[i][0] = branch.getBranch_name();
+            data[i][1] = branch.getProduct_name();
+            data[i][2] = branch.getQuantity();
+        }
 
         DefaultPieDataset dataset = new DefaultPieDataset();
         for (BranchesOutgoingOrdersProductsVO branch : branchesList) {
@@ -411,7 +418,7 @@ public class BranchesUI {
         }
 
         JFreeChart pieChart = ChartFactory.createPieChart(
-                "지점별 특정 제품 총 판매량 (원형 그래프)", dataset, true, true, false
+                "지점별 '" + data[0][1] + "' 총 판매량 (원형 그래프)", dataset, true, true, false
         );
 
         PiePlot plot = (PiePlot) pieChart.getPlot();
@@ -421,7 +428,7 @@ public class BranchesUI {
         plot.setLabelGenerator(labelGenerator);
 
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("지점별 특정 제품 총 판매량 원형 그래프");
+            JFrame frame = new JFrame("지점별 '" + data[0][1] + "' 총 판매량 원형 그래프");
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.getContentPane().add(new ChartPanel(pieChart));
             frame.pack();

@@ -28,8 +28,10 @@ public class AdministratorsDAO implements AdministratorsDAOInterface {
             stmt.setString(1, administrator.getUser_id());
             stmt.setString(2, administrator.getPassword());
             stmt.executeUpdate();
+            CRUDLogger.log("CREATE", "관리자", "일반 관리자 추가: " + administrator.getUser_id());
+        } catch (SQLException e) {
+            logAndThrow("관리자 생성 실패: ", e);
         }
-        CRUDLogger.log("CREATE", "관리자", "일반 관리자 추가: " + administrator.getUser_id());
     }
 
     //READ
@@ -47,6 +49,8 @@ public class AdministratorsDAO implements AdministratorsDAOInterface {
                 administrators.add(administrator);
                 CRUDLogger.log("READ", "관리자", "검색한 일반 관리자 계정: " + administrator.getUser_id());
             }
+        } catch (SQLException e) {
+            logAndThrow("관리자 조회 실패: ", e);
         }
         return administrators;
     }
@@ -68,7 +72,8 @@ public class AdministratorsDAO implements AdministratorsDAOInterface {
                 CRUDLogger.log("READ", "관리자", "'" + administrator.getUser_id()+ "' 계정 관리자 정보 검색");
                 return administrator;
             }
-
+        } catch (SQLException e) {
+            logAndThrow("아이디로 관리자 조회 실패: ", e);
         }
         return null;
     }
@@ -76,13 +81,13 @@ public class AdministratorsDAO implements AdministratorsDAOInterface {
     //Update
     @Override
     public void updateAdministrator(AdministratorsVO administrator) throws SQLException {
-        String sql = "UPDATE Administrators SET user_id = ? WHERE admin_id = ?";
+        String sql = "UPDATE Administrators SET user_id = ? WHERE admin_id = ? and role = 'general'";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, administrator.getUser_id());
             stmt.setInt(2, administrator.getAdmin_id());
             stmt.executeUpdate();
         }
-        CRUDLogger.log("READ", "관리자", "계정 관리자 정보 수정: " + administrator.getUser_id());
+        CRUDLogger.log("UPDATE", "관리자", "계정 관리자 정보 수정: " + administrator.getUser_id());
     }
 
     @Override
@@ -91,8 +96,10 @@ public class AdministratorsDAO implements AdministratorsDAOInterface {
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, user_id);
             stmt.executeUpdate();
+            CRUDLogger.log("DELETE", "관리자", "일반 관리자 계정 삭제: " + user_id);
+        } catch (SQLException e) {
+            logAndThrow("관리자 삭제 실패: ", e);
         }
-        CRUDLogger.log("READ", "관리자", "일반 관리자 계정 삭제: " + user_id);
     }
 
     // 로그인 메서드
@@ -115,8 +122,10 @@ public class AdministratorsDAO implements AdministratorsDAOInterface {
                     return user;
                 }
             }
+            CRUDLogger.log("READ", "관리자", "관리자 로그인: " + user_id);
+        } catch (SQLException e) {
+            logAndThrow("로그인 실패: ", e);
         }
-        CRUDLogger.log("LOGIN", "관리자", "관리자 로그인: " + user_id);
         return null;
     }
 
@@ -140,9 +149,18 @@ public class AdministratorsDAO implements AdministratorsDAOInterface {
                     updateStmt.setString(1, hashedPassword);
                     updateStmt.setInt(2, adminId);
                     updateStmt.executeUpdate();
-                    CRUDLogger.log("PASSWORD_HASHED", "관리자", "비밀번호 암호화: " + hashedPassword);
+                    CRUDLogger.log("UPDATE", "관리자", "비밀번호 암호화: " + hashedPassword);
+                } catch (SQLException e) {
+                    logAndThrow("비밀번호 업데이트 실패: ", e);
                 }
             }
+        } catch (SQLException e) {
+            logAndThrow("데이터베이스 연결 실패: ", e);
         }
+    }
+
+    private void logAndThrow(String message, SQLException e) {
+        CRUDLogger.log("ERROR", "관리자", message + " - " + e.getMessage());
+        throw new RuntimeException(message, e);
     }
 }
