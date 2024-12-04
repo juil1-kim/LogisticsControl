@@ -1,0 +1,322 @@
+[2024-12-03 21:41:08] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 계정 관리자 정보 수정: 
+[2024-12-03 21:41:16] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 계정 관리자 정보 수정: 
+[2024-12-03 21:41:22] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 계정 관리자 정보 수정: 
+[2024-12-03 21:41:27] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 계정 관리자 정보 수정: 
+[2024-12-04 07:53:42] [INFO] org.example.logistics.service.CRUDLogger - [READ] 카테고리-상품-제조사 - 카테고리, 상품, 제조사 조회 성공
+[2024-12-04 07:54:15] [INFO] org.example.logistics.service.CRUDLogger - [READ] 재고 - 페이징된 제품 재고 조회 성공
+[2024-12-04 07:54:19] [INFO] org.example.logistics.service.CRUDLogger - [READ] 재고 - 페이징된 제품 재고 조회 성공
+[2024-12-04 07:54:28] [INFO] org.example.logistics.service.CRUDLogger - [READ] 재고 - 페이징된 제품 재고 조회 성공
+[2024-12-04 07:54:48] [INFO] org.example.logistics.service.CRUDLogger - [READ] 재고 - 페이징된 제품 재고 조회 성공
+[2024-12-04 08:31:05] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 10
+[2024-12-04 08:31:05] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 8
+[2024-12-04 08:31:05] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 6
+[2024-12-04 08:31:05] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 5
+[2024-12-04 08:31:05] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 2
+[2024-12-04 08:31:15] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 10
+[2024-12-04 08:31:15] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 8
+[2024-12-04 08:31:15] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 6
+[2024-12-04 08:31:15] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 5
+[2024-12-04 08:31:15] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 2
+[2024-12-04 08:31:29] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 창원중부지점
+[2024-12-04 08:31:39] [INFO] org.example.logistics.service.CRUDLogger - [SORTING BY NAME] 지점 - 지점 ID: 4
+[2024-12-04 08:31:39] [INFO] org.example.logistics.service.CRUDLogger - [SORTING BY NAME] 지점 - 지점 ID: 5
+[2024-12-04 08:31:39] [INFO] org.example.logistics.service.CRUDLogger - [SORTING BY NAME] 지점 - 지점 ID: 2
+[2024-12-04 08:31:39] [INFO] org.example.logistics.service.CRUDLogger - [SORTING BY NAME] 지점 - 지점 ID: 1
+[2024-12-04 08:31:39] [INFO] org.example.logistics.service.CRUDLogger - [SORTING BY NAME] 지점 - 지점 ID: 6
+[2024-12-04 08:31:39] [INFO] org.example.logistics.service.CRUDLogger - [SORTING BY NAME] 지점 - 지점 ID: 3
+[2024-12-04 08:38:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 서울중앙지점
+[2024-12-04 08:38:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 부산서부지점
+[2024-12-04 08:38:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 창원중부지점
+[2024-12-04 08:38:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 광주남부지점
+[2024-12-04 08:38:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 부산굴곡지점
+[2024-12-04 08:38:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 주일물산
+[2024-12-04 08:38:31] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 10
+[2024-12-04 08:38:31] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 8
+[2024-12-04 08:38:31] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 6
+[2024-12-04 08:38:31] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 5
+[2024-12-04 08:38:31] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 2
+[2024-12-04 08:38:59] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 10
+[2024-12-04 08:38:59] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 8
+[2024-12-04 08:38:59] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 6
+[2024-12-04 08:38:59] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 5
+[2024-12-04 08:38:59] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 2
+[2024-12-04 09:18:22] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 10
+[2024-12-04 09:18:22] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 8
+[2024-12-04 09:18:22] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 6
+[2024-12-04 09:18:22] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 5
+[2024-12-04 09:18:22] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 2
+[2024-12-04 09:18:29] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 10
+[2024-12-04 09:18:29] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 8
+[2024-12-04 09:18:29] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 6
+[2024-12-04 09:18:29] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 5
+[2024-12-04 09:18:29] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 2
+[2024-12-04 09:18:40] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 스마트폰, 총 판매량: 10
+[2024-12-04 09:19:21] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 스마트폰, 총 판매량: 10
+[2024-12-04 10:21:51] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin2
+[2024-12-04 10:21:51] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin3
+[2024-12-04 10:21:51] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin4
+[2024-12-04 10:21:51] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin7
+[2024-12-04 10:21:51] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin6
+[2024-12-04 10:21:51] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: lee
+[2024-12-04 10:22:29] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 계정 관리자 정보 수정: admin88
+[2024-12-04 10:22:46] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin2
+[2024-12-04 10:22:46] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin3
+[2024-12-04 10:22:46] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin4
+[2024-12-04 10:22:46] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin7
+[2024-12-04 10:22:46] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin88
+[2024-12-04 10:22:46] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: lee
+[2024-12-04 10:22:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 서울중앙지점
+[2024-12-04 10:22:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 부산서부지점
+[2024-12-04 10:22:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 창원중부지점
+[2024-12-04 10:22:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 광주남부지점
+[2024-12-04 10:22:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 부산굴곡지점
+[2024-12-04 10:22:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 주일물산
+[2024-12-04 10:24:08] [INFO] org.example.logistics.service.CRUDLogger - [CREATE] 지점 - 지점 추가: 근영중공업
+[2024-12-04 10:24:34] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 서울중앙지점
+[2024-12-04 10:24:34] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 부산서부지점
+[2024-12-04 10:24:34] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 창원중부지점
+[2024-12-04 10:24:34] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 광주남부지점
+[2024-12-04 10:24:34] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 부산굴곡지점
+[2024-12-04 10:24:34] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 주일물산
+[2024-12-04 10:24:34] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 근영중공업
+[2024-12-04 10:24:56] [INFO] org.example.logistics.service.CRUDLogger - [SORTING BY NAME] 지점 - 지점 ID: 4
+[2024-12-04 10:24:56] [INFO] org.example.logistics.service.CRUDLogger - [SORTING BY NAME] 지점 - 지점 ID: 9
+[2024-12-04 10:24:56] [INFO] org.example.logistics.service.CRUDLogger - [SORTING BY NAME] 지점 - 지점 ID: 5
+[2024-12-04 10:24:56] [INFO] org.example.logistics.service.CRUDLogger - [SORTING BY NAME] 지점 - 지점 ID: 2
+[2024-12-04 10:24:56] [INFO] org.example.logistics.service.CRUDLogger - [SORTING BY NAME] 지점 - 지점 ID: 1
+[2024-12-04 10:24:56] [INFO] org.example.logistics.service.CRUDLogger - [SORTING BY NAME] 지점 - 지점 ID: 6
+[2024-12-04 10:24:56] [INFO] org.example.logistics.service.CRUDLogger - [SORTING BY NAME] 지점 - 지점 ID: 3
+[2024-12-04 10:25:33] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 10
+[2024-12-04 10:25:33] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 8
+[2024-12-04 10:25:33] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 6
+[2024-12-04 10:25:33] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 5
+[2024-12-04 10:25:33] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 2
+[2024-12-04 10:26:07] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 스마트폰, 총 판매량: 10
+[2024-12-04 10:26:35] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 10
+[2024-12-04 10:26:35] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 8
+[2024-12-04 10:26:35] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 6
+[2024-12-04 10:26:35] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 5
+[2024-12-04 10:26:35] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 2
+[2024-12-04 10:27:36] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 10
+[2024-12-04 10:27:36] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 8
+[2024-12-04 10:27:36] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 6
+[2024-12-04 10:27:36] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 5
+[2024-12-04 10:27:36] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 2
+[2024-12-04 10:28:14] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 스마트폰, 총 판매량: 10
+[2024-12-04 11:36:04] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 서울중앙지점
+[2024-12-04 11:36:04] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 부산서부지점
+[2024-12-04 11:36:04] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 창원중부지점
+[2024-12-04 11:36:04] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 광주남부지점
+[2024-12-04 11:36:04] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 부산굴곡지점
+[2024-12-04 11:36:04] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 주일물산
+[2024-12-04 11:36:04] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 근영중공업
+[2024-12-04 11:36:58] [INFO] org.example.logistics.service.CRUDLogger - [CREATE] 지점 - 지점 추가: 가산중앙지점
+[2024-12-04 11:37:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 서울중앙지점
+[2024-12-04 11:37:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 부산서부지점
+[2024-12-04 11:37:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 창원중부지점
+[2024-12-04 11:37:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 광주남부지점
+[2024-12-04 11:37:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 부산굴곡지점
+[2024-12-04 11:37:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 주일물산
+[2024-12-04 11:37:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 근영중공업
+[2024-12-04 11:37:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 가산중앙지점
+[2024-12-04 11:37:16] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 스마트폰, 총 판매량: 10
+[2024-12-04 11:37:24] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 10
+[2024-12-04 11:37:24] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 8
+[2024-12-04 11:37:24] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 6
+[2024-12-04 11:37:24] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 5
+[2024-12-04 11:37:24] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 2
+[2024-12-04 11:37:52] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 10
+[2024-12-04 11:37:52] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 8
+[2024-12-04 11:37:52] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 6
+[2024-12-04 11:37:52] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 5
+[2024-12-04 11:37:52] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 2
+[2024-12-04 11:43:30] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 10
+[2024-12-04 11:43:30] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 8
+[2024-12-04 11:43:30] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 6
+[2024-12-04 11:43:30] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 5
+[2024-12-04 11:43:30] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 2
+[2024-12-04 11:55:38] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin2
+[2024-12-04 11:55:38] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin3
+[2024-12-04 11:55:38] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin4
+[2024-12-04 11:55:38] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin7
+[2024-12-04 11:55:38] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin88
+[2024-12-04 11:55:38] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: lee
+[2024-12-04 11:57:58] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 10
+[2024-12-04 11:57:58] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 8
+[2024-12-04 11:57:58] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 6
+[2024-12-04 11:57:58] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 5
+[2024-12-04 11:57:58] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 2
+[2024-12-04 11:58:10] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 10
+[2024-12-04 11:58:10] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 8
+[2024-12-04 11:58:10] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 6
+[2024-12-04 11:58:10] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 5
+[2024-12-04 11:58:10] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 2
+[2024-12-04 12:15:57] [INFO] org.example.logistics.service.CRUDLogger - [LOGIN] 관리자 - 관리자 로그인: admin99
+[2024-12-04 12:16:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 서울중앙지점
+[2024-12-04 12:16:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 부산서부지점
+[2024-12-04 12:16:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 창원중부지점
+[2024-12-04 12:16:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 광주남부지점
+[2024-12-04 12:16:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 부산굴곡지점
+[2024-12-04 12:16:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 주일물산
+[2024-12-04 12:16:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 근영중공업
+[2024-12-04 12:16:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 가산중앙지점
+[2024-12-04 12:16:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: Branch_1
+[2024-12-04 12:16:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: Branch_2
+[2024-12-04 12:16:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: Branch_3
+[2024-12-04 12:16:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: Branch_4
+[2024-12-04 12:16:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: Branch_5
+[2024-12-04 12:18:41] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 스마트폰, 총 판매량: 20
+[2024-12-04 12:18:41] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 스마트폰, 총 판매량: 15
+[2024-12-04 12:18:54] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 101
+[2024-12-04 12:18:54] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 83
+[2024-12-04 12:18:54] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 75
+[2024-12-04 12:18:54] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 57
+[2024-12-04 12:18:54] [INFO] org.example.logistics.service.CRUDLogger - [READ BY TOTAL_SALES] 지점 - 지점 총 판매량: 40
+[2024-12-04 12:19:10] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 스마트폰, 총 판매량: 20
+[2024-12-04 12:19:10] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 스마트폰, 총 판매량: 15
+[2024-12-04 12:19:26] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 스마트폰, 총 판매량: 20
+[2024-12-04 12:19:26] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 스마트폰, 총 판매량: 15
+[2024-12-04 12:21:04] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 이케아 소파, 총 판매량: 35
+[2024-12-04 12:21:04] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 이케아 소파, 총 판매량: 32
+[2024-12-04 12:24:46] [INFO] org.example.logistics.service.CRUDLogger - [READ] 카테고리-상품-제조사 - 카테고리, 상품, 제조사 조회 성공
+[2024-12-04 12:25:16] [INFO] org.example.logistics.service.CRUDLogger - [READ] 카테고리-상품-제조사 - 카테고리, 상품, 제조사 조회 성공
+[2024-12-04 12:25:31] [INFO] org.example.logistics.service.CRUDLogger - [READ] 재고 - 페이징된 제품 재고 조회 성공
+[2024-12-04 12:25:37] [INFO] org.example.logistics.service.CRUDLogger - [READ] 재고 - 페이징된 제품 재고 조회 성공
+[2024-12-04 12:25:49] [INFO] org.example.logistics.service.CRUDLogger - [READ] 재고 - 페이징된 제품 재고 조회 성공
+[2024-12-04 12:26:16] [INFO] org.example.logistics.service.CRUDLogger - [READ] 재고 - 페이징된 제품 재고 조회 성공
+[2024-12-04 12:39:18] [INFO] org.example.logistics.service.CRUDLogger - [LOGIN] 관리자 - 관리자 로그인: admin99
+[2024-12-04 12:39:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin2
+[2024-12-04 12:39:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin3
+[2024-12-04 12:39:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin4
+[2024-12-04 12:39:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin7
+[2024-12-04 12:39:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin88
+[2024-12-04 12:39:40] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: lee
+[2024-12-04 12:39:55] [INFO] org.example.logistics.service.CRUDLogger - [CREATE] 관리자 - 일반 관리자 추가: 13
+[2024-12-04 12:39:55] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$WxkAZEbOS.Dt4PLgX7ryfOt0YnglYXvwUZEZXAXYWWb8amfdHzUp6
+[2024-12-04 12:39:55] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$XM6f9BsvEPQsxS/GNzI0COKxMpLKInrVFg.J64ruhcxYSy1Kfztl.
+[2024-12-04 12:39:55] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$wxTszW4F4SQLVteWcE5MIeAiRB7p0KFBukBaafPOzKJU9MHhWQQee
+[2024-12-04 12:39:56] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$fLVqdFGhO979VEg//d8JNuq6SmR.7bGxKG.McnDvElMa6c7oBRQKa
+[2024-12-04 12:39:56] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$A95apH63W6KYxnPqI1FMAuCL8e1KhJJvfvn5BPQSk/n5g1v1xpKFy
+[2024-12-04 12:39:56] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$LnrgLu/A6HptW24DzHkbWOEPKcm9PNvNqadZr.LDCAtY5Y3pYNNLC
+[2024-12-04 12:39:56] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$b1qkJjHBrlR3gCQn2Hy7I.W4aUYj0lJdriqo2EH5cJoEv7N7W/0D6
+[2024-12-04 12:39:56] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$BRwIs6MLFDDym1tAOm83ROsEP8ShmqV.d8no8u7bz/k.addPwakdq
+[2024-12-04 12:39:56] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$sZvPkg7oWM5Ze7WFw.gtHuyuDf85Uq6e4QybXW9bKXDxWUb/rFwOm
+[2024-12-04 12:39:56] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$SBfEon7uLio1tyHfyQ5ki.zsO9jB1VsW8mOFlfp7vpBJ5agSjx3S6
+[2024-12-04 12:40:25] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin2
+[2024-12-04 12:40:25] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin3
+[2024-12-04 12:40:25] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin4
+[2024-12-04 12:40:25] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin7
+[2024-12-04 12:40:25] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin88
+[2024-12-04 12:40:25] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: lee
+[2024-12-04 12:40:25] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: 13
+[2024-12-04 12:40:37] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - '13' 계정 관리자 정보 검색
+[2024-12-04 12:42:50] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 계정 관리자 정보 수정: 14
+[2024-12-04 12:45:26] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin2
+[2024-12-04 12:45:26] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin3
+[2024-12-04 12:45:26] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin4
+[2024-12-04 12:45:26] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin7
+[2024-12-04 12:45:26] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin88
+[2024-12-04 12:45:26] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: lee
+[2024-12-04 12:45:26] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: 13
+[2024-12-04 14:30:59] [INFO] org.example.logistics.service.CRUDLogger - [LOGIN] 관리자 - 관리자 로그인: admin99
+[2024-12-04 14:31:14] [INFO] org.example.logistics.service.CRUDLogger - [LOGIN] 관리자 - 관리자 로그인: admin99
+[2024-12-04 14:31:30] [INFO] org.example.logistics.service.CRUDLogger - [LOGIN] 관리자 - 관리자 로그인: admin99
+[2024-12-04 14:32:04] [INFO] org.example.logistics.service.CRUDLogger - [LOGIN] 관리자 - 관리자 로그인: admin5
+[2024-12-04 14:34:28] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$sjgfeXMSBxfpBb2m6rI6ieM3GJTn7693/PSvbNjkGHn/X0kwMWHqm
+[2024-12-04 14:34:28] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$2algGRcK4HJkl7Q0dblZyuzoG.GXRoxfS6BKr.BwnyTHT9i2HhiWG
+[2024-12-04 14:34:28] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$fnEpHZSXzh3d9VKp/qnf7.1lT33380WvuDKPPKiF/FG07kGPBsAAG
+[2024-12-04 14:34:28] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$ZIWm01wRTRYnOoxIew5Ca.K8nrJ5NRu1u4OJrguoLulP91E2/LjC6
+[2024-12-04 14:34:28] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$tXnqaYKFCmOHFNkh8Gomy.oMrT5fVVzRx6bmLlC/MAdbrZ/X7r8su
+[2024-12-04 14:34:29] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$pM7VY/MBubnelK4nk/9lqu8c0IS7AQuBLZrLI2XbERWc02D8XWnVO
+[2024-12-04 14:34:29] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$OMZ4CXpzblNKK8iOHiJk7OkXoJw.5rT0fqqhgSPTA6MM1CDEGv0ku
+[2024-12-04 14:34:29] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$A19o094OwZU3ZC8a8ZcqKO07a08AUC8Q.zeM01L/y88II4.Aquh1G
+[2024-12-04 14:34:29] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$rEr95nOqZOPiT77Z7DCun.Wk1y5ZAUNiKlIyyHq81UfoAwnkC3i9e
+[2024-12-04 14:34:29] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$kktDSUgTAjoWoaZu4WkxAOv7YRrEDJ9THQgAY5jqgLoKUoZxhrqAK
+[2024-12-04 14:34:29] [INFO] org.example.logistics.service.CRUDLogger - [PASSWORD_HASHED] 관리자 - 비밀번호 암호화: $2a$10$ZlU8EeKx4/rCd4sgS/pH4eHmNmUw/X3QyAwj38e5y7jHL3lxQZmhm
+[2024-12-04 14:35:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin2
+[2024-12-04 14:35:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin3
+[2024-12-04 14:35:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin4
+[2024-12-04 14:35:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin7
+[2024-12-04 14:35:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin88
+[2024-12-04 14:35:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: lee
+[2024-12-04 14:35:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: 13
+[2024-12-04 14:35:23] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 계정 관리자 정보 수정: bbb
+[2024-12-04 14:35:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin2
+[2024-12-04 14:35:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin3
+[2024-12-04 14:35:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin4
+[2024-12-04 14:35:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin7
+[2024-12-04 14:35:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin88
+[2024-12-04 14:35:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: lee
+[2024-12-04 14:35:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: 13
+[2024-12-04 14:36:59] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 계정 관리자 정보 수정: park
+[2024-12-04 14:37:31] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 일반 관리자 계정 삭제: 14
+[2024-12-04 14:37:34] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin2
+[2024-12-04 14:37:34] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin3
+[2024-12-04 14:37:34] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin4
+[2024-12-04 14:37:34] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin7
+[2024-12-04 14:37:34] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin88
+[2024-12-04 14:37:34] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: park
+[2024-12-04 14:37:34] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: 13
+[2024-12-04 14:38:05] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 일반 관리자 계정 삭제: park
+[2024-12-04 14:38:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin2
+[2024-12-04 14:38:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin3
+[2024-12-04 14:38:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin4
+[2024-12-04 14:38:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin7
+[2024-12-04 14:38:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: admin88
+[2024-12-04 14:38:07] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 검색한 일반 관리자 계정: 13
+[2024-12-04 14:38:19] [INFO] org.example.logistics.service.CRUDLogger - [READ] 관리자 - 일반 관리자 계정 삭제: 14
+[2024-12-04 14:39:59] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 서울중앙지점
+[2024-12-04 14:39:59] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 부산서부지점
+[2024-12-04 14:39:59] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 창원중부지점
+[2024-12-04 14:39:59] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 광주남부지점
+[2024-12-04 14:39:59] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 부산굴곡지점
+[2024-12-04 14:39:59] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 주일물산
+[2024-12-04 14:39:59] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 근영중공업
+[2024-12-04 14:39:59] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 가산중앙지점
+[2024-12-04 14:39:59] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: Branch_1
+[2024-12-04 14:39:59] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: Branch_2
+[2024-12-04 14:39:59] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: Branch_3
+[2024-12-04 14:39:59] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: Branch_4
+[2024-12-04 14:39:59] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: Branch_5
+[2024-12-04 14:41:06] [INFO] org.example.logistics.service.CRUDLogger - [UPDATE] 지점 - 지점 수정: 서울김천점
+[2024-12-04 14:41:17] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 조회: 서울김천점
+[2024-12-04 14:41:40] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 칼하트 티셔츠, 총 판매량: 48
+[2024-12-04 14:41:40] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 칼하트 티셔츠, 총 판매량: 45
+[2024-12-04 14:41:56] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 문구세트, 총 판매량: 56
+[2024-12-04 14:41:56] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 문구세트, 총 판매량: 55
+[2024-12-04 14:48:48] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 이케아 소파, 총 판매량: 35
+[2024-12-04 14:48:48] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 이케아 소파, 총 판매량: 32
+[2024-12-04 14:58:04] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 세탁기, 총 판매량: 25
+[2024-12-04 14:58:04] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 세탁기, 총 판매량: 25
+[2024-12-04 14:59:00] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 이케아 소파, 총 판매량: 35
+[2024-12-04 14:59:00] [INFO] org.example.logistics.service.CRUDLogger - [READ BY PRODUCT_NAME SORTING TOTAL_SALES] 지점 - 검색한 상품: 이케아 소파, 총 판매량: 32
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 11
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 12
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 13
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 14
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 10
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 4
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 9
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 5
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 2
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 15
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 1
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 6
+[2024-12-04 15:59:57] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 ID: 3
+[2024-12-04 16:00:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 101
+[2024-12-04 16:00:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 83
+[2024-12-04 16:00:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 75
+[2024-12-04 16:00:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 57
+[2024-12-04 16:00:01] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 40
+[2024-12-04 16:00:11] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 검색한 상품: 스마트폰, 총 판매량: 20
+[2024-12-04 16:00:11] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 검색한 상품: 스마트폰, 총 판매량: 15
+[2024-12-04 16:00:46] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 101
+[2024-12-04 16:00:46] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 83
+[2024-12-04 16:00:46] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 75
+[2024-12-04 16:00:46] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 57
+[2024-12-04 16:00:46] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 40
+[2024-12-04 16:00:52] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 101
+[2024-12-04 16:00:52] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 83
+[2024-12-04 16:00:52] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 75
+[2024-12-04 16:00:52] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 57
+[2024-12-04 16:00:52] [INFO] org.example.logistics.service.CRUDLogger - [READ] 지점 - 지점 총 판매량: 40
