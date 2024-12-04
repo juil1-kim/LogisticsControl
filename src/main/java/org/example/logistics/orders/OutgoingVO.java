@@ -11,4 +11,3 @@ public class OutgoingVO {
     private int quantity; // 출고 수량
     private String outgoingDate; // DATETIME
 }
-
