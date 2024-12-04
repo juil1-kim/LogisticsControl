@@ -7,9 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManufacturersDAO {
+public class ManufacturersDAO implements ManufacturersDAOInterface {
 
     // 제조사 목록 조회 (READ)
+    @Override
     public List<ManufacturersVO> getAllManufacturers() {
         List<ManufacturersVO> manufacturers = new ArrayList<>();
         String query = "SELECT manufacturer_id, name, location, contact FROM Manufacturers";
@@ -41,6 +42,7 @@ public class ManufacturersDAO {
     }
 
     // 제조사 추가 (CREATE)
+    @Override
     public boolean addManufacturer(String name, String location, String contact) {
         String query = "INSERT INTO Manufacturers (name, location, contact) VALUES (?, ?, ?)";
 
@@ -71,6 +73,7 @@ public class ManufacturersDAO {
     }
 
     // 제조사 수정 (UPDATE)
+    @Override
     public boolean updateManufacturer(int id, String name, String location, String contact) {
         String query = "UPDATE Manufacturers SET name = ?, location = ?, contact = ? WHERE manufacturer_id = ?";
 
@@ -102,6 +105,7 @@ public class ManufacturersDAO {
     }
 
     // 제조사 삭제 (DELETE) -- id 기준
+    @Override
     public boolean deleteManufacturer(int id) {
         String query = "DELETE FROM Manufacturers WHERE manufacturer_id = ?";
 

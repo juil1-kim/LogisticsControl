@@ -4,10 +4,27 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ManufacturersUI {
-    private static final ManufacturersDAO dao = new ManufacturersDAO();
+    private final ManufacturersDAOInterface dao; // 인터페이스 참조
     private static final Scanner scanner = new Scanner(System.in);
 
+    // 생성자: 인터페이스 구현체 주입
+    public ManufacturersUI(ManufacturersDAOInterface dao) {
+        this.dao = dao;
+    }
+
     public static void main(String[] args) {
+        try {
+            // 구현체 주입
+            ManufacturersDAOInterface manufacturersDAO = new ManufacturersDAO();
+            ManufacturersUI ui = new ManufacturersUI(manufacturersDAO);
+            ui.start();
+        } catch (Exception e) {
+            System.out.println("오류 발생: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void start() {
         try {
             while (true) {
                 System.out.println("=== 제조사 관리 시스템 ===");
@@ -37,8 +54,7 @@ public class ManufacturersUI {
         }
     }
 
-    // 유효한 정수 입력 받기
-    private static int getIntInput(String prompt) {
+    private int getIntInput(String prompt) {
         while (true) {
             try {
                 System.out.print(prompt);
@@ -49,14 +65,12 @@ public class ManufacturersUI {
         }
     }
 
-    // 문자열 입력 받기
-    private static String getStringInput(String prompt) {
+    private String getStringInput(String prompt) {
         System.out.print(prompt);
         return scanner.nextLine();
     }
 
-    // 제조사 목록 보기
-    private static void displayManufacturers() {
+    private void displayManufacturers() {
         List<ManufacturersVO> manufacturers = dao.getAllManufacturers();
 
         if (manufacturers.isEmpty()) {
@@ -83,8 +97,7 @@ public class ManufacturersUI {
         System.out.println("=".repeat(70));
     }
 
-    // 제조사 추가
-    private static void addManufacturer() {
+    private void addManufacturer() {
         String name = getStringInput("제조사 이름: ");
         String location = getStringInput("위치: ");
         String contact = getStringInput("연락처: ");
@@ -96,8 +109,7 @@ public class ManufacturersUI {
         }
     }
 
-    // 제조사 수정
-    private static void updateManufacturer() {
+    private void updateManufacturer() {
         int id = getIntInput("수정할 제조사 ID: ");
         String name = getStringInput("새 제조사 이름: ");
         String location = getStringInput("새 위치: ");
@@ -110,25 +122,19 @@ public class ManufacturersUI {
         }
     }
 
-    // 제조사 삭제
-    private static void deleteManufacturer() {
+    private void deleteManufacturer() {
         int id = getIntInput("삭제할 제조사 ID: ");
 
-        try {
-            if (dao.deleteManufacturer(id)) {
-                System.out.println("제조사가 성공적으로 삭제되었습니다.");
-            } else {
-                System.out.println("제조사 삭제에 실패했습니다.");
-            }
-        } catch (Exception e) {
-            System.out.println("오류 발생: " + e.getMessage());
-            e.printStackTrace();
+        if (dao.deleteManufacturer(id)) {
+            System.out.println("제조사가 성공적으로 삭제되었습니다.");
+        } else {
+            System.out.println("제조사 삭제에 실패했습니다.");
         }
     }
 
-    // 문자열 길이를 고정하는 유틸리티 메서드 and Null 값 처리
-    private static String padString(String input, int length) {
+    private String padString(String input, int length) {
         if (input == null) input = ""; // null 값 처리
         return String.format("%-" + length + "s", input);
     }
 }
+

@@ -45,17 +45,27 @@ public class ProductManagementUI {
     }
 
     private void manageProductUI() throws SQLException, ClassNotFoundException {
-        ProductsUI productsUI = new ProductsUI();
+        // ProductsDAOInterface 구현체 생성
+        ProductsDAOInterface productsDAO = new ProductsDAO();
+
+        // 구현체를 생성자에 전달
+        ProductsUI productsUI = new ProductsUI(productsDAO);
         productsUI.start();
     }
 
+
     private void manageCategoryUI() throws SQLException, ClassNotFoundException {
-        CategoriesUI categoriesUI = new CategoriesUI();
+
+        CategoriesDAOInterface categoriesDAO = new CategoriesDAO();
+        CategoriesUI categoriesUI = new CategoriesUI(categoriesDAO);
         categoriesUI.start();
     }
 
+
     private void manageManufacturerUI() throws SQLException, ClassNotFoundException {
-        ManufacturersUI manufacturersUI = new ManufacturersUI();
-        manufacturersUI.main(null);
+
+        ManufacturersDAOInterface manufacturerDAO = new ManufacturersDAO();
+        ManufacturersUI manufacturersUI = new ManufacturersUI(manufacturerDAO);
+        manufacturersUI.start();
     }
 }

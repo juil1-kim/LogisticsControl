@@ -7,17 +7,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CategoryProductManufacturerUI {
-    private final CategoryProductManufacturerDAO dao;
+    private final CateProManuDAOInterface dao;
 
-    public CategoryProductManufacturerUI() {
-        // DAO 초기화
-        try {
-            Connection connection = DatabaseConnection.getConnection();
-            dao = new CategoryProductManufacturerDAO(connection);
-        } catch (Exception e) {
-            System.out.println("DB 연결 실패: " + e.getMessage());
-            throw new RuntimeException(e);
-        }
+    // 생성자: DAO 인터페이스를 주입받음
+    public CategoryProductManufacturerUI(CateProManuDAOInterface dao) {
+        this.dao = dao;
     }
 
     public void start() {
@@ -65,6 +59,15 @@ public class CategoryProductManufacturerUI {
     }
 
     public static void main(String[] args) {
-        new CategoryProductManufacturerUI().start();
+        try {
+            // Connection 객체 생성
+            Connection connection = DatabaseConnection.getConnection();
+            // 인터페이스 구현체 생성 및 주입
+            CateProManuDAOInterface dao = new CategoryProductManufacturerDAO(connection);
+            // UI 시작
+            new CategoryProductManufacturerUI(dao).start();
+        } catch (Exception e) {
+            System.out.println("프로그램 시작에 실패했습니다: " + e.getMessage());
+        }
     }
 }
