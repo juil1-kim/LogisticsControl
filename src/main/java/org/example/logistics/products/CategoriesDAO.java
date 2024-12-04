@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriesDAO {
+public class CategoriesDAO implements CategoriesDAOInterface {
     private Connection conn;
 
     // Constructor: DatabaseConnection에서 Connection 가져오기
@@ -16,6 +16,7 @@ public class CategoriesDAO {
     }
 
     // CREATE: 카테고리 추가
+    @Override
     public void addCategory(CategoriesVO category) {
         String sql = "INSERT INTO Categories (name, description) VALUES (?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -29,6 +30,7 @@ public class CategoriesDAO {
     }
 
     // READ ALL: 모든 카테고리 가져오기
+    @Override
     public List<CategoriesVO> getAllCategories() {
         List<CategoriesVO> categories = new ArrayList<>();
         String sql = "SELECT * FROM Categories";
@@ -49,6 +51,7 @@ public class CategoriesDAO {
     }
 
     // READ BY ID: 특정 ID의 카테고리 가져오기
+    @Override
     public CategoriesVO getCategoryById(int categoryId) {
         String sql = "SELECT * FROM Categories WHERE category_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -71,6 +74,7 @@ public class CategoriesDAO {
     }
 
     // UPDATE: 카테고리 정보 수정
+    @Override
     public void updateCategory(CategoriesVO category) {
         String sql = "UPDATE Categories SET name = ?, description = ? WHERE category_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -90,6 +94,7 @@ public class CategoriesDAO {
     }
 
     // DELETE: 특정 ID의 카테고리 삭제
+    @Override
     public void deleteCategory(int categoryId) {
         String sql = "DELETE FROM Categories WHERE category_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -107,6 +112,7 @@ public class CategoriesDAO {
     }
 
     // DELETE ALL: 모든 카테고리 삭제 (주의: 위험 작업)
+    @Override
     public void deleteAllCategories() {
         String sql = "DELETE FROM Categories";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {

@@ -15,7 +15,7 @@ public class MongoDBConnection {
         try {
             mongoClient = MongoClients.create(CONNECTION_URI);
             database = mongoClient.getDatabase(DATABASE_NAME);
-            System.out.println("MongoDB 연결 성공!");
+            // System.out.println("MongoDB 연결 성공!");
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("MongoDB 연결 실패: " + e.getMessage());

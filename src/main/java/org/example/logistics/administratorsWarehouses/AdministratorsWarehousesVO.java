@@ -2,24 +2,16 @@ package org.example.logistics.administratorsWarehouses;
 
 import lombok.Data;
 
-import java.sql.Timestamp;
+import java.sql.Timestamp; // Timestamp 클래스를 사용하여 시간 정보를 다룸.
 
-// @Data 어노테이션이 포함된 VO(Value Object) 클래스
-// VO는 주로 데이터를 담기 위한 객체로, 데이터베이스 테이블의 행(Row)을 표현함.
-// AdministratorsWarehousesVO는 관리자-창고 데이터를 객체로 다룰 수 있게 해줌.
-@Data
+@Data // Lombok 어노테이션, 이 클래스를 컴파일 시 자동으로 getter, setter, toString 메서드 생성
 public class AdministratorsWarehousesVO {
-    // 관리자-창고 ID (Primary Key 역할)
-    // 데이터베이스에서 각 관리자-창고 관계를 고유하게 식별하기 위해 사용됨.
-    private int admin_warehouse_id;
-    // 관리자 ID
-    // 관리자를 식별하는 ID로, 관리자 테이블과 연관 있음 (외래 키로 사용 가능).
-    private int admin_id;
-    // 창고 ID
-    // 창고를 식별하는 ID로, 창고 테이블과 연관 있음 (외래 키로 사용 가능).
-    private int warehouse_id;
-    // 할당 시간
-    // 관리자가 창고에 할당된 시간을 나타냄.
-    // 데이터베이스의 `Timestamp` 데이터 유형과 매핑되어 시간 정보를 포함.
-    private Timestamp assigned_at;
+    // 창고 관리자와 창고 정보를 연결하는 중간 테이블의 데이터를 저장하는 VO (Value Object) 클래스
+    private int admin_warehouse_id; // 관리자-창고 관계의 고유 ID
+    private int admin_id; // 관리자 ID (관리자를 식별하는 값)
+    private int warehouse_id; // 창고 ID (창고를 식별하는 값)
+    private Timestamp assigned_at; // 창고 관리자에게 할당된 시간, 관리자가 해당 창고에 배정된 시간을 기록
+
+    // 위의 변수들은 관리자와 창고 사이의 관계를 나타내는 데 필요한 정보를 포함하고 있음.
+    // 이 VO 클래스는 데이터베이스의 'Administrator_Warehouses' 테이블에 대응하는 객체
 }

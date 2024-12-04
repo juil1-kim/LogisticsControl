@@ -10,8 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SupplierProductDAO {
+public class SupplierProductDAO implements SupplierProductDAOInterface {
     // 공급자별 공급 제품과 연락처 조회
+    @Override
     public List<SupplierProductVO> getSupplierProducts() {
         List<SupplierProductVO> supplierList = new ArrayList<>();
         String query = """

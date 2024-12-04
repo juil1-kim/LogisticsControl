@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsDAO {
+public class ProductsDAO implements ProductsDAOInterface {
     private Connection conn;
 
     // Constructor: DatabaseConnection에서 Connection 가져오기
@@ -16,6 +16,7 @@ public class ProductsDAO {
     }
 
     // CREATE: 상품 추가
+    @Override
     public void addProduct(ProductsVO product) throws SQLException {
         String sql = "INSERT INTO Products (name, description, category_id, price, manufacturer_id) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -36,6 +37,7 @@ public class ProductsDAO {
     }
 
     // READ ALL: 모든 상품 가져오기
+    @Override
     public List<ProductsVO> getAllProducts() throws SQLException {
         List<ProductsVO> products = new ArrayList<>();
         String sql = "SELECT * FROM Products";
@@ -64,6 +66,7 @@ public class ProductsDAO {
     }
 
     // READ BY ID: 특정 ID의 상품 가져오기
+    @Override
     public ProductsVO getProductById(int productId) throws SQLException {
         String sql = "SELECT * FROM Products WHERE product_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -94,6 +97,7 @@ public class ProductsDAO {
     }
 
     // UPDATE: 상품 정보 수정
+    @Override
     public void updateProduct(ProductsVO product) throws SQLException {
         String sql = "UPDATE Products SET name = ?, description = ?, category_id = ?, price = ?, manufacturer_id = ? WHERE product_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -119,6 +123,7 @@ public class ProductsDAO {
     }
 
     // DELETE: 특정 ID의 상품 삭제
+    @Override
     public void deleteProduct(int productId) throws SQLException {
         String sql = "DELETE FROM Products WHERE product_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {

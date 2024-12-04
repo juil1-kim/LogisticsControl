@@ -10,9 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductInventoryDAO {
+public class ProductInventoryDAO implements ProductInventoryDAOInterface {
 
     // 페이징된 데이터 조회 메서드
+    @Override
     public List<ProductInventoryVO> getProductInventory(int offset, int limit) {
         List<ProductInventoryVO> inventoryList = new ArrayList<>();
         String query = """
@@ -60,6 +61,7 @@ public class ProductInventoryDAO {
     }
 
     // 전체 데이터 조회 메서드
+    @Override
     public List<ProductInventoryVO> getAllProductInventory() {
         List<ProductInventoryVO> inventoryList = new ArrayList<>();
         String query = """
